@@ -19,7 +19,6 @@ class Distances_Measures(Mesure):
         return self.__mesures
 
     def ranking_function_constructor(self,motclef):
-        print(motclef)
         ranker = self.__mesures[motclef].score
         return ranker
 
