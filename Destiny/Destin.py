@@ -26,6 +26,13 @@ class Destiny:
         self.__mesures["De"],self.__nom_mesures["De"] = MesureDeDependance(),Destiny.mesures_dependance
 
 
+    def Projection(self,subset):
+        D = self.__mesures["D"].ranking_function_constructor("FCS")(subset)
+        I = self.__mesures["I"].ranking_function_constructor("GainRatio")(subset)
+        DE = self.__mesures["De"].dependence(subset)
+        Co = self.__mesures["Co"].fcc(subset)
+        return (D,I,DE,Co)
+
     def getMegaHeuristique(self,ids,nb):
         D = {}
         Lmotsclefs = []
@@ -72,4 +79,5 @@ from Destiny.DataSets import german_dataset
 data, target = german_dataset.load_german_dataset()
 DM = Destiny()
 DM.fit(data,target)
-DM.test()
+
+
