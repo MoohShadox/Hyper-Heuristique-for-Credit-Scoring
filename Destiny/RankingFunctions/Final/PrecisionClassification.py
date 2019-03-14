@@ -10,7 +10,6 @@ from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neighbors import KNeighborsClassifier
 from Destiny import Evaluateur_Precision
 import numpy as np
-
 from Destiny.RankingFunctions.Final.Mesure import Mesure
 
 
@@ -127,10 +126,10 @@ class PrecisionClassification (Mesure):
             self.__evaluateurs[k].masquer (masque)
 
 
-from Destiny.DataSets import german_dataset
-data, target = german_dataset.load_german_dataset()
-DM = PrecisionClassification()
-DM.fit(data,target)
-print('Debut du fit')
-DM.rank_with(['KNN',"RF"],n=2)
-print(DM.getCalculatedMeasures())
+#from Destiny.DataSets import german_dataset
+#data, target = german_dataset.load_german_dataset()
+#DM = PrecisionClassification()
+#DM.fit(data,target)
+#print('Debut du fit')
+#DM.rank_with(['KNN',"RF"],n=3)
+#print(DM.getCalculatedMeasures())
