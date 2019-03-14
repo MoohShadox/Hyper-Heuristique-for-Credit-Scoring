@@ -56,7 +56,7 @@ class PrecisionClassification (Mesure):
         self.masquer (masque)
         for j in self.__evaluateurs.keys ():
             if (Motclef == None or j in Motclef):
-                self.__ranks[len (numero)][j].append ((numero , self.__evaluateurs[j].score ()))
+                self.__ranks[len (numero)][j].append ((tuple(numero) , self.__evaluateurs[j].score ()))
                 self.__ranks[len (numero)][j].sort (key=lambda x: x[1] , reverse=True)
         self.setup_modeles (self.__data , self.__target)
         return self.__ranks[len (numero)]
@@ -126,11 +126,11 @@ class PrecisionClassification (Mesure):
         for k in self.__evaluateurs.keys ():
             self.__evaluateurs[k].masquer (masque)
 
-#Test Unitaire :
-#from Destiny.DataSets import german_dataset
-#data, target = german_dataset.load_german_dataset()
-#DM = PrecisionClassification()
-#DM.fit(data,target)
-#print('Debut du fit')
-#DM.rank_with(['KNN',"RF"],n=2)
-#print(DM.getCalculatedMeasures())
+
+from Destiny.DataSets import german_dataset
+data, target = german_dataset.load_german_dataset()
+DM = PrecisionClassification()
+DM.fit(data,target)
+print('Debut du fit')
+DM.rank_with(['KNN',"RF"],n=2)
+print(DM.getCalculatedMeasures())

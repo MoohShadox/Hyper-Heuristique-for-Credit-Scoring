@@ -85,4 +85,3 @@ class FCS:
             self.__mesures[len(x)][tuple(x)] = numer/denom
         return self.__mesures[len(x)][tuple(x)]
 
-

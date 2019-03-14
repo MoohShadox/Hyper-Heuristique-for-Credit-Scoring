@@ -38,7 +38,6 @@ class MesureDeDependance(Mesure):
         liste=[]
         patternsset=list(set(patterns))
         for j in range(len(patternsset)):
-
             sousliste=[]
             for z in range(len(patterns)):
                 if(patternsset[j]==patterns[z]):

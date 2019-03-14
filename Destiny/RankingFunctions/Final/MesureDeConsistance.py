@@ -79,3 +79,8 @@ class MesureDeConsistance(Mesure):
             self.feature_score[len(x)][tuple(x)] = 1-float(s)/len(patterns)
         return self.feature_score[len(x)][tuple(x)]
 
+from Destiny.DataSets import german_dataset
+data, target = german_dataset.load_german_dataset()
+C = MesureDeConsistance()
+C.fit(data,target)
+print(C.rank(2))

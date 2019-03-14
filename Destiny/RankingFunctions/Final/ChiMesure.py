@@ -14,4 +14,6 @@ class chi:
     def score(self,x):
         if(len(x)>1):
             return -1
-        return self.__scores[x[0]]
+        return self.__scores[x[0]][1]
+
+

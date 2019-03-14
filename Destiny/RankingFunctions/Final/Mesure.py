@@ -1,5 +1,7 @@
 import abc
 from itertools import combinations
+import numpy as np
+from sklearn.preprocessing import StandardScaler,MinMaxScaler
 
 class Mesure:
 
@@ -35,6 +37,23 @@ class Mesure:
                 K.append(j)
             t = i,ranker(tuple(K))
             scores.append(t)
+        X = []
+        for i in scores:
+            X.append(i[1])
+        X = np.array(X)
+        X = X.reshape(-1,1)
+        sc = MinMaxScaler()
+        X = sc.fit_transform(X)
+        cpt = 0
+        XX  = []
+        X = X.transpose()
+        X = list(X[0])
+        #print("X = ",X)
+        for i in scores:
+            t = i[0],X[cpt]
+            XX.append(t)
+            cpt = cpt + 1
+        #print("XX = " , XX)
         scores.sort(key=lambda x:x[1],reverse=True)
         return scores
 
