@@ -55,14 +55,14 @@ class Destiny:
             L.append(motclef)
             Lmotsclefs.append(motclef)
             D.update(self.__mesures[tp].rank_with(L,n=nb))
-        return D
-
-
-
+        DDD = {}
+        for i in D[nb]:
+            if i in Lmotsclefs:
+                DDD[i] = D[nb][i]
+        return DDD
 
     def fit(self,X,Y):
         for i in self.__mesures.keys():
-            print("Initialisation des mesures : ", i)
             self.__mesures[i].fit(X,Y)
 
     def test(self):
@@ -79,5 +79,10 @@ from Destiny.DataSets import german_dataset
 data, target = german_dataset.load_german_dataset()
 DM = Destiny()
 DM.fit(data,target)
+L = DM.getMegaHeuristique(["H6"],nb=1)
+print(L)
+L.clear()
+L = DM.getMegaHeuristique(["H8"],nb=1)
+print(L)
 
 
