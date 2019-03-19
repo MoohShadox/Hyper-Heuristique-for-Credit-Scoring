@@ -39,13 +39,10 @@ class PrecisionClassification (Mesure):
             except(RuntimeError):
                 pass
         L = np.array(L)
-        print(L.mean()/len(self.__data[0]))
         s = L.mean()/len(self.__data[0])
         for j in self._calculated_measures[1]:
             if (self._liste_thresholds[self._liste_mesures.index (j)] == 0):
-                self._liste_thresholds[self._liste_mesures.index (j)] = \
-                self._calculated_measures[1][j][int (s * (len (self._attributs.keys ()) - 1))][1]
-        print (self._liste_thresholds)
+                self._liste_thresholds[self._liste_mesures.index (j)] = self._calculated_measures[1][j][int (s * (len (self._attributs.keys ()) - 1))][1]
         self._calculated_measures.clear ()
         self.__ranks.clear()
 
@@ -158,8 +155,3 @@ class PrecisionClassification (Mesure):
             self.__evaluateurs[k].masquer (masque)
 
 
-
-from Destiny.DataSets import german_dataset
-data, target = make_classification(n_samples=1500, n_features=20, n_informative=5,
-                           n_redundant=3, n_repeated=2, n_classes=2,
-                           n_clusters_per_class=1, random_state=0)

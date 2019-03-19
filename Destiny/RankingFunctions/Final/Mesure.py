@@ -29,7 +29,6 @@ class Mesure:
         T.fit(self.__data,self.__target)
         for i in range(2,Mesure.MegaAttributTailleMax+1):
             self._subsets[i] = T.generer_subset(i , borne)
-        print(self._subsets)
 
 
     def setThresholdsAutomatiquement(self,s=None):
@@ -41,7 +40,6 @@ class Mesure:
         for j in self._calculated_measures[1]:
             if(self._liste_thresholds[self._liste_mesures.index (j)]==0):
                 self._liste_thresholds[self._liste_mesures.index(j)] = self._calculated_measures[1][j][int(s*(len(self._attributs.keys())-1))][1]
-        print(self._liste_thresholds)
         self._calculated_measures.clear()
 
 

@@ -1,4 +1,7 @@
 from sklearn.feature_selection import chi2
+import numpy as np
+
+from Destiny.RankingFunctions import Dimension_Reductor
 
 
 class chi:
@@ -13,7 +16,16 @@ class chi:
 
     def score(self,x):
         if(len(x)>1):
-            return -1
-        return self.__scores[x[0]][1]
+            DR = Dimension_Reductor.Dimension_Reductor ()
+            DR.fit (self.__data , self.__target)
+            L = DR.getPCA (x)
+            LL = []
+            LL.append (L)
+            LL = np.array (LL)
+            LL = LL.transpose ()
+            R = chi2(LL , self.__target)
+            return R[0][0]
+        else:
+            return self.__scores[x[0]][1]
 
 

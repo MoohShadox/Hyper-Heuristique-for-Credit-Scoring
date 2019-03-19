@@ -11,7 +11,7 @@ from Destiny.Tresholding import Tresholding
 class Destiny:
     #C'est simple pour demander un ranking donné tu précise la lettre suivi de l'indice donc D0 pour Chi, I1 pour le gain d'information etc...
     #Sinon on peut indexer en utilisant H et un chiffre qui commence a 0
-    #mesures_distance = ["Chi","FScore","ReliefF","FCS"]
+    mesures_distance = ["Chi","FScore","ReliefF","FCS"]
     mesures_information = ["Entropie" , 'GainInformation' , "GainRatio" , "SymetricalIncertitude" , "MutualInformation" , "UH" , "US" , "DML"]
     mesures_dependance = ["RST"]
     mesures_consistance = ['FCC']
@@ -23,7 +23,7 @@ class Destiny:
         self.__Threshold = 0
         self.__nom_mesures = {}
         self.__precedent_measures = {}
-        #self.__mesures["D"],self.__nom_mesures["D"] = Distances_Measures(),Destiny.mesures_distance
+        self.__mesures["D"],self.__nom_mesures["D"] = Distances_Measures(),Destiny.mesures_distance
         self.__mesures["I"],self.__nom_mesures["I"] = Information_Measure(),Destiny.mesures_information
         self.__mesures["C"],self.__nom_mesures["C"] = PrecisionClassification(),Destiny.mesures_classification
         self.__mesures["Co"],self.__nom_mesures["Co"] = MesureDeConsistance(),Destiny.mesures_consistance

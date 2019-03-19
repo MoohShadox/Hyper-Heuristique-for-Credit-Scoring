@@ -23,6 +23,8 @@ from __future__ import print_function
 import numpy as np
 from sklearn.neighbors import KDTree
 
+from Destiny.RankingFunctions.Dimension_Reductor import Dimension_Reductor
+
 
 class ReliefF(object):
 
@@ -57,8 +59,12 @@ class ReliefF(object):
         self.n_neighbors = n_neighbors
         self.n_features_to_keep = n_features_to_keep
         self.scores = {}
+        self.__data = None
+        self.__target = None
 
     def fit(self, X, y):
+        self.__data = X
+        self.__target = y
         """Computes the feature importance scores from the training data.
 
         Parameters
@@ -76,51 +82,53 @@ class ReliefF(object):
         """
         self.feature_scores = np.zeros(X.shape[1])
         self.tree = KDTree(X)
-
         for source_index in range(X.shape[0]):
             distances, indices = self.tree.query(
                 X[source_index].reshape(1, -1), k=self.n_neighbors+1)
-
             # Nearest neighbor is self, so ignore first match
             indices = indices[0][1:]
-
             # Create a binary array that is 1 when the source and neighbor
             #  match and -1 everywhere else, for labels and features..
             labels_match = np.equal(y[source_index], y[indices]) * 2. - 1.
             features_match = np.equal(X[source_index], X[indices]) * 2. - 1.
-
             # The change in feature_scores is the dot product of these  arrays
             self.feature_scores += np.dot(features_match.T, labels_match)
-
         self.top_features = np.argsort(self.feature_scores)[::-1]
 
     def score(self,x):
         if(len(x)>1):
-            return -1
-        if(len(self.scores.keys())==0):
-            self.scores = {}
-            cpt = 0
-            for r in self.feature_scores:
-                tu = cpt,r
-                self.feature_scores[cpt] = r
-                cpt = cpt + 1
-        return self.feature_scores[x[0]]
+            DR = Dimension_Reductor()
+            DR.fit(self.__data,self.__target)
+            L = DR.getPCA(x)
+            LL = []
+            LL.append(L)
+            LL = np.array(LL)
+            LL = LL.transpose()
+            R = ReliefF()
+            R.fit(LL,self.__target)
+            return R.feature_scores[0]
+        else:
+            if(len(self.scores.keys())==0):
+                self.scores = {}
+                cpt = 0
+                for r in self.feature_scores:
+                    tu = cpt,r
+                    self.feature_scores[cpt] = r
+                    cpt = cpt + 1
+            return self.feature_scores[x[0]]
 
 
 
     def transform(self, X):
         """Reduces the feature set down to the top `n_features_to_keep` features.
-
         Parameters
         ----------
         X: array-like {n_samples, n_features}
             Feature matrix to perform feature selection on
-
         Returns
         -------
         X_reduced: array-like {n_samples, n_features_to_keep}
             Reduced feature matrix
-
         """
         return X[:, self.top_features[:self.n_features_to_keep]]
 
@@ -143,3 +151,5 @@ class ReliefF(object):
         """
         self.fit(X, y)
         return self.transform(X)
+
+

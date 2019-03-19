@@ -37,10 +37,12 @@ class Clustering_Incarnations:
     @staticmethod
     def maxCarreProjection(liste_projections):
         m = 0
+        im = None
         for i in liste_projections:
             if (Clustering_Incarnations.carreProjection(i) > 0):
                 m = Clustering_Incarnations.carreProjection(i)
-        return m
+                im = i
+        return im
 
 
     def clusteriser(self):
@@ -56,9 +58,10 @@ class Clustering_Incarnations:
         for i in Rez:
             print(i , " : " , Rez[i])
         self.clusters = Rez
-        self.alphas_locaux = len(self.clusters.keys())*[]
+        self.alphas_locaux = len(self.clusters.keys())*[0]
         for i in self.clusters:
             self.alphas_locaux[i] = Clustering_Incarnations.maxCarreProjection(self.clusters[i])
+        print(self.alphas_locaux)
 
 
 from Destiny.DataSets import german_dataset

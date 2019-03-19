@@ -41,11 +41,7 @@ class Distances_Measures(Mesure):
 
 
 
-data,target = german_dataset.load_german_dataset()
-M = Distances_Measures()
-M.fit(data,target)
-M.setThresholdsAutomatiquement()
-print(M.rank_with(n=1))
+
 
 
 

@@ -60,8 +60,6 @@ class FCS:
         return self.__mesures[n]
 
     def score(self , x):
-        if(len(x)<2):
-            return -1
         if not (len(x) in self.__mesures.keys()):
             self.__mesures[len(x)] = {}
         if not (tuple(x) in self.__mesures[len(x)].keys()):
@@ -78,6 +76,9 @@ class FCS:
                     if(j>i):
                         SFF = SFF  + self.getFeatureFeatureCorreclation(i,j)
                         cptFF = cptFF + 1
+            if (SFF == 0):
+                SFF = 1
+                cptFF = 1
             SFF = SFF/cptFF
             SFC = SFC/cptFC
             denom = math.sqrt(k+k*(k-1)*SFF)

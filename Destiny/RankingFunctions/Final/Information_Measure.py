@@ -134,12 +134,6 @@ class Information_Measure(Mesure):
         return B/A
 
 
-data,target = german_dataset.load_german_dataset()
-M = Information_Measure()
-M.fit(data,target)
-M.setThresholdsAutomatiquement()
-print(M.rank_with(n=1))
-
 
 
 

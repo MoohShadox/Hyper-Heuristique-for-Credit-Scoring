@@ -79,17 +79,8 @@ class MesureDeConsistance(Mesure):
                 s=s+npp-c1
             if(1-float(s)/len(patterns) >= self._liste_thresholds[0]):
                 self.feature_score[len(x)][tuple(x)] = 1-float(s)/len(patterns)
-                print(1-float(s)/len(patterns))
             else:
                 self.feature_score[len (x)][tuple (x)] = -1
         return self.feature_score[len(x)][tuple(x)]
 
-from Destiny.DataSets import german_dataset
-data, target = make_classification(n_samples=300, n_features=25, n_informative=5,
-                           n_redundant=3, n_repeated=2, n_classes=2,
-                           n_clusters_per_class=1, random_state=0)
-data,target = german_dataset.load_german_dataset()
-M = MesureDeConsistance()
-M.fit(data,target)
-M.setThresholdsAutomatiquement()
-print(M.rank_with(n=1))
+
