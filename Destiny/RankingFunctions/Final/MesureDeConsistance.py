@@ -1,6 +1,7 @@
 from itertools import combinations
 
 import numpy as np
+from sklearn.datasets import make_classification
 
 from Destiny.RankingFunctions.Final.Mesure import Mesure
 
@@ -76,11 +77,19 @@ class MesureDeConsistance(Mesure):
                         else: c2=c2+1
                 c1=max(c1,c2)
                 s=s+npp-c1
-            self.feature_score[len(x)][tuple(x)] = 1-float(s)/len(patterns)
+            if(1-float(s)/len(patterns) >= self._liste_thresholds[0]):
+                self.feature_score[len(x)][tuple(x)] = 1-float(s)/len(patterns)
+                print(1-float(s)/len(patterns))
+            else:
+                self.feature_score[len (x)][tuple (x)] = -1
         return self.feature_score[len(x)][tuple(x)]
 
 from Destiny.DataSets import german_dataset
-data, target = german_dataset.load_german_dataset()
-C = MesureDeConsistance()
-C.fit(data,target)
-print(C.rank(2))
+data, target = make_classification(n_samples=300, n_features=25, n_informative=5,
+                           n_redundant=3, n_repeated=2, n_classes=2,
+                           n_clusters_per_class=1, random_state=0)
+data,target = german_dataset.load_german_dataset()
+M = MesureDeConsistance()
+M.fit(data,target)
+M.setThresholdsAutomatiquement()
+print(M.rank_with(n=1))

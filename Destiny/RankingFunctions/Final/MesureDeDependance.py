@@ -1,5 +1,7 @@
 import numpy as np
+from sklearn.datasets import make_classification
 
+from Destiny.DataSets import german_dataset
 from Destiny.RankingFunctions.Final.Mesure import Mesure
 
 
@@ -54,5 +56,15 @@ class MesureDeDependance(Mesure):
         for l in liste:
             if(l<g1 or l<g2):
                 n=n+len(l)
+        print(n/len(patterns))
         return n/len(patterns)
 
+data,target = german_dataset.load_german_dataset()
+M = MesureDeDependance()
+M.fit(data,target)
+M.setThresholdsAutomatiquement()
+print("Fin de la génération")
+M.CreateSubsets(borne=100)
+L = M.rank_with(n=3)
+for i in L:
+    print(i , " : " , L[i])

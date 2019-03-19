@@ -1,5 +1,6 @@
 from itertools import combinations
 
+from sklearn.datasets import make_classification
 from sklearn.neural_network import MLPClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
@@ -8,7 +9,7 @@ from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.ensemble import RandomForestClassifier , AdaBoostClassifier
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.neighbors import KNeighborsClassifier
-from Destiny import Evaluateur_Precision
+from Destiny import Evaluateur_Precision , Embedded_Thresholding
 import numpy as np
 from Destiny.RankingFunctions.Final.Mesure import Mesure
 
@@ -24,6 +25,30 @@ class PrecisionClassification (Mesure):
         self.__evaluateurs = {}
         self.__ranks = {}
         self._liste_mesures = PrecisionClassification.liste_modeles
+
+
+    def setThresholdsAutomatiquement(self,s=None):
+        self.rank_with (n=1)
+        E = Embedded_Thresholding.Embedded_Thresholding()
+        E.fit(self.__data,self.__target)
+        L = []
+        for i in PrecisionClassification.liste_modeles:
+            try:
+                L.append(E.getThresholdEmbedded(PrecisionClassification.modele_generator(i)))
+                self._liste_thresholds[PrecisionClassification.liste_modeles.index(i)]  =self.__ranks[1][i][E.getThresholdEmbedded(PrecisionClassification.modele_generator(i))-1][1]
+            except(RuntimeError):
+                pass
+        L = np.array(L)
+        print(L.mean()/len(self.__data[0]))
+        s = L.mean()/len(self.__data[0])
+        for j in self._calculated_measures[1]:
+            if (self._liste_thresholds[self._liste_mesures.index (j)] == 0):
+                self._liste_thresholds[self._liste_mesures.index (j)] = \
+                self._calculated_measures[1][j][int (s * (len (self._attributs.keys ()) - 1))][1]
+        print (self._liste_thresholds)
+        self._calculated_measures.clear ()
+        self.__ranks.clear()
+
 
     def ranking_function_constructor(self , motclef):
         D = {}
@@ -55,7 +80,10 @@ class PrecisionClassification (Mesure):
         self.masquer (masque)
         for j in self.__evaluateurs.keys ():
             if (Motclef == None or j in Motclef):
-                self.__ranks[len (numero)][j].append ((tuple(numero) , self.__evaluateurs[j].score ()))
+                if(self.__evaluateurs[j].score () >= self._liste_thresholds[PrecisionClassification.liste_modeles.index(j)]):
+                    self.__ranks[len (numero)][j].append ((tuple(numero) , self.__evaluateurs[j].score ()))
+                else:
+                    self.__ranks[len (numero)][j].append ((tuple (numero) , -1))
                 self.__ranks[len (numero)][j].sort (key=lambda x: x[1] , reverse=True)
         self.setup_modeles (self.__data , self.__target)
         return self.__ranks[len (numero)]
@@ -71,7 +99,11 @@ class PrecisionClassification (Mesure):
         if (not motclef in self.__ranks[nb].keys ()):
             scores = []
             L = range (0 , len (self._attributs.keys ()) - 2)
-            for i in combinations (L , nb):
+            if (self._subsets == None):
+                C = combinations (L , nb)
+            else:
+                C = self._subsets[nb]
+            for i in C:
                 K = []
                 for j in i:
                     K.append (j)
@@ -126,10 +158,8 @@ class PrecisionClassification (Mesure):
             self.__evaluateurs[k].masquer (masque)
 
 
-#from Destiny.DataSets import german_dataset
-#data, target = german_dataset.load_german_dataset()
-#DM = PrecisionClassification()
-#DM.fit(data,target)
-#print('Debut du fit')
-#DM.rank_with(['KNN',"RF"],n=3)
-#print(DM.getCalculatedMeasures())
+
+from Destiny.DataSets import german_dataset
+data, target = make_classification(n_samples=1500, n_features=20, n_informative=5,
+                           n_redundant=3, n_repeated=2, n_classes=2,
+                           n_clusters_per_class=1, random_state=0)

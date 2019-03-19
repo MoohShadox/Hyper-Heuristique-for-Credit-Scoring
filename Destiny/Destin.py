@@ -5,6 +5,7 @@ from Destiny.RankingFunctions.Final.Information_Measure import Information_Measu
 from Destiny.RankingFunctions.Final.MesureDeConsistance import MesureDeConsistance
 from Destiny.RankingFunctions.Final.MesureDeDependance import MesureDeDependance
 from Destiny.RankingFunctions.Final.PrecisionClassification import PrecisionClassification
+from Destiny.Tresholding import Tresholding
 
 
 class Destiny:
@@ -14,10 +15,11 @@ class Destiny:
     mesures_information = ["Entropie" , 'GainInformation' , "GainRatio" , "SymetricalIncertitude" , "MutualInformation" , "UH" , "US" , "DML"]
     mesures_dependance = ["RST"]
     mesures_consistance = ['FCC']
-    mesures_classification = ["BN","RF","LSVM","RBFSVM","GaussianProcess","AdaBoost","QDA","KNN","DTC","MLP"]
+    mesures_classification =  ["BN" , "RF" , "KNN" , "AdaBoost"]
 
     def __init__(self):
         self.__mesures = {}
+        self.__Threshold = 0
         self.__nom_mesures = {}
         self.__mesures["D"],self.__nom_mesures["D"] = Distances_Measures(),Destiny.mesures_distance
         self.__mesures["I"],self.__nom_mesures["I"] = Information_Measure(),Destiny.mesures_information
@@ -25,6 +27,11 @@ class Destiny:
         self.__mesures["Co"],self.__nom_mesures["Co"] = MesureDeConsistance(),Destiny.mesures_consistance
         self.__mesures["De"],self.__nom_mesures["De"] = MesureDeDependance(),Destiny.mesures_dependance
 
+
+    #L est une liste de types de mesures par exemple ['C' ,'Ce', 'De']
+    def GestionSubsets(self,L,Borne = None):
+        for i in L:
+            self.__mesures[i].CreateSubsets(Borne)
 
     def Projection(self,subset):
         D = self.__mesures["D"].ranking_function_constructor("FCS")(subset)
@@ -62,8 +69,15 @@ class Destiny:
         return DDD
 
     def fit(self,X,Y):
+        T = Tresholding()
+        T.fit(X,Y)
+        self.__Threshold = T.getTreshold(X,Y)
         for i in self.__mesures.keys():
-            self.__mesures[i].fit(X,Y)
+            self.__mesures[i].fit (X , Y)
+            if(i!="C"):
+                self.__mesures[i].setThresholdsAutomatiquement(self.__Threshold)
+
+
 
     def test(self):
         D = {}
@@ -79,10 +93,6 @@ from Destiny.DataSets import german_dataset
 data, target = german_dataset.load_german_dataset()
 DM = Destiny()
 DM.fit(data,target)
-L = DM.getMegaHeuristique(["H6"],nb=1)
-print(L)
-L.clear()
-L = DM.getMegaHeuristique(["H8"],nb=1)
-print(L)
+
 
 

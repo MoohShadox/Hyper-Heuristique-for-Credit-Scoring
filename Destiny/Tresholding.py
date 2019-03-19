@@ -1,3 +1,5 @@
+import random
+from datetime import time
 from itertools import *
 
 import numpy as np
@@ -8,12 +10,17 @@ class Tresholding:
         self.__data = None
         self.__target = None
         self.__valeurs_classe = {}
+        self.__treshold_percentage = {}
         self.__proportions_classes = {}
         self.__discriminants_ficher = {}
         self.__volume_overlap_region = {}
-        self.__alpha = 0.75
+        self.__nb_features = 0
+        self.__alpha = 0.85
 
     def fit(self,data,target):
+        self.__valeurs_classe.clear()
+        self.__proportions_classes.clear()
+        self.__nb_features = len(data[0])
         self.__data = data
         self.__target = target
         for i in range(0,len(self.__target)):
@@ -65,7 +72,6 @@ class Tresholding:
                 N = np.array(L)
                 results[j]["M"] = N.mean()
                 results[j]["V"] = N.var()
-                print("Les résultats donnés sont ",results)
             numerator = 0
             for j in results:
                 for k in results:
@@ -75,13 +81,14 @@ class Tresholding:
             for j in results:
                 denominateur = denominateur + results[j]['V'] * self.__proportions_classes[j]
             self.__discriminants_ficher[i] = numerator / denominateur
-        print("Au final les discriminants sotn ")
+        m = 0
         for i in self.__discriminants_ficher:
-            print(i," : ",self.__discriminants_ficher[i])
+            if(self.__discriminants_ficher[i]>m):
+                m = self.__discriminants_ficher[i]
+        return m
 
     def MinF(self,feature,classe):
         M = self.getAttributClasse(classe,feature)
-
         M = np.array(M)
         return M.min()
 
@@ -116,14 +123,43 @@ class Tresholding:
             self.__volume_overlap_region[i] = produit
         p = 1
         for i in self.__volume_overlap_region.items():
-            p = p * i
+            p = p * i[1]
         return p
+
+    def setThresholdinDestiny(self,D,data,target):
+        pass
+
+    def getTreshold(self,data,target):
+        self.__nb_features = len(data[0])
+        self.fit(data,target)
+        L = list(range(0,self.__nb_features))
+        t = 0
+        em = 1000
+        ez = 1100
+        for i in range(1,self.__nb_features):
+            C = list(combinations(L,i))
+            for j in C:
+                self.masquer(j)
+                e = self.__alpha * ((1/self.F1())+self.F2())/2 + (1-self.__alpha) * (i/self.__nb_features)
+                if(ez==e):
+                    self.fit (data , target)
+                    break
+                ez = e
+                if(e<em):
+                    em = e
+                    t = i/self.__nb_features
+                self.fit (data , target)
+        return t
+
+
+
 
 
 
 from Destiny.DataSets import german_dataset
 data, target = german_dataset.load_german_dataset()
+from sklearn.datasets import load_wine
+from sklearn.datasets import load_iris
+#data,target = load_iris()["data"],load_iris()["target"]
 FF = Tresholding()
-FF.fit(data,target)
-
-print(0.75 * FF.F2()[1] + 0.25 )
+FF.getTreshold(data,target)
