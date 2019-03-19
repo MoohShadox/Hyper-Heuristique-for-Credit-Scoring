@@ -1,4 +1,4 @@
-import Nature as nat
+from Nature2 import Nature as nat
 import re
 
 class Genome:
@@ -6,10 +6,11 @@ class Genome:
     def __init__(self):
         self.identity=""
         self.incarnation=[]
+        self.resultat=[]
         self.isvalide=0
 
     def incarner(self):
-        exp = "(\d[h\d]+)/"
+        exp = "(\d[H\d]+)/"
         genes=re.findall(exp,self.identity)
 
         for g in genes:

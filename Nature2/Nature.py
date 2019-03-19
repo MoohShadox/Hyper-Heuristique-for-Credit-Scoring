@@ -1,21 +1,26 @@
 import re
 import random
 import itertools
-import Genome
+from Nature2 import Genome
+from Nature2 import Fabriquant as fb
+import time
 class Nature:
-    Pstop=0.5
-    maxA = 4
-    maxH = 5
-    maxP = 1000
+    Pstop=0.4
+    maxA = 2
+    maxH = 6
+    maxP = 1
     maxS = 10
     strat = []
     population = []
     actualalpha = ""
+    DM=""
+    Tol=3
+
 
     @classmethod
     def csm(cls,G0I,G0A,Strat):
         st=""
-        exp="\d[h\d]+/"
+        exp="\d[H\d]+/"
         gi=re.findall(exp,G0I)
         ga=re.findall(exp,G0A)
         for s,s2 in itertools.zip_longest(gi,ga):
@@ -53,10 +58,10 @@ class Nature:
         else:
             st = st + G[0]
         k = random.randint(1, cls.maxH)
-        st = st + "h" + str(k)
+        st = st + "H" + str(k)
         while(random.random()<cls.Pstop):
             k = random.randint(1, 10)
-            st = st + "h" + str(k)
+            st = st + "H" + str(k)
         return st
 
     @classmethod
@@ -66,7 +71,7 @@ class Nature:
     @classmethod
     def PseudoTransoducteur(cls, GOI, GOA, CSM):
         st = ""
-        exp = "(\d[h\d]+)/"
+        exp = "(\d[H\d]+)/"
         exp2 = "S|CI|CO|MI|MO"
         gi = re.findall(exp, GOI)
         ga = re.findall(exp, GOA)
@@ -90,17 +95,17 @@ class Nature:
     @classmethod
     def validate(cls, G):
 
-        VG = Genome.Genome()
-
         if (len(G.identity) == 0):
-
             ppp = random.randint(0, 1)
             if (ppp == 1):
-                VG.identity = cls.PseudoTransoducteur("1h1/1h1/1h1/1h1/1h1/1h1", "", "MOMOMOMOMOMOMOMO")
+                G.identity = cls.PseudoTransoducteur("1H1/2H3/1H2/2H5/1H6/2H2", "", "MOMOMOMOMOMOMOMO")
             else:
-                VG.identity = cls.PseudoTransoducteur("1h1/1h1/1h1/1h1/1h1", "", "MOMOMOMOMOMOMO")
-        else:
-            VG=G
+                G.identity = cls.PseudoTransoducteur("1H2H3/2H3/1H4/2H1H4/2H1", "", "MOMOMOMOMOMOMO")
+        b=time.time()
+        fab = fb.Fabriquant(G, cls.DM)
+        print("le temps: ",time.time()-b)
+        VG = fab.genome
+
 
         return VG
 
@@ -110,7 +115,6 @@ class Nature:
         GN = Genome.Genome()
         GN.identity = cls.PseudoTransoducteur(VGOI.identity, VGOA.identity, st)
         VGN = cls.validate(GN)
-        #print(VGN.identity)
         return VGN
 
     @classmethod
@@ -119,8 +123,8 @@ class Nature:
         return cls.population[random.randint(0,cls.maxP-1)]
 
     @classmethod
-    def init(cls):
-
+    def init(cls,D):
+        cls.DM=D
         cls.strat=[[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],
                [0.2, 0.6, 0.5, 0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8]]
         cls.population=[]
@@ -128,6 +132,7 @@ class Nature:
         VNG=Genome.Genome()
         for i in range(cls.maxP):
             cls.population.append(cls.monoevolv(VNG,VNG,cls.strat[random.randint(0,cls.maxS-1)]))
+            print(cls.population)
 
         cls.actualalpha=cls.eludeAlpha()
 
@@ -136,6 +141,5 @@ class Nature:
         for i in range(cls.maxP):
             cls.population[i] = cls.monoevolv(cls.population[i], cls.actualalpha,
                                                 cls.strat[random.randint(0, cls.maxS - 1)])
-            #print(cls.population[i])
         cls.actualalpha = cls.eludeAlpha()
 
