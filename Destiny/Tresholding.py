@@ -156,10 +156,3 @@ class Tresholding:
 
 
 
-from Destiny.DataSets import german_dataset
-data, target = german_dataset.load_german_dataset()
-from sklearn.datasets import load_wine
-from sklearn.datasets import load_iris
-#data,target = load_iris()["data"],load_iris()["target"]
-FF = Tresholding()
-FF.getTreshold(data,target)

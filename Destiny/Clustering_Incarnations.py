@@ -8,6 +8,8 @@ class Clustering_Incarnations:
         self.__population = None
         self.__projections = []
         self.__destiny = Destiny()
+        self.clusters = {}
+        self.alphas_locaux = []
 
     def fit(self,X,Y):
         self.__destiny.fit(X,Y)
@@ -16,11 +18,29 @@ class Clustering_Incarnations:
         self.__population = X
 
 
+    def setDestiny(self,D):
+        self.__destiny = D
+
     def projeter(self):
         self.__projections = []
         for i in self.__population:
             self.__projections.append(self.__destiny.Projection(i))
         return self.__projections
+
+    @staticmethod
+    def carreProjection(projection):
+        s = 0
+        for i in projection:
+            s = s + i*i
+        return s
+
+    @staticmethod
+    def maxCarreProjection(liste_projections):
+        m = 0
+        for i in liste_projections:
+            if (Clustering_Incarnations.carreProjection(i) > 0):
+                m = Clustering_Incarnations.carreProjection(i)
+        return m
 
 
     def clusteriser(self):
@@ -35,7 +55,10 @@ class Clustering_Incarnations:
             cpt = cpt + 1
         for i in Rez:
             print(i , " : " , Rez[i])
-
+        self.clusters = Rez
+        self.alphas_locaux = len(self.clusters.keys())*[]
+        for i in self.clusters:
+            self.alphas_locaux[i] = Clustering_Incarnations.maxCarreProjection(self.clusters[i])
 
 
 from Destiny.DataSets import german_dataset
@@ -47,6 +70,7 @@ K = []
 print("Test pour ",len(list(combinations(L,2)))," elements ")
 for i in combinations(L,2):
     K.append(list(i))
+print(K)
 CI.ajouter_population(K)
 
 for i in CI.projeter():

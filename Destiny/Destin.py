@@ -11,17 +11,19 @@ from Destiny.Tresholding import Tresholding
 class Destiny:
     #C'est simple pour demander un ranking donné tu précise la lettre suivi de l'indice donc D0 pour Chi, I1 pour le gain d'information etc...
     #Sinon on peut indexer en utilisant H et un chiffre qui commence a 0
-    mesures_distance = ["Chi","FScore","ReliefF","FCS"]
+    #mesures_distance = ["Chi","FScore","ReliefF","FCS"]
     mesures_information = ["Entropie" , 'GainInformation' , "GainRatio" , "SymetricalIncertitude" , "MutualInformation" , "UH" , "US" , "DML"]
     mesures_dependance = ["RST"]
     mesures_consistance = ['FCC']
     mesures_classification =  ["BN" , "RF" , "KNN" , "AdaBoost"]
 
     def __init__(self):
+        self.__data,self.__target = None,None
         self.__mesures = {}
         self.__Threshold = 0
         self.__nom_mesures = {}
-        self.__mesures["D"],self.__nom_mesures["D"] = Distances_Measures(),Destiny.mesures_distance
+        self.__precedent_measures = {}
+        #self.__mesures["D"],self.__nom_mesures["D"] = Distances_Measures(),Destiny.mesures_distance
         self.__mesures["I"],self.__nom_mesures["I"] = Information_Measure(),Destiny.mesures_information
         self.__mesures["C"],self.__nom_mesures["C"] = PrecisionClassification(),Destiny.mesures_classification
         self.__mesures["Co"],self.__nom_mesures["Co"] = MesureDeConsistance(),Destiny.mesures_consistance
@@ -32,6 +34,9 @@ class Destiny:
     def GestionSubsets(self,L,Borne = None):
         for i in L:
             self.__mesures[i].CreateSubsets(Borne)
+
+    def getDataset(self):
+        return self.__data,self.__target
 
     def Projection(self,subset):
         D = self.__mesures["D"].ranking_function_constructor("FCS")(subset)
@@ -69,15 +74,21 @@ class Destiny:
         return DDD
 
     def fit(self,X,Y):
+        self.__data ,self.__target = X, Y
         T = Tresholding()
         T.fit(X,Y)
         self.__Threshold = T.getTreshold(X,Y)
         for i in self.__mesures.keys():
+            print(i," fini")
             self.__mesures[i].fit (X , Y)
-            if(i!="C"):
-                self.__mesures[i].setThresholdsAutomatiquement(self.__Threshold)
+            self.__mesures[i].setThresholdsAutomatiquement (self.__Threshold)
+        print("Fin du fit")
 
 
+
+
+    def getprecdico(self):
+        return self.__precedent_measures
 
     def test(self):
         D = {}
@@ -86,13 +97,6 @@ class Destiny:
             print(self.__mesures[i].rank_with(n=1))
 
 
-
-
-
-from Destiny.DataSets import german_dataset
-data, target = german_dataset.load_german_dataset()
-DM = Destiny()
-DM.fit(data,target)
 
 
 

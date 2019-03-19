@@ -1,9 +1,13 @@
 import re
 import random
 import itertools
+
+from Destiny.Clustering_Incarnations import Clustering_Incarnations
+from Destiny.Evaluateur_Precision import Evaluateur_Precision
 from Nature2 import Genome
 from Nature2 import Fabriquant as fb
 import time
+from sklearn.ensemble import AdaBoostClassifier
 class Nature:
     Pstop=0.4
     maxA = 2
@@ -15,7 +19,10 @@ class Nature:
     actualalpha = ""
     DM=""
     Tol=3
-
+    population_clusterised = {}
+    alphas_locaux = []
+    alpha_global = []
+    modele = AdaBoostClassifier()
 
     @classmethod
     def csm(cls,G0I,G0A,Strat):
@@ -94,7 +101,6 @@ class Nature:
 
     @classmethod
     def validate(cls, G):
-
         if (len(G.identity) == 0):
             ppp = random.randint(0, 1)
             if (ppp == 1):
@@ -105,8 +111,6 @@ class Nature:
         fab = fb.Fabriquant(G, cls.DM)
         print("le temps: ",time.time()-b)
         VG = fab.genome
-
-
         return VG
 
     @classmethod
@@ -120,6 +124,29 @@ class Nature:
     @classmethod
     def eludeAlpha(cls):
         #provisoire pour le test:
+        P = []
+        print("heheboi")
+        for i in Nature.population:
+            P.append(i.incarnation)
+        print("heheboi")
+        CI = Clustering_Incarnations()
+        CI.setDestiny(Nature.DM)
+        CI.ajouter_population(P)
+        print ("heheboi")
+        CI.clusteriser()
+        print ("heheboi")
+        Nature.population_clusterised = CI.clusters
+        Nature.alphas_locaux = CI.alphas_locaux
+        E = Evaluateur_Precision(Nature.DM.getDataset()[0],Nature.DM.getDataset()[1])
+        E.train(Nature.modele)
+        maxx = 0
+        alpha_global = None
+        for i in Nature.alphas_locaux:
+            c=E.Evaluer(i)
+            if c > maxx:
+                maxx = c
+                alpha_global = i
+        Nature.alpha_global = alpha_global
         return cls.population[random.randint(0,cls.maxP-1)]
 
     @classmethod
@@ -128,12 +155,10 @@ class Nature:
         cls.strat=[[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],
                [0.2, 0.6, 0.5, 0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8]]
         cls.population=[]
-
         VNG=Genome.Genome()
         for i in range(cls.maxP):
             cls.population.append(cls.monoevolv(VNG,VNG,cls.strat[random.randint(0,cls.maxS-1)]))
             print(cls.population)
-
         cls.actualalpha=cls.eludeAlpha()
 
     @classmethod

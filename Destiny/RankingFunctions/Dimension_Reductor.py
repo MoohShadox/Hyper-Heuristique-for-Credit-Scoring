@@ -29,7 +29,7 @@ class Dimension_Reductor(object):
         P.fit(D,self.__target)
         c = P.components_[0]
         A = D.dot(c)
-        print(A)
+        return A
 
 
     def getLDA(self,liste_nums):
@@ -43,7 +43,6 @@ class Dimension_Reductor(object):
         P.fit(D,self.__target)
         c = P.coef_[0]
         A = D.dot(c)
-        print(A)
 
 
 
@@ -56,9 +55,5 @@ class Dimension_Reductor(object):
             A = A + I
         return A
 
-from Destiny.DataSets import german_dataset
-data, target = german_dataset.load_german_dataset()
-P = Dimension_Reductor()
-P.fit(data,target)
-P.getLDA([3,4,5])
+
 

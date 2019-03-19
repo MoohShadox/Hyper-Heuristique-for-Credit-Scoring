@@ -116,22 +116,3 @@ class Embedded_Thresholding:
         C = list(self.__subset_selectionned.keys())
         self.__subset_selectionned.clear()
         return C
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import matplotlib.pyplot as plt
-from sklearn.svm import SVC
-from sklearn.model_selection import StratifiedKFold
-from sklearn.feature_selection import RFECV
-from sklearn.datasets import make_classification

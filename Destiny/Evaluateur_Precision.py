@@ -36,6 +36,16 @@ class Evaluateur_Precision:
     def score(self):
         return self.__model.score(self.__data_test,self.__target_test)
 
+    def Evaluer(self,numeros):
+        X,Y,Z,W = self.__data_train, self.__data_test, self.__target_train , self.__target_test
+        masque = np.array(len(self.__data_test[0]) * [False])
+        for i in numeros:
+            masque[i] = True
+        self.masquer(masque)
+        S = self.score()
+        self.__data_train , self.__data_test , self.__target_train , self.__target_test = X,Y,Z,W
+        return S
+
     def masquer(self,masque):
         self.__data_test = self.__data_test.transpose ()
         self.__data_test = self.__data_test[masque]
