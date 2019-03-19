@@ -1,3 +1,4 @@
+from Destiny.DataSets import german_dataset
 from Destiny.RankingFunctions import ReliefF
 from Destiny.RankingFunctions.Final import ChiMesure , FScore
 
@@ -38,6 +39,13 @@ class Distances_Measures(Mesure):
         self.__mesures['FCS'] = FC
 
 
+
+
+data,target = german_dataset.load_german_dataset()
+M = Distances_Measures()
+M.fit(data,target)
+M.setThresholdsAutomatiquement()
+print(M.rank_with(n=1))
 
 
 

@@ -18,7 +18,7 @@ class FScore:
             score = -1
         else:
             score = self.__scores[x[0]]
-        return score
+        return score[1]
 
 
 
