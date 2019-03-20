@@ -15,7 +15,7 @@ class Nature:
     Pstop=0.4
     maxA = 2
     maxH = 6
-    maxP = 100
+    maxP = 10
     maxS = 10
     strat = []
     population = []
@@ -84,23 +84,24 @@ class Nature:
         st = ""
         exp = "(\d[H\d]+)/"
         exp2 = "S|CI|CO|MI|MO"
+
         gi = re.findall(exp, GOI)
         ga = re.findall(exp, GOA)
         csm = re.findall(exp2, CSM)
         modif = itertools.zip_longest(gi, ga, csm)
-
         for i, a, c in modif:
-            if (gi != None):
-                if (c == "S"):
-                    st = st + i + "/"
-                if (c == "MI"):
-                    st = st + cls.Grand(i) + "/"
-                if (c == "MO"):
-                    st = st + cls.Grand() + "/"
-                if (c == "CI"):
-                    st = st + cls.MergeH(i, a) + "/"
-                if (c == "CO"):
-                    st = st + a + "/"
+            if(random.random()<0.72):
+                if (gi != None):
+                    if (c == "S"):
+                        st = st + i + "/"
+                    if (c == "MI"):
+                        st = st + cls.Grand(i) + "/"
+                    if (c == "MO"):
+                        st = st + cls.Grand() + "/"
+                    if (c == "CI"):
+                        st = st + cls.MergeH(i, a) + "/"
+                    if (c == "CO"):
+                        st = st + a + "/"
         return st
 
     @classmethod
