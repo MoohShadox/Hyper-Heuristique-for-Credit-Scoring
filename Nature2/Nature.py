@@ -16,13 +16,14 @@ class Nature:
     maxS = 10
     strat = []
     population = []
-    actualalpha = ""
+    actualalpha = None
     DM=None
     Tol=3
     population_clusterised = {}
     alphas_locaux = []
     alpha_global = []
     modele = AdaBoostClassifier()
+    actual_precision=0
 
     @classmethod
     def csm(cls,G0I,G0A,Strat):
@@ -123,6 +124,7 @@ class Nature:
     @classmethod
     def eludeAlpha(cls):
         #provisoire pour le test:
+        cls.actual_precision=0
         P = []
         for i in cls.population:
             P.append(i.resultat)
@@ -135,12 +137,11 @@ class Nature:
         Nature.alphas_locaux = CI.alphas_locaux
         E = Evaluateur_Precision(Nature.DM.getDataset()[0],Nature.DM.getDataset()[1])
         E.train(Nature.modele)
-        maxx = 0
         alpha_global = None
         for i in Nature.alphas_locaux:
             c=E.Evaluer(i)
-            if c > maxx:
-                maxx = c
+            if c > cls.actual_precision:
+                cls.actual_precision = c
                 alpha_global = i
         Nature.alpha_global = alpha_global
         lesalpha=cls.alphas_locaux
@@ -153,9 +154,14 @@ class Nature:
                     kk=len(cls.population)+1
                 kk=kk+1
         ll=0
+        print("alpha global",cls.alpha_global)
         while(ll<len(cls.population)):
-            if (cls.population[ll].resultat == cls.alpha_global):
+            if (cls.population[ll].resultat == list(cls.alpha_global)):
                 cls.actualalpha=cls.population[ll]
+                ll=len(cls.population)+1
+            ll=ll+1
+
+
 
 
 
