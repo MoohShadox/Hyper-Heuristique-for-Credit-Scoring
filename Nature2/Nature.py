@@ -8,6 +8,9 @@ from Nature2 import Genome
 from Nature2 import Fabriquant as fb
 import time
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+
 class Nature:
     Pstop=0.4
     maxA = 2
@@ -22,7 +25,7 @@ class Nature:
     population_clusterised = {}
     alphas_locaux = []
     alpha_global = []
-    modele = AdaBoostClassifier()
+    modele = DecisionTreeClassifier()
     actual_precision=0
 
     @classmethod
@@ -123,8 +126,6 @@ class Nature:
 
     @classmethod
     def eludeAlpha(cls):
-        #provisoire pour le test:
-        cls.actual_precision=0
         P = []
         for i in cls.population:
             P.append(i.resultat)
@@ -138,10 +139,11 @@ class Nature:
         E = Evaluateur_Precision(Nature.DM.getDataset()[0],Nature.DM.getDataset()[1])
         E.train(Nature.modele)
         alpha_global = None
+        max=0
         for i in Nature.alphas_locaux:
             c=E.Evaluer(i)
-            if c > cls.actual_precision:
-                cls.actual_precision = c
+            if c > max:
+                max = c
                 alpha_global = i
         Nature.alpha_global = alpha_global
         lesalpha=cls.alphas_locaux
@@ -149,17 +151,18 @@ class Nature:
         for k in lesalpha:
             kk=0
             while(kk<len(cls.population)):
-                if(cls.population[kk].resultat == k):
+                if(cls.population[kk].resultat == list(k)):
                     cls.alphas_locaux.append(cls.population[kk])
                     kk=len(cls.population)+1
                 kk=kk+1
         ll=0
-        print("alpha global",cls.alpha_global)
-        while(ll<len(cls.population)):
-            if (cls.population[ll].resultat == list(cls.alpha_global)):
-                cls.actualalpha=cls.population[ll]
-                ll=len(cls.population)+1
-            ll=ll+1
+        if(cls.actual_precision<max):
+            cls.actual_precision=max
+            while(ll<len(cls.population)):
+                if (cls.population[ll].resultat == list(cls.alpha_global)):
+                    cls.actualalpha=cls.population[ll]
+                    ll=len(cls.population)+1
+                ll=ll+1
 
 
 
@@ -173,15 +176,35 @@ class Nature:
         cls.population=[]
         VNG=Genome.Genome()
         for i in range(cls.maxP):
-            a=time.time()
             cls.population.append(cls.monoevolv(VNG,VNG,cls.strat[random.randint(0,cls.maxS-1)]))
-          #  print("temps init",time.time()-a)
         cls.eludeAlpha()
 
     @classmethod
     def evolve(cls):
         for i in range(cls.maxP):
-            cls.population[i] = cls.monoevolv(cls.population[i], cls.actualalpha,
-                                                cls.strat[random.randint(0, cls.maxS - 1)])
+            cls.population[i]=cls.monoevolv(cls.population[i],cls.alphas_locaux[cls.getcluster(cls.population[i])],cls.strat[random.randint(0, cls.maxS - 1)])
+            cls.population[i] = cls.monoevolv(cls.population[i], cls.actualalpha, cls.strat[random.randint(0, cls.maxS - 1)])
         cls.eludeAlpha()
+
+    @classmethod
+    def getcluster(cls,G):
+        cpt=0
+        trouve=False
+        while(cpt<len(cls.population_clusterised)):
+            cpt2=0
+            while(cpt2<len(cls.population_clusterised[cpt])):
+                if(G.resultat == list(cls.population_clusterised[cpt][cpt2])):
+                    return cpt
+                    cpt2=len(cls.population_clusterised[cpt])+1
+                    trouve=True
+                cpt2=cpt2+1
+            if(trouve):
+                cpt = len(cls.population_clusterised) + 1
+            cpt=cpt+1
+
+
+        return -1
+
+
+
 
