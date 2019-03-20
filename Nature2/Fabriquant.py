@@ -54,7 +54,7 @@ class Fabriquant:
                             kk=kk+1
                 tournoit.append((joueur,score))
             tournoit=sorted(tournoit,key=operator.itemgetter(1),reverse=True)
-            if(tournoit==[]):
+            if(tournoit!=[]):
                 self.incarnation.append((stg,tournoit[0][0],1))
                 self.listbuffer= self.listbuffer + list(list(tournoit[0][0]))
 
@@ -101,7 +101,11 @@ class Fabriquant:
                 inter=inter.intersection(elus)
             else:inter=elus
             union=union.union(elus)
+        #print("inter et union",len(inter),len(union))
+        #print("ce qui a deja ete selectionne: ",self.listbuffer)
+        #print("inter et union ensembles",inter,union)
         k = random.randint(len(inter),len(union))
+        #print("k",k)
         for j in range(k):
             fait=0
             while(fait==0):
