@@ -1,2 +1,8 @@
 
 Fichiers/
+
+*.pyc
+
+Destiny/DataSets/test\.csv
+
+Destiny/DataSets/train\.csv
