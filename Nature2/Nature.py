@@ -124,17 +124,13 @@ class Nature:
     def eludeAlpha(cls):
         #provisoire pour le test:
         P = []
-        print("heheboi")
         for i in cls.population:
             P.append(i.resultat)
-        print("heheboi")
         CI = Clustering_Incarnations()
         CI.setDestiny(Nature.DM)
-        print("laaa",P)
         CI.ajouter_population(P)
-        print ("heheboi")
+        CI.projeter()
         CI.clusteriser()
-        print ("heheboi")
         Nature.population_clusterised = CI.clusters
         Nature.alphas_locaux = CI.alphas_locaux
         E = Evaluateur_Precision(Nature.DM.getDataset()[0],Nature.DM.getDataset()[1])
@@ -148,8 +144,20 @@ class Nature:
                 alpha_global = i
         Nature.alpha_global = alpha_global
         lesalpha=cls.alphas_locaux
-        print(lesalpha)
-        return cls.population[random.randint(0,cls.maxP-1)]
+        cls.alphas_locaux=[]
+        for k in lesalpha:
+            kk=0
+            while(kk<len(cls.population)):
+                if(cls.population[kk].resultat == k):
+                    cls.alphas_locaux.append(cls.population[kk])
+                    kk=len(cls.population)+1
+                kk=kk+1
+        ll=0
+        while(ll<len(cls.population)):
+            if (cls.population[ll].resultat == cls.alpha_global):
+                cls.actualalpha=cls.population[ll]
+
+
 
     @classmethod
     def init(cls,D):
@@ -161,13 +169,13 @@ class Nature:
         for i in range(cls.maxP):
             a=time.time()
             cls.population.append(cls.monoevolv(VNG,VNG,cls.strat[random.randint(0,cls.maxS-1)]))
-            print("temps init",time.time()-a)
-        cls.actualalpha=cls.eludeAlpha()
+          #  print("temps init",time.time()-a)
+        cls.eludeAlpha()
 
     @classmethod
     def evolve(cls):
         for i in range(cls.maxP):
             cls.population[i] = cls.monoevolv(cls.population[i], cls.actualalpha,
                                                 cls.strat[random.randint(0, cls.maxS - 1)])
-        cls.actualalpha = cls.eludeAlpha()
+        cls.eludeAlpha()
 
