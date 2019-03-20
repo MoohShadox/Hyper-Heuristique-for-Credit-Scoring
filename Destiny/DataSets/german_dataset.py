@@ -1,5 +1,9 @@
 import numpy as np
 import pandas as pd
+from sklearn.naive_bayes import GaussianNB
+
+from Destiny.Evaluateur_Precision import Evaluateur_Precision
+
 
 def load_german_dataset():
     X = pd.read_csv(r"C:\Users\Geekzone\Documents\PFEHyperHeuristicForCreditScoring\Destiny\DataSets\GermanData.csv")
@@ -21,3 +25,11 @@ def load_german_dataset():
         W.append(L)
     return np.array(W),Y
 
+
+#train,target = load_german_dataset()
+#print(train.shape)
+#print(target.shape)
+#print(target)
+#E = Evaluateur_Precision(train,target)
+#E.train(GaussianNB())
+#print(E.vecteur_precision())

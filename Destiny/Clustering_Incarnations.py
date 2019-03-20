@@ -22,6 +22,7 @@ class Clustering_Incarnations:
         self.__destiny = D
 
     def projeter(self):
+        print("population en entrée ", self.__population)
         self.__projections = []
         for i in self.__population:
             self.__projections.append(self.__destiny.Projection(i))
@@ -39,14 +40,14 @@ class Clustering_Incarnations:
         m = 0
         im = None
         for i in liste_projections:
-            if (Clustering_Incarnations.carreProjection(i) > 0):
+            if (Clustering_Incarnations.carreProjection(i) >= m):
                 m = Clustering_Incarnations.carreProjection(i)
                 im = i
         return im
 
 
     def clusteriser(self):
-        KM = k_means(self.__projections,n_clusters=10)
+        KM = k_means(self.__projections,n_clusters=3)
         cpt = 0
         Rez = {}
         for i in KM[1]:
@@ -55,28 +56,26 @@ class Clustering_Incarnations:
             W.append(t)
             Rez[i] = Rez.get(i,[]) + W
             cpt = cpt + 1
-        for i in Rez:
-            print(i , " : " , Rez[i])
         self.clusters = Rez
-        self.alphas_locaux = len(self.clusters.keys())*[0]
+        self.alphas_locaux = (len(self.clusters.keys()))*[0]
         for i in self.clusters:
-            self.alphas_locaux[i] = Clustering_Incarnations.maxCarreProjection(self.clusters[i])
-        print(self.alphas_locaux)
+            C = Clustering_Incarnations.maxCarreProjection(self.clusters[i])
+            self.alphas_locaux[i] = C
 
 
-from Destiny.DataSets import german_dataset
-data, target = german_dataset.load_german_dataset()
-L = range(0,len(data[0])-2)
-CI  = Clustering_Incarnations()
-CI.fit(data,target)
-K = []
-print("Test pour ",len(list(combinations(L,2)))," elements ")
-for i in combinations(L,2):
-    K.append(list(i))
-print(K)
-CI.ajouter_population(K)
-
-for i in CI.projeter():
-    print(i)
-
-CI.clusteriser()
+#from Destiny.DataSets import german_dataset
+#data, target = german_dataset.load_german_dataset()
+#L = range(0,len(data[0])-2)
+#CI  = Clustering_Incarnations()
+#CI.fit(data,target)
+#K = []
+#print("Test pour ",len(list(combinations(L,2)))," elements ")
+#for i in combinations(L,2):
+#    K.append(list(i))
+#print(K)
+#CI.ajouter_population(K)
+#
+#for i in CI.projeter():
+#    print(i)
+#
+#CI.clusteriser()

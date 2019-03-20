@@ -7,7 +7,8 @@ from Destiny.RankingFunctions.Final.Mesure import Mesure
 
 
 class Distances_Measures(Mesure):
-    liste_mesures = ["Chi","FScore","ReliefF","FCS"]
+    #liste_mesures = ["Chi" , "FScore" , "ReliefF" , "FCS"]
+    liste_mesures = ["FScore" , "ReliefF" , "FCS"]
 
     def __init__(self):
         super().__init__()
@@ -28,14 +29,14 @@ class Distances_Measures(Mesure):
         self.__data = X
         self.__target = Y
         R = ReliefF()
-        CH = ChiMesure.chi(X , Y)
+        #CH = ChiMesure.chi(X , Y)
         F = FScore.FScore(X , Y)
         R.fit(X,Y)
         FC = FCS()
         FC.fit(self.__data, self.__target)
         self.__mesures["ReliefF"] = R
         self.__mesures["FScore"] = F
-        self.__mesures["Chi"] = CH
+        #self.__mesures["Chi"] = CH
         self.__mesures['FCS'] = FC
 
 

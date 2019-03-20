@@ -95,7 +95,7 @@ class Fabriquant:
             hierlist2 = gj[list(gj.keys())[0]]
             elus=set()
             for h in hierlist2:
-                if(intersect(self.listbuffer,h[0])==[] and h[1]>0):
+                if (intersect (self.listbuffer , h[0]) == [] and h[1] > 0):
                     elus= elus.union(set(h[0]))
             if(len(inter)>0):
                 inter=inter.intersection(elus)

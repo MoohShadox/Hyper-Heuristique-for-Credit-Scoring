@@ -1,3 +1,5 @@
+import math
+
 from sklearn.feature_selection import chi2
 import numpy as np
 
@@ -9,6 +11,13 @@ class chi:
         self.__data = data
         self.__target = target
         self.__scores = {}
+        D = []
+        for i in self.__data.transpose():
+            i = i + math.fabs(i.min())
+            D.append(i)
+        D = np.array(D)
+        D = D.transpose()
+        self.__data = D
         sc = chi2(data,target)
         for i in range(0,len(sc[0])-1):
             t = i,sc[0][i]
@@ -23,6 +32,7 @@ class chi:
             LL.append (L)
             LL = np.array (LL)
             LL = LL.transpose ()
+            LL = LL + math.fabs(LL.min())
             R = chi2(LL , self.__target)
             return R[0][0]
         else:

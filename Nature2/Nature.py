@@ -13,9 +13,9 @@ from sklearn.tree import DecisionTreeClassifier
 
 class Nature:
     Pstop=0.4
-    maxA = 2
-    maxH = 6
-    maxP = 10
+    maxA = 3
+    maxH = 5
+    maxP = 500
     maxS = 10
     strat = []
     population = []
@@ -122,7 +122,6 @@ class Nature:
         GN = Genome.Genome()
         GN.identity = cls.PseudoTransoducteur(VGOI.identity, VGOA.identity, st)
         VGN = cls.validate(GN)
-
         return VGN
 
     @classmethod
