@@ -12,12 +12,12 @@ class Nature:
     Pstop=0.4
     maxA = 2
     maxH = 6
-    maxP = 1
+    maxP = 100
     maxS = 10
     strat = []
     population = []
     actualalpha = ""
-    DM=""
+    DM=None
     Tol=3
     population_clusterised = {}
     alphas_locaux = []
@@ -67,7 +67,7 @@ class Nature:
         k = random.randint(1, cls.maxH)
         st = st + "H" + str(k)
         while(random.random()<cls.Pstop):
-            k = random.randint(1, 10)
+            k = random.randint(1, cls.maxH)
             st = st + "H" + str(k)
         return st
 
@@ -107,9 +107,7 @@ class Nature:
                 G.identity = cls.PseudoTransoducteur("1H1/2H3/1H2/2H5/1H6/2H2", "", "MOMOMOMOMOMOMOMO")
             else:
                 G.identity = cls.PseudoTransoducteur("1H2H3/2H3/1H4/2H1H4/2H1", "", "MOMOMOMOMOMOMO")
-        b=time.time()
         fab = fb.Fabriquant(G, cls.DM)
-        print("le temps: ",time.time()-b)
         VG = fab.genome
         return VG
 
@@ -119,6 +117,7 @@ class Nature:
         GN = Genome.Genome()
         GN.identity = cls.PseudoTransoducteur(VGOI.identity, VGOA.identity, st)
         VGN = cls.validate(GN)
+
         return VGN
 
     @classmethod
@@ -126,11 +125,12 @@ class Nature:
         #provisoire pour le test:
         P = []
         print("heheboi")
-        for i in Nature.population:
-            P.append(i.incarnation)
+        for i in cls.population:
+            P.append(i.resultat)
         print("heheboi")
         CI = Clustering_Incarnations()
         CI.setDestiny(Nature.DM)
+        print("laaa",P)
         CI.ajouter_population(P)
         print ("heheboi")
         CI.clusteriser()
@@ -147,6 +147,8 @@ class Nature:
                 maxx = c
                 alpha_global = i
         Nature.alpha_global = alpha_global
+        lesalpha=cls.alphas_locaux
+        print(lesalpha)
         return cls.population[random.randint(0,cls.maxP-1)]
 
     @classmethod
@@ -157,8 +159,9 @@ class Nature:
         cls.population=[]
         VNG=Genome.Genome()
         for i in range(cls.maxP):
+            a=time.time()
             cls.population.append(cls.monoevolv(VNG,VNG,cls.strat[random.randint(0,cls.maxS-1)]))
-            print(cls.population)
+            print("temps init",time.time()-a)
         cls.actualalpha=cls.eludeAlpha()
 
     @classmethod

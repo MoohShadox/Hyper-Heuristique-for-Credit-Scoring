@@ -22,7 +22,9 @@ class Fabriquant:
             gene = re.findall(exp2, stg)
             condidats=set()
             for mesure in gene:
+                a = time.time()
                 dictt=DM.getMegaHeuristique([mesure],int(self.attlen))
+              #  print("le temps Fab1: "+mesure, time.time() - a)
                 hierlist = dictt[list(dictt.keys())[0]]
                 latol=0
                 cpt1=0
@@ -87,11 +89,13 @@ class Fabriquant:
         inter=set()
         union=set()
         for i in range(nat.Nature.maxH):
+            a = time.time()
             gj = self.dm.getMegaHeuristique(["H" + str(i+1)], 1)
+            #print("le temps fab2: H"+str(i+1), time.time() - a)
             hierlist2 = gj[list(gj.keys())[0]]
             elus=set()
             for h in hierlist2:
-                if(intersect(self.listbuffer,h[0])==[]):
+                if(intersect(self.listbuffer,h[0])==[] and h[1]>0):
                     elus= elus.union(set(h[0]))
             if(len(inter)>0):
                 inter=inter.intersection(elus)
@@ -102,7 +106,9 @@ class Fabriquant:
             fait=0
             while(fait==0):
                 p=random.randint(1,nat.Nature.maxH)
+                a = time.time()
                 gjj = self.dm.getMegaHeuristique(["H" + str(p)], 1)
+             #   print("le temps fab3: H"+str(p), time.time() - a)
                 hierlist3 = gjj[list(gjj.keys())[0]]
                 hh=0
                 while(hh<len(hierlist3)):
