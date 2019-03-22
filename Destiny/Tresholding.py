@@ -5,6 +5,7 @@ from itertools import *
 import numpy as np
 import math
 
+from Destiny.DataSets.german_dataset import load_german_dataset
 from Destiny.DataSets.musk_dataset import load_musk_dataset
 
 
@@ -38,7 +39,7 @@ class Tresholding:
             sum = sum + self.__proportions_classes[j]
         for j in self.__proportions_classes:
             self.__proportions_classes[j] = self.__proportions_classes[j] / sum
-
+#
     def getAttributClasse(self,classe,attribut):
         L= []
         for j in self.__valeurs_classe[classe]:
@@ -185,9 +186,4 @@ class Tresholding:
 
 
 
-train,target = load_musk_dataset()
-
-T = Tresholding()
-T.fit(train,target)
-print(T.getTreshold(train,target))
 

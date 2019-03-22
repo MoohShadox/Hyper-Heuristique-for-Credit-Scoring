@@ -22,7 +22,6 @@ class Clustering_Incarnations:
         self.__destiny = D
 
     def projeter(self):
-        print("population en entrée ", self.__population)
         self.__projections = []
         for i in self.__population:
             self.__projections.append(self.__destiny.Projection(i))
@@ -56,6 +55,8 @@ class Clustering_Incarnations:
             W.append(t)
             Rez[i] = Rez.get(i,[]) + W
             cpt = cpt + 1
+        for i in Rez:
+            print(i , " : " , Rez[i])
         self.clusters = Rez
         self.alphas_locaux = (len(self.clusters.keys()))*[0]
         for i in self.clusters:

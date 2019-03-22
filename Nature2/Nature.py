@@ -10,18 +10,20 @@ import time
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
 
 class Nature:
+    Psupp=0.7
     Pstop=0.4
     maxA = 3
-    maxH = 5
-    maxP = 500
+    maxH = 13
+    maxP = 100
     maxS = 10
     strat = []
     population = []
     actualalpha = None
     DM=None
-    Tol=3
+    Tol=4
     population_clusterised = {}
     alphas_locaux = []
     alpha_global = []
@@ -89,8 +91,10 @@ class Nature:
         ga = re.findall(exp, GOA)
         csm = re.findall(exp2, CSM)
         modif = itertools.zip_longest(gi, ga, csm)
+        boola=True
         for i, a, c in modif:
-            if(random.random()<0.72):
+            if(random.random()<cls.Psupp or boola):
+                boola=False
                 if (gi != None):
                     if (c == "S"):
                         st = st + i + "/"
@@ -138,14 +142,13 @@ class Nature:
         Nature.alphas_locaux = CI.alphas_locaux
         E = Evaluateur_Precision(Nature.DM.getDataset()[0],Nature.DM.getDataset()[1])
         E.train(Nature.modele)
-        alpha_global = None
-        max=0
+        max=cls.actual_precision
         for i in Nature.alphas_locaux:
             c=E.Evaluer(i)
             if c > max:
                 max = c
-                alpha_global = i
-        Nature.alpha_global = alpha_global
+                cls.alpha_global = i
+        cls.actual_precision = max
         lesalpha=cls.alphas_locaux
         cls.alphas_locaux=[]
         for k in lesalpha:
@@ -156,13 +159,13 @@ class Nature:
                     kk=len(cls.population)+1
                 kk=kk+1
         ll=0
-        if(cls.actual_precision<max):
-            cls.actual_precision=max
-            while(ll<len(cls.population)):
-                if (cls.population[ll].resultat == list(cls.alpha_global)):
-                    cls.actualalpha=cls.population[ll]
-                    ll=len(cls.population)+1
-                ll=ll+1
+        print("----------ALPHA GLOBAL",cls.alpha_global)
+        while(ll<len(cls.population)):
+            if (cls.population[ll].resultat == list(cls.alpha_global)):
+                print("**********ICI")
+                cls.actualalpha=cls.population[ll]
+                ll=len(cls.population)+1
+            ll=ll+1
 
 
 

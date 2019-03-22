@@ -23,13 +23,16 @@ class Mesure:
         self.__target = None
 
 
+    def setSubsets(self,subset):
+        self._subsets = subset
+
     def CreateSubsets(self,borne=None):
         self._subsets = {}
         T = Embedded_Thresholding()
         T.fit(self.__data,self.__target)
         for i in range(2,Mesure.MegaAttributTailleMax+1):
             self._subsets[i] = T.generer_subset(i , borne)
-
+        return self._subsets
 
     def setThresholdsAutomatiquement(self,s=None):
         self.rank_with(n=1)
@@ -65,7 +68,7 @@ class Mesure:
         ranker = self.ranking_function_constructor(motclef)
         scores = []
         L = range(0,len(self._attributs.keys())-2)
-        if(self._subsets == None or nb == 1):
+        if(self._subsets == None or not nb in self._subsets.keys()):
             C = combinations(L,nb)
         else:
             print("nb = ",nb)

@@ -1,3 +1,5 @@
+from Destiny.DataSets.german_dataset import load_german_dataset
+from Destiny.Embedded_Thresholding import Embedded_Thresholding
 from Destiny.RankingFunctions import Entropie
 from Destiny.RankingFunctions.Final.Distances_Measures import Distances_Measures
 
@@ -12,18 +14,19 @@ class Destiny:
     #C'est simple pour demander un ranking donné tu précise la lettre suivi de l'indice donc D0 pour Chi, I1 pour le gain d'information etc...
     #Sinon on peut indexer en utilisant H et un chiffre qui commence a 0
     #mesures_distance = ["Chi","FScore","ReliefF","FCS"]
-    mesures_distance = ["FScore" , "ReliefF" , "FCS"]
-    mesures_information = ["Entropie" , 'GainInformation' , "GainRatio" , "SymetricalIncertitude" , "MutualInformation" , "UH" , "US" , "DML"]
-    mesures_dependance = ["RST"]
+    mesures_distance = []
+    mesures_information = [ 'GainInformation' , "GainRatio" , "SymetricalIncertitude" , "MutualInformation" , "UH" , "US" , "DML"]
+    mesures_classification = ["BN", "RF",  "AdaBoost", "KNN"]
     mesures_consistance = ['FCC']
-    mesures_classification =  ["BN" , "RF" , "KNN" , "AdaBoost"]
+    mesures_dependance = ["RST"]
+    #mesures_classification = ["BN","RF","LSVM","RBFSVM","GaussianProcess","AdaBoost","QDA","KNN","DTC","MLP"]
 
     def __init__(self):
         self.__data,self.__target = None,None
         self.__mesures = {}
         self.__Threshold = 0
         self.__nom_mesures = {}
-        self.__precedent_measures = {}
+        self.subsetgenerated = None
         self.__mesures["D"],self.__nom_mesures["D"] = Distances_Measures(),Destiny.mesures_distance
         self.__mesures["I"],self.__nom_mesures["I"] = Information_Measure(),Destiny.mesures_information
         self.__mesures["C"],self.__nom_mesures["C"] = PrecisionClassification(),Destiny.mesures_classification
@@ -41,7 +44,7 @@ class Destiny:
 
     def Projection(self,subset):
         D = self.__mesures["D"].ranking_function_constructor("FCS")(subset)
-        I = self.__mesures["I"].ranking_function_constructor("GainRatio")(subset)
+        I = self.__mesures["I"].ranking_function_constructor("US")(subset)
         DE = self.__mesures["De"].dependence(subset)
         Co = self.__mesures["Co"].fcc(subset)
         return (D,I,DE,Co)
@@ -84,21 +87,24 @@ class Destiny:
         for i in self.__mesures.keys():
             self.__mesures[i].fit (X , Y)
             print(i," fini")
-            self.__mesures[i].CreateSubsets(borne=10)
+            if(self.subsetgenerated == None):
+                self.subsetgenerated = self.__mesures[i].CreateSubsets(borne = 30)
+            else:
+                self.__mesures[i].setSubsets(self.subsetgenerated)
             self.__mesures[i].setThresholdsAutomatiquement (self.__Threshold)
         print("Fin du fit")
 
 
 
-
-    def getprecdico(self):
-        return self.__precedent_measures
-
     def test(self):
         D = {}
         for i in self.__mesures.keys():
             print("Utilisation de ", i)
-            print(self.__mesures[i].rank_with(n=1))
+            self.__mesures[i].rank_with(n=1)
+            self.__mesures[i].rank_with(n=2)
+            print(self.__mesures[i].rank_with(n=3))
+
+
 
 
 

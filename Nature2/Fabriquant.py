@@ -81,9 +81,8 @@ class Fabriquant:
             if (int(self.incarnation[k][2]) > 0):
                 bourlist.extend(list(self.incarnation[k][1]))
                 Vincanration.append(self.incarnation[k])
-                k = k + 1
-            else:
-                k = len(self.recette) + 1
+            k = k + 1
+
         self.incarnation=Vincanration
         self.listbuffer=bourlist
         inter=set()
