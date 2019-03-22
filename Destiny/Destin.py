@@ -78,11 +78,13 @@ class Destiny:
         self.__data ,self.__target = X, Y
         T = Tresholding()
         T.fit(X,Y)
-        self.__Threshold = T.getTreshold(X,Y)
+        #self.__Threshold = T.getTreshold(X,Y)
+        self.__Threshold = 0.3
         print(self.__Threshold)
         for i in self.__mesures.keys():
             self.__mesures[i].fit (X , Y)
             print(i," fini")
+            self.__mesures[i].CreateSubsets(borne=10)
             self.__mesures[i].setThresholdsAutomatiquement (self.__Threshold)
         print("Fin du fit")
 

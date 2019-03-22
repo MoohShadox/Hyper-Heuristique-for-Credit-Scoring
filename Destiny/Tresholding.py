@@ -4,6 +4,10 @@ from itertools import *
 
 import numpy as np
 import math
+
+from Destiny.DataSets.musk_dataset import load_musk_dataset
+
+
 class Tresholding:
 
     def __init__(self):
@@ -14,6 +18,7 @@ class Tresholding:
         self.__proportions_classes = {}
         self.__discriminants_ficher = {}
         self.__volume_overlap_region = {}
+        self.__pourcentage_dehors_overlap = {}
         self.__nb_features = 0
         self.__alpha = 0.85
 
@@ -126,21 +131,45 @@ class Tresholding:
             p = p * i[1]
         return p
 
+
+    def F3(self):
+        L = list (self.__valeurs_classe.keys ())
+        s = len(self.__data)
+        m = 0
+        for j in range (0 , len (self.__data[0])):
+            cpt = 0
+            d = self.__data.transpose()[j]
+            C = combinations (L , 2)
+            for i in C:
+                MMA = self.MINMAX(j,i[0],i[1])
+                MMI = self.MAXMIN(j,i[0],i[1])
+                for k in d:
+                    if(k<=MMA and k>=MMI):
+                        cpt = cpt + 1
+            if(cpt/s>m):
+                m = cpt/s
+            if(m==1):
+                break
+        return m
+
+
+
     def setThresholdinDestiny(self,D,data,target):
         pass
 
     def getTreshold(self,data,target):
         self.__nb_features = len(data[0])
         self.fit(data,target)
-        L = list(range(0,self.__nb_features))
+        L = list(range(0 , self.__nb_features))
         t = 0
         em = 1000
         ez = 1100
-        for i in range(1,self.__nb_features):
+        for i in range(1,self.__nb_features , int(math.log(self.__nb_features,2))):
             C = list(combinations(L,i))
             for j in C:
+                print(j)
                 self.masquer(j)
-                e = self.__alpha * ((1/self.F1())+self.F2())/2 + (1-self.__alpha) * (i/self.__nb_features)
+                e = self.__alpha * ((1/self.F1())) + (1-self.__alpha) * (i/self.__nb_features)
                 if(ez==e):
                     self.fit (data , target)
                     break
@@ -148,6 +177,7 @@ class Tresholding:
                 if(e<em):
                     em = e
                     t = i/self.__nb_features
+                print(em)
                 self.fit (data , target)
         return t
 
@@ -155,4 +185,9 @@ class Tresholding:
 
 
 
+train,target = load_musk_dataset()
+
+T = Tresholding()
+T.fit(train,target)
+print(T.getTreshold(train,target))
 

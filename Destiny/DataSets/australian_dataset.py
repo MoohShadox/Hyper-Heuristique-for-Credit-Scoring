@@ -38,7 +38,6 @@ def save_dataset_on_disc():
 #train,target = load_australian_dataset()
 #print(train.shape)
 #print(target.shape)
-#
 #print(target)
 #E = Evaluateur_Precision(train,target)
 #E.train(GaussianNB())

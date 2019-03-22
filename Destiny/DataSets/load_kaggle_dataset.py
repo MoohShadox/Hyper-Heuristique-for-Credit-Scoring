@@ -2,7 +2,7 @@ import pandas as pd
 
 
 class load_kaggle_dataset:
-
+    @staticmethod
     def load_dateset():
         train = pd.read_csv (r'train.csv')
         target = train['target']

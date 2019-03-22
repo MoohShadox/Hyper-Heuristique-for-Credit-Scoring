@@ -34,11 +34,11 @@ class Embedded_Thresholding:
         self.__data = X
         self.__target = Y
         self.__data_masque = X
-        rfecv = RFECV (estimator=self.__modele , step=1 , cv=StratifiedKFold (2) ,
-                       scoring='accuracy')
-        rfecv.fit(self.__data,self.__target)
+        #rfecv = RFECV (estimator=self.__modele , step=1 , cv=StratifiedKFold (2) ,
+        #               scoring='accuracy')
+        #rfecv.fit(self.__data,self.__target)
         self.__nbfeatures = len(self.__data.transpose())
-        self.__threshold = rfecv.n_features_
+        self.__threshold = 100
 
 
     def getThresholdEmbedded(self,modele):

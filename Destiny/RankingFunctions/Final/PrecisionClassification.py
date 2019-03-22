@@ -27,24 +27,24 @@ class PrecisionClassification (Mesure):
         self._liste_mesures = PrecisionClassification.liste_modeles
 
 
-    def setThresholdsAutomatiquement(self,s=None):
-        self.rank_with (n=1)
-        E = Embedded_Thresholding.Embedded_Thresholding()
-        E.fit(self.__data,self.__target)
-        L = []
-        for i in PrecisionClassification.liste_modeles:
-            try:
-                L.append(E.getThresholdEmbedded(PrecisionClassification.modele_generator(i)))
-                self._liste_thresholds[PrecisionClassification.liste_modeles.index(i)]  =self.__ranks[1][i][E.getThresholdEmbedded(PrecisionClassification.modele_generator(i))-1][1]
-            except(RuntimeError):
-                pass
-        L = np.array(L)
-        s = L.mean()/len(self.__data[0])
-        for j in self._calculated_measures[1]:
-            if (self._liste_thresholds[self._liste_mesures.index (j)] == 0):
-                self._liste_thresholds[self._liste_mesures.index (j)] = self._calculated_measures[1][j][int (s * (len (self._attributs.keys ()) - 1))][1]
-        self._calculated_measures.clear ()
-        self.__ranks.clear()
+    #def setThresholdsAutomatiquement(self,s=None):
+    #    self.rank_with (n=1)
+    #    E = Embedded_Thresholding.Embedded_Thresholding()
+    #    E.fit(self.__data,self.__target)
+    #    L = []
+    #    for i in PrecisionClassification.liste_modeles:
+    #        try:
+    #            L.append(E.getThresholdEmbedded(PrecisionClassification.modele_generator(i)))
+    #            self._liste_thresholds[PrecisionClassification.liste_modeles.index(i)]  =self.__ranks[1][i][E.getThresholdEmbedded(PrecisionClassification.modele_generator(i))-1][1]
+    #        except(RuntimeError):
+    #            pass
+    #    L = np.array(L)
+    #    s = L.mean()/len(self.__data[0])
+    #    for j in self._calculated_measures[1]:
+    #        if (self._liste_thresholds[self._liste_mesures.index (j)] == 0):
+    #            self._liste_thresholds[self._liste_mesures.index (j)] = self._calculated_measures[1][j][int (s * (len (self._attributs.keys ()) - 1))][1]
+    #    self._calculated_measures.clear ()
+    #    self.__ranks.clear()
 
 
     def ranking_function_constructor(self , motclef):
@@ -96,7 +96,7 @@ class PrecisionClassification (Mesure):
         if (not motclef in self.__ranks[nb].keys ()):
             scores = []
             L = range (0 , len (self._attributs.keys ()) - 2)
-            if (self._subsets == None):
+            if (self._subsets == None or nb==1):
                 C = combinations (L , nb)
             else:
                 C = self._subsets[nb]

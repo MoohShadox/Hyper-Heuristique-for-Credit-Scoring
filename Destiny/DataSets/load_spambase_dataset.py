@@ -32,5 +32,5 @@ print(target.shape)
 target = target[:-1]
 print(target)
 E = Evaluateur_Precision(train,target)
-E.train(GaussianNB())
+E.train(SVC())
 print(E.vecteur_precision())

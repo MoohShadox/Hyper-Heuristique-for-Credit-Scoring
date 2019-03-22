@@ -10,7 +10,7 @@ from Destiny.Embedded_Thresholding import Embedded_Thresholding
 class Mesure:
 
     #Taille de Méga Attribut :
-    MegaAttributTailleMax = 6
+    MegaAttributTailleMax = 3
 
     def __init__(self):
         self._liste_mesures = []
@@ -65,9 +65,11 @@ class Mesure:
         ranker = self.ranking_function_constructor(motclef)
         scores = []
         L = range(0,len(self._attributs.keys())-2)
-        if(self._subsets == None):
+        if(self._subsets == None or nb == 1):
             C = combinations(L,nb)
         else:
+            print("nb = ",nb)
+            print(self._subsets)
             C = self._subsets[nb]
         for i in C:
             K = []
