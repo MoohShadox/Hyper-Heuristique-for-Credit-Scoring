@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1197e31-7916-4651-a829-1a7c49aa0305" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Destiny/DataSets/TestKaggle.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Destiny/DataSets/load_kaggle_dataset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Destiny/DataSets/load_spambase_dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Destiny/Clustering_Incarnations.py" beforeDir="false" afterPath="$PROJECT_DIR$/Destiny/Clustering_Incarnations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Destiny/DataSets/australian_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Destiny/DataSets/australian_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Destiny/DataSets/german_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Destiny/DataSets/german_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Destiny/Destin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Destiny/Destin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Destiny/RankingFunctions/Final/ChiMesure.py" beforeDir="false" afterPath="$PROJECT_DIR$/Destiny/RankingFunctions/Final/ChiMesure.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py" beforeDir="false" afterPath="$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Destiny/RankingFunctions/Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Destiny/RankingFunctions/Test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nature/Fabriquant.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nature/Tester.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nature2/Fabriquant.py" beforeDir="false" afterPath="$PROJECT_DIR$/Nature2/Fabriquant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nature2/Nature.py" beforeDir="false" afterPath="$PROJECT_DIR$/Nature2/Nature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Destiny/Tresholding.py" beforeDir="false" afterPath="$PROJECT_DIR$/Destiny/Tresholding.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,19 +15,23 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Nature.coverage" NAME="Nature Coverage Results" MODIFIED="1553073751036" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Nature2" />
+    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$gisette_dataset.coverage" NAME="gisette_dataset Coverage Results" MODIFIED="1553252832088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$Information_Measure__1_.coverage" NAME="Information_Measure (1) Coverage Results" MODIFIED="1552149135075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions/Final" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Information_Measure.coverage" NAME="Information_Measure Coverage Results" MODIFIED="1552912865041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions/Final" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$ReliefF.coverage" NAME="ReliefF Coverage Results" MODIFIED="1553026583497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions/Final" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$load_data_bankrupty.coverage" NAME="load_data_bankrupty Coverage Results" MODIFIED="1551298329118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
-    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Test.coverage" NAME="Test Coverage Results" MODIFIED="1553091412538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions" />
+    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Test.coverage" NAME="Test Coverage Results" MODIFIED="1553251440985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$PCA.coverage" NAME="PCA Coverage Results" MODIFIED="1551801773140" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$PCA.coverage" NAME="PCA Coverage Results" MODIFIED="1553024930192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$FCS.coverage" NAME="FCS Coverage Results" MODIFIED="1552562143490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions/Final" />
+    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$madelon_dataset.coverage" NAME="madelon_dataset Coverage Results" MODIFIED="1553249485427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$Distances_Measures.coverage" NAME="Distances_Measures Coverage Results" MODIFIED="1552300982971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions/Final" />
+    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$musk_dataset.coverage" NAME="musk_dataset Coverage Results" MODIFIED="1553256039620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$Destiny.coverage" NAME="Destiny Coverage Results" MODIFIED="1551639836053" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Embedded_Thresholding.coverage" NAME="Embedded_Thresholding Coverage Results" MODIFIED="1552913473430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Distances_Measures.coverage" NAME="Distances_Measures Coverage Results" MODIFIED="1552913042004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions/Final" />
-    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Tresholding.coverage" NAME="Tresholding Coverage Results" MODIFIED="1552762873434" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny" />
+    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Tresholding.coverage" NAME="Tresholding Coverage Results" MODIFIED="1553257987037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny" />
+    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$load_promoters_dataset.coverage" NAME="load_promoters_dataset Coverage Results" MODIFIED="1553254461303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$Information_Measure.coverage" NAME="Information_Measure Coverage Results" MODIFIED="1552038917049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$ChiMesure.coverage" NAME="ChiMesure Coverage Results" MODIFIED="1552562100277" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions/Final" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$FCS.coverage" NAME="FCS Coverage Results" MODIFIED="1551867773401" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions" />
@@ -52,7 +44,7 @@
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$MesureDeConsistance.coverage" NAME="MesureDeConsistance Coverage Results" MODIFIED="1552321793921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$PrecisionClassification.coverage" NAME="PrecisionClassification Coverage Results" MODIFIED="1552997185548" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions/Final" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$MesureDeDependance.coverage" NAME="MesureDeDependance Coverage Results" MODIFIED="1552999036438" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions/Final" />
-    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$german_dataset.coverage" NAME="german_dataset Coverage Results" MODIFIED="1553090993621" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
+    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$german_dataset.coverage" NAME="german_dataset Coverage Results" MODIFIED="1553202894185" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Clustering_Incarnations.coverage" NAME="Clustering_Incarnations Coverage Results" MODIFIED="1553036169299" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$Evaluateur_Precision.coverage" NAME="Evaluateur_Precision Coverage Results" MODIFIED="1551438783984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$australian_dataset.coverage" NAME="australian_dataset Coverage Results" MODIFIED="1551305725354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
@@ -60,12 +52,12 @@
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$LDA.coverage" NAME="LDA Coverage Results" MODIFIED="1551865100641" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Destin.coverage" NAME="Destin Coverage Results" MODIFIED="1552560758651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$Destin.coverage" NAME="Destin Coverage Results" MODIFIED="1552444255574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny" />
-    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$load_spambase_dataset.coverage" NAME="load_spambase_dataset Coverage Results" MODIFIED="1553090239980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
+    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$load_spambase_dataset.coverage" NAME="load_spambase_dataset Coverage Results" MODIFIED="1553247325266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
     <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$Inter2__1_.coverage" NAME="Inter2 (1) Coverage Results" MODIFIED="1552737243686" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Downloads" />
-    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$australian_dataset.coverage" NAME="australian_dataset Coverage Results" MODIFIED="1553091034844" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
+    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$australian_dataset.coverage" NAME="australian_dataset Coverage Results" MODIFIED="1553202811794" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$MesureDeConsistance__1_.coverage" NAME="MesureDeConsistance (1) Coverage Results" MODIFIED="1552325864511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/RankingFunctions/Final" />
     <SUITE FILE_PATH="coverage/PFEHyperHeuristicForCreditScoring$german_dataset.coverage" NAME="german_dataset Coverage Results" MODIFIED="1551792396782" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
-    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$TestKaggle.coverage" NAME="TestKaggle Coverage Results" MODIFIED="1553088388428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
+    <SUITE FILE_PATH="coverage/Hyper_Heuristique_for_Credit_Scoring$TestKaggle.coverage" NAME="TestKaggle Coverage Results" MODIFIED="1553109447952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Destiny/DataSets" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="1087698681">
@@ -112,35 +104,38 @@
     <session id="-1956413712">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="48" />
-          <entry key="py" value="16625" />
+          <entry key="py" value="19108" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="48" />
-          <entry key="Python" value="16625" />
+          <entry key="Python" value="19108" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="csv" value="2" />
+          <entry key="csv" value="4" />
+          <entry key="data" value="3" />
           <entry key="gitignore" value="1" />
-          <entry key="py" value="136" />
+          <entry key="py" value="159" />
+          <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSV" value="2" />
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="136" />
+          <entry key="CSV" value="4" />
+          <entry key="PLAIN_TEXT" value="8" />
+          <entry key="Python" value="159" />
         </counts>
       </usages-collector>
     </session>
@@ -151,86 +146,32 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="15" lean-forward="true" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#48#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/PrecisionClassification.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="11" selection-end-column="64" />
+              <caret line="3" selection-start-line="3" selection-end-line="10" selection-end-column="50" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/feature_selection/univariate_selection.py">
+        <entry file="file://$PROJECT_DIR$/Destiny/DataSets/gisette_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="147" selection-start-line="147" selection-end-line="147" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/FScore.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="400">
+              <caret line="57" selection-start-line="57" selection-end-line="61" selection-end-column="29" />
               <folding>
-                <element signature="e#0#47#0" expanded="true" />
+                <element signature="e#0#15#0" expanded="true" />
+                <marker date="1553253081202" expanded="true" signature="150:151" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Destiny/DataSets/TestKaggle.py">
+        <entry file="file://$PROJECT_DIR$/Destiny/DataSets/load_promoters_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="12" selection-start-line="12" selection-end-line="15" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Destiny/DataSets/test.csv">
-          <provider selected="true" editor-type-id="LargeFileEditor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Destiny/Destin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="95" column="14" lean-forward="true" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#45#0" expanded="true" />
-                <marker date="1553091412521" expanded="true" signature="742:747" ph="..." />
-                <marker date="1553091412521" expanded="true" signature="1970:2115" ph="..." />
-                <marker date="1553091412521" expanded="true" signature="2068:2115" ph="..." />
-                <marker date="1553091412521" expanded="true" signature="2143:2433" ph="..." />
-                <marker date="1553091412521" expanded="true" signature="3788:3794" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Destiny/DataSets/load_spambase_dataset.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="17" column="22" lean-forward="true" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="57" />
+            <state relative-caret-position="468">
+              <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -239,17 +180,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Destiny/DataSets/australian_dataset.py">
+        <entry file="file://$PROJECT_DIR$/Destiny/DataSets/musk_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="44" column="1" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
-              <caret line="43" column="1" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
-              <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
-              <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-              <caret line="40" column="1" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
-              <caret line="39" column="1" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
-              <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
-              <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
+            <state relative-caret-position="445">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -258,10 +192,46 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Destiny/DataSets/german_dataset.py">
+        <entry file="file://$PROJECT_DIR$/Destiny/DataSets/madelon_dataset.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="37" />
+            <state relative-caret-position="476">
+              <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+              <folding>
+                <element signature="e#1#19#0" expanded="true" />
+                <marker date="1553249884247" expanded="true" signature="944:945" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Destiny/Tresholding.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="755">
+              <caret line="185" lean-forward="true" selection-start-line="185" selection-end-line="185" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <marker date="1553294278804" expanded="true" signature="4882:5472" ph="..." />
+                <marker date="1553294278804" expanded="true" signature="5518:5527" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/utils/validation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="594" selection-start-line="594" selection-end-line="594" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Destiny/DataSets/australian_dataset.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" selection-start-line="7" selection-end-line="23" selection-end-column="14" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -312,11 +282,7 @@
         <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/ReliefF.py" />
         <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/FScore.py" />
         <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/FCS.py" />
-        <option value="$PROJECT_DIR$/Destiny/Tresholding.py" />
-        <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/Mesure.py" />
         <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/MesureDeDependance.py" />
-        <option value="$PROJECT_DIR$/Destiny/Embedded_Thresholding.py" />
-        <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/PrecisionClassification.py" />
         <option value="$PROJECT_DIR$/Destiny/Evaluateur_Precision.py" />
         <option value="$PROJECT_DIR$/Nature2/Fabriquant.py" />
         <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/MesureDeConsistance.py" />
@@ -324,14 +290,23 @@
         <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py" />
         <option value="$PROJECT_DIR$/Destiny/Clustering_Incarnations.py" />
         <option value="$PROJECT_DIR$/Nature2/Nature.py" />
-        <option value="$PROJECT_DIR$/Destiny/DataSets/load_kaggle_dataset.py" />
-        <option value="$PROJECT_DIR$/Destiny/DataSets/TestKaggle.py" />
         <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py" />
-        <option value="$PROJECT_DIR$/Destiny/DataSets/load_spambase_dataset.py" />
         <option value="$PROJECT_DIR$/Destiny/DataSets/australian_dataset.py" />
         <option value="$PROJECT_DIR$/Destiny/DataSets/german_dataset.py" />
+        <option value="$PROJECT_DIR$/Destiny/DataSets/TestKaggle.py" />
+        <option value="$PROJECT_DIR$/Destiny/DataSets/load_kaggle_dataset.py" />
+        <option value="$PROJECT_DIR$/Destiny/DataSets/load_spambase_dataset.py" />
+        <option value="$PROJECT_DIR$/Destiny/DataSets/madelon_dataset.py" />
         <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Test.py" />
         <option value="$PROJECT_DIR$/Destiny/Destin.py" />
+        <option value="$PROJECT_DIR$/Destiny/Embedded_Thresholding.py" />
+        <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/Mesure.py" />
+        <option value="$PROJECT_DIR$/Destiny/RankingFunctions/Final/PrecisionClassification.py" />
+        <option value="$PROJECT_DIR$/Destiny/DataSets/zoo_dataset.py" />
+        <option value="$PROJECT_DIR$/Destiny/DataSets/gisette_dataset.py" />
+        <option value="$PROJECT_DIR$/Destiny/DataSets/load_promoters_dataset.py" />
+        <option value="$PROJECT_DIR$/Destiny/DataSets/musk_dataset.py" />
+        <option value="$PROJECT_DIR$/Destiny/Tresholding.py" />
       </list>
     </option>
   </component>
@@ -351,6 +326,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -397,7 +373,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -430,7 +405,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Test">
+  <component name="RunManager" selected="Python.Tresholding">
     <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PFEHyperHeuristicForCreditScoring" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -453,7 +428,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="TestKaggle" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Tresholding" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PFEHyperHeuristicForCreditScoring" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -461,12 +436,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Destiny/DataSets" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Destiny" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Destiny/DataSets/TestKaggle.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Destiny/Tresholding.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -475,7 +450,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="australian_dataset" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="gisette_dataset" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PFEHyperHeuristicForCreditScoring" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -488,7 +463,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Destiny/DataSets/australian_dataset.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Destiny/DataSets/gisette_dataset.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -497,7 +472,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="german_dataset" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="load_promoters_dataset" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PFEHyperHeuristicForCreditScoring" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -510,7 +485,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Destiny/DataSets/german_dataset.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Destiny/DataSets/load_promoters_dataset.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -519,7 +494,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="load_spambase_dataset" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="musk_dataset" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PFEHyperHeuristicForCreditScoring" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -532,7 +507,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Destiny/DataSets/load_spambase_dataset.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Destiny/DataSets/musk_dataset.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -542,19 +517,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.gisette_dataset" />
       <item itemvalue="Python.Test" />
-      <item itemvalue="Python.TestKaggle" />
-      <item itemvalue="Python.load_spambase_dataset" />
-      <item itemvalue="Python.australian_dataset" />
-      <item itemvalue="Python.german_dataset" />
+      <item itemvalue="Python.load_promoters_dataset" />
+      <item itemvalue="Python.musk_dataset" />
+      <item itemvalue="Python.Tresholding" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Tresholding" />
+        <item itemvalue="Python.musk_dataset" />
+        <item itemvalue="Python.load_promoters_dataset" />
+        <item itemvalue="Python.gisette_dataset" />
         <item itemvalue="Python.Test" />
-        <item itemvalue="Python.australian_dataset" />
-        <item itemvalue="Python.german_dataset" />
-        <item itemvalue="Python.load_spambase_dataset" />
-        <item itemvalue="Python.TestKaggle" />
       </list>
     </recent_temporary>
   </component>
@@ -573,13 +548,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15245202" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15405117" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286334" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.329718" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -632,196 +608,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py</url>
-          <line>52</line>
-          <option name="timeStamp" value="31" />
+          <url>file://$PROJECT_DIR$/Destiny/Embedded_Thresholding.py</url>
+          <line>117</line>
+          <option name="timeStamp" value="111" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py</url>
-          <line>51</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py</url>
-          <line>50</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py</url>
-          <line>49</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py</url>
-          <line>42</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py</url>
-          <line>41</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py</url>
-          <line>40</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py</url>
-          <line>39</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py</url>
-          <line>29</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py</url>
-          <line>32</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py</url>
-          <line>34</line>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py</url>
-          <line>35</line>
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py</url>
-          <line>36</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py</url>
-          <line>37</line>
-          <option name="timeStamp" value="58" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py</url>
-          <line>39</line>
-          <option name="timeStamp" value="59" />
+          <url>file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/PrecisionClassification.py</url>
+          <line>13</line>
+          <option name="timeStamp" value="112" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/load_data_bankrupty.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/Inter2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="48" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/australian_dataset.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/GermanData.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6953">
-          <caret line="409" column="5" selection-start-line="409" selection-start-column="4" selection-end-line="409" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/Projetctor.py" />
-    <entry file="file://$USER_HOME$/Downloads/Inter2 (1).py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../CCadoc2/Cadoc/Enrichissement_BDD/Scriptes/Resume_Renseignements2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="109" column="11" selection-start-line="109" selection-start-column="11" selection-end-line="109" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/LDA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/ReliefF.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="99" column="12" selection-start-line="99" selection-start-column="12" selection-end-line="108" selection-end-column="38" />
-          <folding>
-            <element signature="e#1093#1130#0" expanded="true" />
-            <marker date="1553032331832" expanded="true" signature="4304:4313" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/MesureDeDependance.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/MutualInformation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Entropie.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="183" column="22" selection-start-line="183" selection-start-column="18" selection-end-line="183" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/ensemble/weight_boosting.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
@@ -870,17 +669,6 @@
     <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Mesure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <marker date="1553032331819" expanded="true" signature="326:1732" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/MesureDeConsistance.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -902,25 +690,6 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/Clustering_Incarnations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="49" column="52" selection-start-line="49" selection-start-column="52" selection-end-line="49" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-            <marker date="1553082076950" expanded="true" signature="138:143" ph="..." />
-            <marker date="1553082076950" expanded="true" signature="345:383" ph="..." />
-            <marker date="1553082076950" expanded="true" signature="474:507" ph="..." />
-            <marker date="1553082076950" expanded="true" signature="960:1205" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/train.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="-663" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Destiny/Evaluateur_Precision.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -936,17 +705,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="475" selection-start-line="475" selection-end-line="475" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/load_kaggle_dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
-          <folding>
-            <marker date="1553086961961" expanded="true" signature="48:49" ph="..." />
-            <marker date="1553086961961" expanded="true" signature="48:54" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -978,44 +736,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/Tresholding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="22" column="29" lean-forward="true" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Nature2/Nature.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1368">
           <caret line="101" column="7" selection-start-line="101" selection-start-column="7" selection-end-line="101" selection-end-column="7" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <marker date="1553088166847" expanded="true" signature="1046:1047" ph="..." />
-            <marker date="1553088166847" expanded="true" signature="2201:2307" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/Embedded_Thresholding.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1016">
-          <caret line="118" selection-start-line="118" selection-end-line="118" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1030,17 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="35" lean-forward="true" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-            <marker date="1553082077162" expanded="true" signature="784:790" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/numpy/core/numeric.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
@@ -1048,16 +763,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/utils/validation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="755" selection-start-line="755" selection-end-line="755" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/feature_selection/univariate_selection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
+        <state relative-caret-position="2295">
           <caret line="147" selection-start-line="147" selection-end-line="147" />
         </state>
       </provider>
@@ -1072,84 +780,251 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/TestKaggle.py">
+    <entry file="file://$PROJECT_DIR$/Destiny/Clustering_Incarnations.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="12" selection-start-line="12" selection-end-line="15" selection-end-column="18" />
+        <state relative-caret-position="404">
+          <caret line="49" column="52" selection-start-line="49" selection-start-column="52" selection-end-line="49" selection-end-column="52" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/test.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor" />
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/australian_dataset.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/PrecisionClassification.py">
+    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Information_Measure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="11" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/load_spambase_dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="17" column="22" lean-forward="true" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="57" />
+        <state relative-caret-position="204">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/australian_dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="44" column="1" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
-          <caret line="43" column="1" selection-start-line="43" selection-start-column="1" selection-end-line="43" selection-end-column="1" />
-          <caret line="42" column="1" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="1" />
-          <caret line="41" column="1" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
-          <caret line="40" column="1" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
-          <caret line="39" column="1" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
-          <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1553088166847" expanded="true" signature="1046:1047" ph="..." />
+            <marker date="1553088166847" expanded="true" signature="2201:2307" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Destiny/DataSets/german_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="28" column="1" lean-forward="true" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="37" />
+        <state relative-caret-position="366">
+          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/train.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/test.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/load_data_bankrupty.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/load_kaggle_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="27" selection-start-line="10" selection-start-column="27" selection-end-line="10" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/ReliefF.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="83" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
+          <folding>
+            <element signature="e#1093#1130#0" expanded="true" />
+            <marker date="1553032331832" expanded="true" signature="4304:4313" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/madelon_train.data.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/TestKaggle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <marker date="1553203059471" expanded="true" signature="113:530" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/load_spambase_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="15" lean-forward="true" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="15" />
+        <state relative-caret-position="289">
+          <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
           <folding>
-            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#1#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Distances_Measures.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Destiny/Destin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="95" column="14" lean-forward="true" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
+        <state relative-caret-position="168">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
-            <marker date="1553091412521" expanded="true" signature="742:747" ph="..." />
-            <marker date="1553091412521" expanded="true" signature="1970:2115" ph="..." />
-            <marker date="1553091412521" expanded="true" signature="2068:2115" ph="..." />
-            <marker date="1553091412521" expanded="true" signature="2143:2433" ph="..." />
-            <marker date="1553091412521" expanded="true" signature="3788:3794" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/Mesure.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <marker date="1553251440949" expanded="true" signature="326:1732" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/Embedded_Thresholding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="117" selection-start-line="117" selection-end-line="117" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/zoo_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/zoo.data">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/gisette_test.data.txt">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="289">
+          <caret line="17" column="10897" selection-start-line="17" selection-start-column="10897" selection-end-line="17" selection-end-column="10897" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/australian_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="23" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../clean1.data">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4029" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/load_promoters_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/musk1.data">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/madelon_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
+            <marker date="1553249884247" expanded="true" signature="944:945" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/gisette_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="57" selection-start-line="57" selection-end-line="61" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1553253081202" expanded="true" signature="150:151" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/RankingFunctions/Final/PrecisionClassification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="10" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/gisette_train.labels.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3978" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/sklearn/utils/validation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="594" selection-start-line="594" selection-end-line="594" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/DataSets/musk_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="445">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Destiny/Tresholding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="755">
+          <caret line="185" lean-forward="true" selection-start-line="185" selection-end-line="185" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <marker date="1553294278804" expanded="true" signature="4882:5472" ph="..." />
+            <marker date="1553294278804" expanded="true" signature="5518:5527" ph="..." />
           </folding>
         </state>
       </provider>
