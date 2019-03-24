@@ -82,15 +82,12 @@ class Fabriquant:
                 bourlist.extend(list(self.incarnation[k][1]))
                 Vincanration.append(self.incarnation[k])
             k = k + 1
-
         self.incarnation=Vincanration
         self.listbuffer=bourlist
         inter=set()
         union=set()
         for i in range(nat.Nature.maxH):
-            a = time.time()
             gj = self.dm.getMegaHeuristique(["H" + str(i+1)], 1)
-            #print("le temps fab2: H"+str(i+1), time.time() - a)
             hierlist2 = gj[list(gj.keys())[0]]
             elus=set()
             for h in hierlist2:
@@ -100,18 +97,13 @@ class Fabriquant:
                 inter=inter.intersection(elus)
             else:inter=elus
             union=union.union(elus)
-        #print("inter et union",len(inter),len(union))
-        #print("ce qui a deja ete selectionne: ",self.listbuffer)
-        #print("inter et union ensembles",inter,union)
         k = random.randint(len(inter),len(union))
-        #print("k",k)
+
         for j in range(k):
             fait=0
             while(fait==0):
                 p=random.randint(1,nat.Nature.maxH)
-                a = time.time()
                 gjj = self.dm.getMegaHeuristique(["H" + str(p)], 1)
-             #   print("le temps fab3: H"+str(p), time.time() - a)
                 hierlist3 = gjj[list(gjj.keys())[0]]
                 hh=0
                 while(hh<len(hierlist3)):
