@@ -6,6 +6,7 @@ import numpy as np
 import math
 
 from Destiny.DataSets.german_dataset import load_german_dataset
+from Destiny.DataSets.load_promoters_dataset import load_promoter_dataset
 from Destiny.DataSets.musk_dataset import load_musk_dataset
 
 
@@ -44,7 +45,7 @@ class Tresholding:
     def getAttributClasse(self,classe,attribut):
         L= []
         for j in self.__valeurs_classe[classe]:
-            L.append(self.__valeurs_classe[classe][attribut])
+            L.append(j[attribut])
         return L
 
     def masquer(self,numero):
@@ -313,7 +314,9 @@ class Tresholding:
 
 
 
-data,target = load_musk_dataset()
+data,target = load_german_dataset()
+print(data)
+print(target)
 T = Tresholding()
 T.fit(data,target)
 print(T.getTreshold(data,target))
