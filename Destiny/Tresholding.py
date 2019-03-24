@@ -14,6 +14,7 @@ class Tresholding:
     def __init__(self):
         self.__data = None
         self.__target = None
+        self.__min_max = {}
         self.__valeurs_classe = {}
         self.__treshold_percentage = {}
         self.__proportions_classes = {}
@@ -21,7 +22,7 @@ class Tresholding:
         self.__volume_overlap_region = None
         self.__pourcentage_dehors_overlap = None
         self.__nb_features = 0
-        self.__alpha = 0.85
+        self.__alpha = 0.80
 
     def fit(self,data,target):
         self.__valeurs_classe.clear()
@@ -96,14 +97,30 @@ class Tresholding:
         return m
 
     def MinF(self,feature,classe):
-        M = self.getAttributClasse(classe,feature)
-        M = np.array(M)
-        return M.min()
+        K = []
+        K.append(feature)
+        K.append(classe)
+        if not (tuple(K) in self.__min_max.keys() ) :
+            M = self.getAttributClasse(classe,feature)
+            M = np.array(M)
+            L = []
+            L.append(M.min())
+            L.append(M.max())
+            self.__min_max[tuple(K)] = L
+        return self.__min_max[tuple(K)][0]
 
     def MaxF(self,feature,classe):
-        M = self.getAttributClasse (classe , feature)
-        M = np.array (M)
-        return M.max ()
+        K = []
+        K.append (feature)
+        K.append (classe)
+        if not (tuple (K) in self.__min_max.keys ()):
+            M = self.getAttributClasse (classe , feature)
+            M = np.array (M)
+            L = []
+            L.append (M.min ())
+            L.append (M.max ())
+            self.__min_max[tuple (K)] = L
+        return self.__min_max[tuple (K)][1]
 
 
     def MINMAX(self,feature,classe1,classe2):
@@ -167,8 +184,8 @@ class Tresholding:
         pass
 
     def Energie(self,L):
-        e = self.__alpha * ((1 / self.F1 (L)) + self.F2 (L) + (1 / self.F3 (L))) / 3 + (1 - self.__alpha) * (
-                    len (L) / self.__nb_features)
+        e = self.__alpha * ((1 / self.F1 (L)) + self.F2 (L) + (1 / self.F3 (L))) / 3 + (1 - self.__alpha) * (len (L) / self.__nb_features)
+        #e = self.__alpha * (1/self.F2(L)) + (1-self.__alpha)*(len(L) / self.__nb_features)
         return e
 
     def GenererListeRandom(self):
@@ -259,7 +276,9 @@ class Tresholding:
             print("Le nouvel ensemble a estimer est ",NL)
             #Mise a jour de la température
             if(e == ep):
-                T = T*(1+coef_decrementation_temperature/10)
+                pdivers = pdivers + 0.05
+                if(pdivers == 1):
+                    break
             T = T * coef_decrementation_temperature
             if(cptcpt == 0):
                 cptcpt = nb_iterations_pas
@@ -268,7 +287,6 @@ class Tresholding:
             #Mise a jour de l'energie
             ep = e
             enew = self.Energie(NL)
-
             if(enew<=e):
                 L = NL
                 e = enew
@@ -287,10 +305,7 @@ class Tresholding:
             if(e<emin):
                 emin = e
                 percentagemin = len(L) / self.__nb_features
-            #Condition d'arret
-            if(T < 0.01):
-                break
-        return emin,percentagemin
+        return percentagemin
 
 
 
