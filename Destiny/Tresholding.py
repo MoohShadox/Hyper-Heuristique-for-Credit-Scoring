@@ -5,9 +5,6 @@ from itertools import *
 import numpy as np
 import math
 
-from Destiny.DataSets.german_dataset import load_german_dataset
-from Destiny.DataSets.load_promoters_dataset import load_promoter_dataset
-from Destiny.DataSets.musk_dataset import load_musk_dataset
 
 
 class Tresholding:
@@ -23,7 +20,7 @@ class Tresholding:
         self.__volume_overlap_region = None
         self.__pourcentage_dehors_overlap = None
         self.__nb_features = 0
-        self.__alpha = 0.80
+        self.__alpha = 0.95
 
     def fit(self,data,target):
         self.__valeurs_classe.clear()
@@ -185,8 +182,11 @@ class Tresholding:
         pass
 
     def Energie(self,L):
-        e = self.__alpha * ((1 / self.F1 (L)) + self.F2 (L) + (1 / self.F3 (L))) / 3 + (1 - self.__alpha) * (len (L) / self.__nb_features)
-        #e = self.__alpha * (1/self.F2(L)) + (1-self.__alpha)*(len(L) / self.__nb_features)
+        try:
+            e = self.__alpha * ((1 / self.F1 (L)) + self.F2 (L) + (1 / self.F3 (L))) / 3 + (1 - self.__alpha) * (len (L) / self.__nb_features)
+        except(ZeroDivisionError):
+            e = 1000
+        #e = self.__alpha * (self.F2(L)) + (1-self.__alpha)*(len(L) / self.__nb_features)
         return e
 
     def GenererListeRandom(self):
@@ -194,7 +194,7 @@ class Tresholding:
         L = r * [-1]
         for i in range(0,r):
             k = random.randint(0,self.__nb_features-1)
-            while(k in L):
+            while (k in L and len (L) != self.__nb_features):
                 k = random.randint (0 , self.__nb_features-1)
             L[i] = k
         return L
@@ -202,16 +202,16 @@ class Tresholding:
     def Alteration_Diversification(self,L):
         i = random.randint(1,self.__nb_features-1)
         NL = i*[0]
-        print("L = ",L)
+        #print("L = ",L)
         for j in range(0,i):
             if(j < len(L)):
                 NL[j] = L[j]
             else:
                 k = random.randint(0,self.__nb_features-1)
-                while(k in NL):
+                while (k in NL and len (NL) != self.__nb_features):
                     k = random.randint(0,self.__nb_features-1)
                 NL[j] = k
-        print("NL = ", NL)
+        #print("NL = ", NL)
         return NL
 
 
@@ -219,6 +219,7 @@ class Tresholding:
         ELMIN = 0
         ELMAX = 0
         augmentation_taille = int(math.log(self.__nb_features,2)*T) + 1
+        augmentation_taille = random.randint(1,augmentation_taille)
         if(augmentation_taille == 0):
             augmentation_taille = 1
         nouvelle_taille_sup = len(L) + augmentation_taille
@@ -236,7 +237,7 @@ class Tresholding:
                 i = i + 1
             while(i<nouvelle_taille_sup):
                 z = random.randint(0,self.__nb_features-1)
-                while(z in NLP):
+                while(z in NLP and len(NLP) != self.__nb_features):
                     z = random.randint (0 , self.__nb_features - 1)
                 NLP[i] = z
                 i = i + 1
@@ -259,32 +260,26 @@ class Tresholding:
         self.fit(data,target)
         L = self.GenererListeRandom()
         e = self.Energie(L)
-        pdivers = 0.5
         T = 1
         emin,percentagemin = 1000,1000
-        nb_iterations_pas = 10
+        nb_iterations_pas = 1000000
         cptcpt = nb_iterations_pas
         ep = 0
-        pas = 0.20
-        coef_decrementation_temperature = 0.80
-        while(T  > 0.01):
+        pas = 0.01
+        coef_decrementation_temperature = 0.99
+        cpt_iter = 0
+        while(cpt_iter <  100000):
+            cpt_iter = cpt_iter + 1
             k = random.randint(1,100)
             #Mecanisme de régulation des diversification / intensification
-            if(k<pdivers*100):
-                NL = self.Alteration_Diversification(L)
-            else:
-                NL = self.Alteration_Insensification(L,T)
-            print("Le nouvel ensemble a estimer est ",NL)
+            NL = self.Alteration_Insensification(L,T)
+            #print("Le nouvel ensemble a estimer est ",NL)
             #Mise a jour de la température
-            if(e == ep):
-                pdivers = pdivers + 0.05
-                if(pdivers == 1):
-                    break
             T = T * coef_decrementation_temperature
             if(cptcpt == 0):
                 cptcpt = nb_iterations_pas
                 T = T - pas
-            print("La température est : ",T)
+            #print("La température est : ",T)
             #Mise a jour de l'energie
             ep = e
             enew = self.Energie(NL)
@@ -294,18 +289,22 @@ class Tresholding:
             else:
                 try:
                     p = math.exp (-((enew - e) / T))
+                    if(p<0.0001 and cpt_iter % 1000 == 0):
+                        L = self.GenererListeRandom()
+                        #print("Rez la liste")
                 except(OverflowError):
                     break
                 p = int(p*100)
                 rr = random.randint(0,100)
-                if(p<rr):
+                if(p>rr):
                     L = NL
                     e = enew
-            print("Et donc la nouvelle energie s'èleve a ",e)
             #Concerver le maximum
             if(e<emin):
+                #print("Amélioration de ",emin-e,"pour : Longueur = ",len(L))
                 emin = e
                 percentagemin = len(L) / self.__nb_features
+
         return percentagemin
 
 
@@ -314,11 +313,11 @@ class Tresholding:
 
 
 
-data,target = load_german_dataset()
-print(data)
-print(target)
-T = Tresholding()
-T.fit(data,target)
-print(T.getTreshold(data,target))
-
+#data,target = load_musk_dataset()
+#print(data.shape)
+#T = Tresholding()
+#T.fit(data,target)
+#t = T.getTreshold(data,target)
+#print(t)
+#print("Le nombre d'attributs a garder est de : ", data.shape[1]*t, "parmi : ", data.shape[1])
 

@@ -1,4 +1,5 @@
 from Destiny.DataSets.german_dataset import load_german_dataset
+from Destiny.DataSets.musk_dataset import load_musk_dataset
 from Destiny.Embedded_Thresholding import Embedded_Thresholding
 from Destiny.RankingFunctions import Entropie
 from Destiny.RankingFunctions.Final.Distances_Measures import Distances_Measures
@@ -27,6 +28,7 @@ class Destiny:
         self.__Threshold = 0
         self.__nom_mesures = {}
         self.subsetgenerated = None
+        self.__matrices_redondaces, self.__matrices_importances = {} , {}
         self.__mesures["D"],self.__nom_mesures["D"] = Distances_Measures(),Destiny.mesures_distance
         self.__mesures["I"],self.__nom_mesures["I"] = Information_Measure(),Destiny.mesures_information
         self.__mesures["C"],self.__nom_mesures["C"] = PrecisionClassification(),Destiny.mesures_classification
@@ -43,8 +45,13 @@ class Destiny:
         return self.__data,self.__target
 
     def Projection(self,subset):
-        D = self.__mesures["D"].ranking_function_constructor("FCS")(subset)
-        I = self.__mesures["I"].ranking_function_constructor("US")(subset)
+        #Ancienne projection :
+        #D = self.__mesures["D"].ranking_function_constructor("FCS")(subset)
+        #I = self.__mesures["I"].ranking_function_constructor("US")(subset)
+
+        #Nouvelle Projection :
+        D = self.MinimumRMaxS (subset,"Distance")
+        I = self.MinimumRMaxS (subset , "Information")
         DE = self.__mesures["De"].dependence(subset)
         Co = self.__mesures["Co"].fcc(subset)
         return (D,I,DE,Co)
@@ -77,12 +84,55 @@ class Destiny:
                 DDD[i] = D[nb][i]
         return DDD
 
+
+    def MinimumRMaxS(self,subset,mc):
+        masque = self.__data.shape[1]*[0]
+        for i in subset:
+            masque[i] = 1
+        masque = np.array(masque)
+        return masque.transpose().dot(self.__matrices_redondaces[mc]).dot(masque)-masque.dot(self.__matrices_importances[mc])
+
+
+    def setMatricesImportanceRedondance(self,data,target):
+        self.__mesures["I"].fit (data , target)
+        data = data.transpose ()
+        d = list (data)
+        d.append (target)
+        d = np.array (d)
+        #data = data.transpose ()
+        c = np.corrcoef (d)
+        c = c.transpose()
+        self.__matrices_importances["Distance"] = c[-1]
+        self.__matrices_redondaces["Distance"] = c[0:-1]
+        self.__matrices_redondaces["Distance"] = self.__matrices_redondaces["Distance"].transpose()[:-1]
+        self.__matrices_importances["Distance"] = self.__matrices_importances["Distance"].transpose ()[:-1]
+        f = self.__mesures["I"]
+        m = np.ones((len(data),len(data)))
+        imp = np.ones((len(data)))
+        for i in range(0,len(data)):
+            C1 = f.getEntropy([i])
+            for j in range(0,len(data)):
+                C2 = f.getEntropy([j])
+                C3 = f.getEntropySachant([j],[i])
+                m[i][j] = C1 + C2 - C3
+            C2 = f.getEntropy([-1])
+            C3 = f.getEntropySachant([i],[-1])
+            imp[i] = C1 + C2 - C3
+        self.__matrices_redondaces["Information"] = m
+        self.__matrices_importances["Information"] = imp
+        unit = np.ones(self.__matrices_importances["Distance"].shape[0])
+        for i in self.__matrices_importances:
+            self.__matrices_importances[i] = unit - self.__matrices_importances[i]/self.__matrices_importances[i].sum()
+
+
+
     def fit(self,X,Y):
         self.__data ,self.__target = X, Y
+        self.setMatricesImportanceRedondance(X,Y)
         T = Tresholding()
         T.fit(X,Y)
-        #self.__Threshold = T.getTreshold(X,Y)
-        self.__Threshold = 0.3
+        self.__Threshold = T.getTreshold(X,Y)
+        #self.__Threshold = 0.3
         print(self.__Threshold)
         for i in self.__mesures.keys():
             self.__mesures[i].fit (X , Y)
@@ -94,7 +144,8 @@ class Destiny:
             self.__mesures[i].setThresholdsAutomatiquement (self.__Threshold)
         print("Fin du fit")
 
-
+    def getMatriceImportanceRedondance(self):
+        return self.__matrices_redondaces,self.__matrices_importances
 
     def test(self):
         D = {}
@@ -107,6 +158,8 @@ class Destiny:
 
 
 
-
-
-
+import numpy as np
+data,target = load_german_dataset()
+D = Destiny()
+D.fit(data,target)
+print(D.MinimumRMaxS([1,3,5,4],"Distance"))
