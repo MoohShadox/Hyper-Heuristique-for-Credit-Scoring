@@ -21,17 +21,21 @@ class Mesure:
         self._target = {}
         self.__data = None
         self.__target = None
+        self.__Subset_Calculator = Embedded_Thresholding()
 
 
     def setSubsets(self,subset):
         self._subsets = subset
 
+
+    def setMatrix(self,m1,m2):
+        self.__Subset_Calculator.setMatrices(m1,m2)
+
+
     def CreateSubsets(self,borne=None):
         self._subsets = {}
-        T = Embedded_Thresholding()
-        T.fit(self.__data,self.__target)
         for i in range(2,Mesure.MegaAttributTailleMax+1):
-            self._subsets[i] = T.generer_subset(i , borne)
+            self._subsets[i] = self.__Subset_Calculator.generer_subset(i , borne)
         return self._subsets
 
     def setThresholdsAutomatiquement(self,s=None):
@@ -49,6 +53,7 @@ class Mesure:
     def fit(self,data,target):
         self.__data = data
         self.__target = target
+        self.__Subset_Calculator.fit(self.__data, self.__target)
         d = data.transpose()
         cpt = 0
         for i in d:

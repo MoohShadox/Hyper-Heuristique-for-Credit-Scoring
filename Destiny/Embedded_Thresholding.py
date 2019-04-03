@@ -1,4 +1,5 @@
 #import random
+import math
 from itertools import combinations
 
 import matplotlib.pyplot as plt
@@ -17,7 +18,6 @@ import numpy as np
 import random
 
 from Destiny.DataSets.german_dataset import load_german_dataset
-from Destiny.Tresholding import Tresholding
 
 
 class Embedded_Thresholding:
@@ -34,6 +34,12 @@ class Embedded_Thresholding:
         self.__threshold = 0
         self.__subset_selectionned = {}
         self.__nbfeatures = 0
+        self.__matrices_redondaces, self.__matrices_importances = {}, {}
+
+
+    def setMatrices(self,m1,m2):
+        self.__matrices_importances = m2
+        self.__matrices_redondaces = m1
 
     def fit(self,X,Y):
         self.__data = X
@@ -67,60 +73,119 @@ class Embedded_Thresholding:
             self.__subset_selectionned[tuple(liste_chiffre)] = rfecv.ranking_,rfecv.grid_scores_
         return self.__subset_selectionned[tuple(liste_chiffre)]
 
-    def diversifier(self,e):
-        r = self.compute_subset(e)
-        cpt = 0
-        while(tuple(e) in self.__subset_selectionned.keys()):
-            r = random.randint(0,len(e)-1)
-            j = random.randint(0,self.__nbfeatures-1)
-            while(j in e):
-                j = random.randint (0 , self.__nbfeatures - 1)
-            e[r] = j
-            cpt = cpt + 1
-            if(cpt == 1000):
-                break
+
+
+
+
+    def Energie(self,L,mc="Distance"):
+        masque = [0] * self.__nbfeatures
+        for i in L:
+            masque[i] = 1
+        masque = np.array(masque)
+        try:
+           e =  masque.transpose().dot(self.__matrices_redondaces[mc]).dot(masque) - masque.dot(
+                self.__matrices_importances[mc])
+        except(ZeroDivisionError):
+            e = 1000
         return e
 
-    def intensifier(self,e):
-        r = self.compute_subset(e)
-        D = {}
-        for i in range(0,len(r[0])):
-            L = []
-            L.append((i,r[1][i]))
-            D[r[0][i]] = D.get(r[0][i],[]) + L
-        rez = 0
-        for i in sorted(list(D.keys())):
-            for j in sorted(D[i],key=lambda x:x[1]):
-                rez = j[0]
-                break
-        j = random.randint (0 , self.__nbfeatures - 1)
-        while (j in e):
-            j = random.randint (0 , self.__nbfeatures - 1)
-        e[rez] = j
-        return e
+
+    def GenererListeRandom(self,taille):
+        r = taille
+        L = r * [-1]
+        for i in range(0,r):
+            k = random.randint(0,self.__nbfeatures-1)
+            while (k in L and len (L) != self.__nbfeatures):
+                k = random.randint (0 , self.__nbfeatures-1)
+            L[i] = k
+        return L
+
+
+    def Alteration_Insensification(self,L,mc="Distance"):
+        max = -1
+        min_i = -1
+        for i in L:
+            if(self.__matrices_importances[mc][i] > max):
+                max = self.__matrices_importances[mc][i]
+                min_i = i
+        max_r = -1
+        rempl = None
+        for j in L:
+            if(self.__matrices_redondaces[mc][min_i][j] > max_r):
+                rempl = j
+                max_r = self.__matrices_redondaces[mc][min_i][j]
+        NL = L
+        new_att = random.randint(0,self.__nbfeatures-1)
+        while(new_att in L):
+            new_att = random.randint(0, self.__nbfeatures - 1)
+        NL[NL.index(rempl)] = new_att
+        return NL
 
 
     def generer_subset(self,taille,borne = None):
-        vinit = np.random.randint(0,self.__nbfeatures,taille)
-        p = 0.25
-        if(borne == None):
-            b = Embedded_Thresholding.borne_complexite
-        else:
-            b = borne
-        for i in range(0,b):
-            r = random.randint(0,10)
-            if(r/10>p):
-                vinit = self.intensifier(vinit)
-                if(tuple(vinit) in self.__subset_selectionned):
-                    p = p + 0.05
-                    vinit = self.diversifier(vinit)
+        self.__subset_selectionned[taille] = []
+        L = self.GenererListeRandom(taille)
+        e = self.Energie(L)
+        T = 1
+        booll = False
+        mc_courant = "Distance"
+        emin_d,emin_mutinf = 1000, 1000
+        nb_iterations_pas = 1000000
+        cptcpt = nb_iterations_pas
+        pas = 0.01
+        coef_decrementation_temperature = 0.99
+        cpt_iter = 0
+        while (cpt_iter < 100000):
+            cpt_iter = cpt_iter + 1
+            # Mecanisme d'intensification
+            NL = self.Alteration_Insensification(L, mc_courant)
+            while(NL in self.__subset_selectionned[taille]):
+                booll = not booll
+                if(booll == True):
+                    if(mc_courant == "Distance"):
+                        mc_courant = "Information"
+                    else:
+                        mc_courant = "Distance"
+                    NL = self.Alteration_Insensification(L,mc_courant)
+                else:
+                    NL = self.GenererListeRandom(taille)
+            print("Le nouvel ensemble a estimer est ",NL)
+            # Mise a jour de la température
+            T = T * coef_decrementation_temperature
+            if (cptcpt == 0):
+                cptcpt = nb_iterations_pas
+                T = T - pas
+            # print("La température est : ",T)
+            # Mise a jour de l'energie
+            ep = e
+            enew = self.Energie(NL,mc_courant)
+            if (enew <= emin_d and mc_courant=="Distance"):
+                L = NL
+                e = enew
+            elif(enew <= emin_mutinf and mc_courant=="Information"):
+                L = NL
+                e = enew
             else:
-                vinit = self.diversifier(vinit)
-            if(p==1):
-                break
-        C = list(self.__subset_selectionned.keys())
-        self.__subset_selectionned.clear()
-        return C
-
-
+                try:
+                    p = 0
+                    if(mc_courant == "Distance"):
+                        p = math.exp(-((emin_d - e) / T))
+                    if (mc_courant == "Information"):
+                        p = math.exp(-((emin_mutinf - e) / T))
+                except(OverflowError):
+                    continue
+                p = int(p * 100)
+                rr = random.randint(0, 100)
+                if (p > rr):
+                    if ( mc_courant == "Distance"):
+                        L = NL
+                        emin_mutinf = enew
+                    elif ( mc_courant == "Information"):
+                        L = NL
+                        emin_d = enew
+            # Selectionner l'ensemble courant
+            self.__subset_selectionned[len(L)].append(L)
+            if(len(self.__subset_selectionned[len(L)])==borne):
+                return self.__subset_selectionned[len(L)]
+        return self.__subset_selectionned[len(L)]
 

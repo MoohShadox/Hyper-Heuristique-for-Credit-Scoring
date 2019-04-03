@@ -1,7 +1,5 @@
 from Destiny.DataSets.german_dataset import load_german_dataset
-from Destiny.DataSets.musk_dataset import load_musk_dataset
 from Destiny.Embedded_Thresholding import Embedded_Thresholding
-from Destiny.RankingFunctions import Entropie
 from Destiny.RankingFunctions.Final.Distances_Measures import Distances_Measures
 
 from Destiny.RankingFunctions.Final.Information_Measure import Information_Measure
@@ -9,6 +7,7 @@ from Destiny.RankingFunctions.Final.MesureDeConsistance import MesureDeConsistan
 from Destiny.RankingFunctions.Final.MesureDeDependance import MesureDeDependance
 from Destiny.RankingFunctions.Final.PrecisionClassification import PrecisionClassification
 from Destiny.Tresholding import Tresholding
+import numpy as np
 
 
 class Destiny:
@@ -123,12 +122,13 @@ class Destiny:
         unit = np.ones(self.__matrices_importances["Distance"].shape[0])
         for i in self.__matrices_importances:
             self.__matrices_importances[i] = unit - self.__matrices_importances[i]/self.__matrices_importances[i].sum()
+        return self.__matrices_redondaces,self.__matrices_importances
 
 
 
     def fit(self,X,Y):
         self.__data ,self.__target = X, Y
-        self.setMatricesImportanceRedondance(X,Y)
+        m1 , m2 = self.setMatricesImportanceRedondance(X,Y)
         T = Tresholding()
         T.fit(X,Y)
         self.__Threshold = T.getTreshold(X,Y)
@@ -138,7 +138,8 @@ class Destiny:
             self.__mesures[i].fit (X , Y)
             print(i," fini")
             if(self.subsetgenerated == None):
-                self.subsetgenerated = self.__mesures[i].CreateSubsets(borne = 30)
+                self.__mesures[i].setMatrix(m1,m2)
+                self.subsetgenerated = self.__mesures[i].CreateSubsets(borne = 1000)
             else:
                 self.__mesures[i].setSubsets(self.subsetgenerated)
             self.__mesures[i].setThresholdsAutomatiquement (self.__Threshold)
@@ -158,8 +159,9 @@ class Destiny:
 
 
 
-import numpy as np
 data,target = load_german_dataset()
-D = Destiny()
+Dest = Destiny()
+Dest.fit(data,target)
+D = Embedded_Thresholding()
 D.fit(data,target)
-print(D.MinimumRMaxS([1,3,5,4],"Distance"))
+Dest.test()
