@@ -216,8 +216,6 @@ class Tresholding:
 
 
     def Alteration_Insensification(self,L,T):
-        ELMIN = 0
-        ELMAX = 0
         augmentation_taille = int(math.log(self.__nb_features,2)*T) + 1
         augmentation_taille = random.randint(1,augmentation_taille)
         if(augmentation_taille == 0):

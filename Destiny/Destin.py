@@ -27,6 +27,7 @@ class Destiny:
         self.__Threshold = 0
         self.__nom_mesures = {}
         self.subsetgenerated = None
+        self.__mesures_anterieure = {}
         self.__matrices_redondaces, self.__matrices_importances = {} , {}
         self.__mesures["D"],self.__nom_mesures["D"] = Distances_Measures(),Destiny.mesures_distance
         self.__mesures["I"],self.__nom_mesures["I"] = Information_Measure(),Destiny.mesures_information
@@ -34,6 +35,15 @@ class Destiny:
         self.__mesures["Co"],self.__nom_mesures["Co"] = MesureDeConsistance(),Destiny.mesures_consistance
         self.__mesures["De"],self.__nom_mesures["De"] = MesureDeDependance(),Destiny.mesures_dependance
 
+
+
+    def __copy__(self):
+        D = Destiny()
+        D.__mesures["D"] = self.__mesures["D"]
+        D.__mesures["I"] = self.__mesures["I"]
+        D.__mesures["C"] = self.__mesures["C"]
+        D.__mesures["Co"] = self.__mesures["Co"]
+        D.__mesures["De"] = self.__mesures["De"]
 
     #L est une liste de types de mesures par exemple ['C' ,'Ce', 'De']
     def GestionSubsets(self,L,Borne = None):
@@ -125,15 +135,19 @@ class Destiny:
         return self.__matrices_redondaces,self.__matrices_importances
 
 
+    def ThresholdMeasures(self,seuil):
+        self.__mesures_anterieure = self.__mesures.copy()
+        self.__Threshold = seuil
+        for i in self.__mesures.keys():
+            self.__mesures[i].setThresholdsAutomatiquement(self.__Threshold)
+        pass
+
+
 
     def fit(self,X,Y):
         self.__data ,self.__target = X, Y
         m1 , m2 = self.setMatricesImportanceRedondance(X,Y)
-        T = Tresholding()
-        T.fit(X,Y)
-        self.__Threshold = T.getTreshold(X,Y)
-        #self.__Threshold = 0.3
-        print(self.__Threshold)
+
         for i in self.__mesures.keys():
             self.__mesures[i].fit (X , Y)
             print(i," fini")
@@ -142,8 +156,9 @@ class Destiny:
                 self.subsetgenerated = self.__mesures[i].CreateSubsets(borne = 1000)
             else:
                 self.__mesures[i].setSubsets(self.subsetgenerated)
-            self.__mesures[i].setThresholdsAutomatiquement (self.__Threshold)
-        print("Fin du fit")
+        T = Tresholding ()
+        T.fit (X , Y)
+        self.ThresholdMeasures(T.getTreshold(X,Y))
 
     def getMatriceImportanceRedondance(self):
         return self.__matrices_redondaces,self.__matrices_importances
