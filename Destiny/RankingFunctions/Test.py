@@ -1,18 +1,19 @@
+from sklearn.datasets import make_classification
+from sklearn.ensemble import AdaBoostClassifier
 
+from Destiny.DataSets import german_dataset
+from Destiny.DataSets.australian_dataset import load_australian_dataset
+from Destiny.DataSets.load_spambase_dataset import load_spambase_dataset
 from Destiny.Destin import Destiny
-
+from Destiny.Evaluateur_Precision import Evaluateur_Precision
 from Nature2.Nature import Nature
 
-from Destiny.DataSets.madelon_dataset import load__train_dataset
-
-data,target = load__train_dataset()
-target = target.transpose()
-print("dumped")
+#data,target = wine.data, wine.target
+data,target = load_spambase_dataset()
 DM= Destiny()
 DM.fit(data,target)
-DM.test()
 Nature.init(DM)
-for i in range(10):
+for i in range(20):
     Nature.evolve()
     print("Le génome alpha",Nature.actualalpha.incarnation)
     print("la precision",Nature.actual_precision)

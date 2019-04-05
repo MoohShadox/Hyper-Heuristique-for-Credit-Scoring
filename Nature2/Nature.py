@@ -6,6 +6,7 @@ from Destiny.Clustering_Incarnations import Clustering_Incarnations
 from Destiny.Evaluateur_Precision import Evaluateur_Precision
 from Nature2 import Genome
 from Nature2 import Fabriquant as fb
+import math
 import time
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -13,22 +14,34 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
 
 class Nature:
-    Psupp=0.7
+    #Hyper parametres:
+    Psupp=0.6
     Pstop=0.4
     maxA = 3
     maxH = 13
-    maxP = 100
-    maxS = 10
-    strat = []
+    maxP = 1000
+    maxS = 3
+    nb_promo=4
+    alpha=0.1
+    Tol = 4
+    tol_evolutivite = 0.25
+    strat = [[0.1, 0.7, 0.5, 0.8], [0.5, 0.3, 0.5, 0.7], [0.3, 0.6, 0.5, 0.7]]
+
+    #Parametres de stockage
     population = []
     actualalpha = None
     DM=None
-    Tol=4
+    modjahidin=[]
     population_clusterised = {}
     alphas_locaux = []
     alpha_global = []
     modele = DecisionTreeClassifier()
     actual_precision=0
+    qualite=0
+    PM=1
+    evolutivite_inter=0
+    actuel_score=0
+
 
     @classmethod
     def csm(cls,G0I,G0A,Strat):
@@ -42,7 +55,7 @@ class Nature:
                 if(p<Strat[0]):
                     st=st+"S"
                 else:
-                    if(p<Strat[1]):
+                    if(p<Strat[1]*cls.PM):
                         pp=random.random()
                         if(pp<Strat[2]):
                             st=st+"MI"
@@ -129,7 +142,7 @@ class Nature:
         return VGN
 
     @classmethod
-    def eludeAlpha(cls):
+    def eludeAlpha(cls,evolve):
         P = []
         for i in cls.population:
             P.append(i.resultat)
@@ -140,15 +153,22 @@ class Nature:
         CI.clusteriser()
         Nature.population_clusterised = CI.clusters
         Nature.alphas_locaux = CI.alphas_locaux
+        if(len(cls.modjahidin)==cls.nb_promo):
+            cls.modjahidin.remove(cls.modjahidin[0])
+            cls.modjahidin.append(cls.alphas_locaux)
+        else: cls.modjahidin.append(cls.alphas_locaux)
+        print("----Moudjahidin",len(cls.modjahidin))
         E = Evaluateur_Precision(Nature.DM.getDataset()[0],Nature.DM.getDataset()[1])
         E.train(Nature.modele)
-        max=cls.actual_precision
+        max=cls.qualite
         for i in Nature.alphas_locaux:
-            c=E.Evaluer(i)
+            precision=E.Evaluer(i)
+            c=cls.reguler_par_complexote(precision,len(i))
             if c > max:
                 max = c
                 cls.alpha_global = i
-        cls.actual_precision = max
+                cls.actual_precision=precision
+        cls.qualite = max
         lesalpha=cls.alphas_locaux
         cls.alphas_locaux=[]
         for k in lesalpha:
@@ -162,32 +182,41 @@ class Nature:
         print("----------ALPHA GLOBAL",cls.alpha_global)
         while(ll<len(cls.population)):
             if (cls.population[ll].resultat == list(cls.alpha_global)):
-                print("**********ICI")
                 cls.actualalpha=cls.population[ll]
                 ll=len(cls.population)+1
             ll=ll+1
+        cls.alter_strategies(CI,evolve)
 
 
+    @classmethod
+    def alter_strategies(cls,C,evolve):
+        cls.evolutivite_inter=(C.actul_score - cls.actuel_score)/(cls.maxP*100)
+        cls.actuel_score=C.actul_score
+        if(evolve):
+            if(cls.evolutivite_inter>4):
+                cls.PM=max(cls.PM*(1-cls.tol_evolutivite),0.2)
+            else:
+                cls.PM=min(1,8,cls.PM*(1+cls.tol_evolutivite))
+            print("PM",cls.PM)
+            print("Evolutivite",cls.evolutivite_inter)
 
 
 
     @classmethod
     def init(cls,D):
         cls.DM=D
-        cls.strat=[[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],
-               [0.2, 0.6, 0.5, 0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8],[0.2,0.6,0.5,0.8]]
         cls.population=[]
         VNG=Genome.Genome()
         for i in range(cls.maxP):
             cls.population.append(cls.monoevolv(VNG,VNG,cls.strat[random.randint(0,cls.maxS-1)]))
-        cls.eludeAlpha()
+        cls.eludeAlpha(False)
 
     @classmethod
     def evolve(cls):
         for i in range(cls.maxP):
             cls.population[i]=cls.monoevolv(cls.population[i],cls.alphas_locaux[cls.getcluster(cls.population[i])],cls.strat[random.randint(0, cls.maxS - 1)])
             cls.population[i] = cls.monoevolv(cls.population[i], cls.actualalpha, cls.strat[random.randint(0, cls.maxS - 1)])
-        cls.eludeAlpha()
+        cls.eludeAlpha(True)
 
     @classmethod
     def getcluster(cls,G):
@@ -208,6 +237,13 @@ class Nature:
 
         return -1
 
+    @classmethod
+    def reguler_par_complexote(cls,val,taille):
+        return (val *(1-cls.alpha)/(taille)*cls.alpha)
+
+
+def sigmoid(x):
+  return 1 / (1 + math.exp(-x))
 
 
 

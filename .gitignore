@@ -2,15 +2,3 @@
 Fichiers/
 
 *.csv
-
-Destiny/DataSets/madelon_valid\.data\.txt
-
-Destiny/DataSets/madelon_train\.data\.txt
-
-Destiny/DataSets/madelon_test\.data\.txt
-
-*.txt
-
-*.data
-
-*.pyc
