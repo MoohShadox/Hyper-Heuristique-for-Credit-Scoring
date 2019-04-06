@@ -3,7 +3,6 @@ from itertools import combinations
 import numpy as np
 from sklearn.preprocessing import StandardScaler,MinMaxScaler
 
-from Destiny import Tresholding
 from Destiny.Embedded_Thresholding import Embedded_Thresholding
 
 
@@ -40,10 +39,6 @@ class Mesure:
 
     def setThresholdsAutomatiquement(self,s=None):
         self.rank_with(n=1)
-        T = Tresholding.Tresholding()
-        if(s==None):
-            T.fit(self.__data,self.__target)
-            s = T.getTreshold(self.__data,self.__target)
         for j in self._calculated_measures[1]:
             if(self._liste_thresholds[self._liste_mesures.index (j)]==0):
                 self._liste_thresholds[self._liste_mesures.index(j)] = self._calculated_measures[1][j][int(s*(len(self._attributs.keys())-1))][1]

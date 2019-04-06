@@ -74,14 +74,15 @@ class Destiny:
             for i in self.__nom_mesures.keys():
                 cptlocal = 0
                 for j in self.__nom_mesures[i]:
-                    cpt = cpt + 1
                     cptlocal = cptlocal + 1
                     if(id == str(i)+str(cptlocal) or id == "H"+str(cpt)):
                         motclef = j
                         tp = i
                         break
+                    cpt = cpt + 1
                 if(motclef != None):
                     break
+
             L = []
             L.append(motclef)
             Lmotsclefs.append(motclef)
@@ -135,26 +136,38 @@ class Destiny:
 
 
     def ThresholdMeasures(self,seuil):
-        self.__mesures_anterieure = self.__mesures.copy()
+        cpt = 0
+        for i in self.__mesures.keys():
+            for j in range(0,len(self.__nom_mesures[i])):
+                self.__mesures_anterieure.update(self.getMegaHeuristique(["H"+str(cpt)],1))
+                cpt = cpt + 1
+        self.attributs_qualitatifs(0.5)
         self.__Threshold = seuil
         for i in self.__mesures.keys():
             self.__mesures[i].setThresholdsAutomatiquement(self.__Threshold)
-        pass
+
+
+    def attributs_qualitatifs(self,seuil):
+        nb = int(seuil * len(self.__data[0]))
+        print("nb attributs = ",len(self.__data[0]))
+        dict_listes = {}
+        cpt = 0
+        for i in self.__mesures_anterieure:
+            L = []
+            print("Je positionne le curseur sur ",i)
+            for j in range(0,nb):
+                L.append(self.__mesures_anterieure[i][j][0][0])
+                print(self.__mesures_anterieure[i][j])
+            print("L = ",L, " i= ",i)
+            dict_listes[cpt] = L
+            cpt = cpt + 1
+        print(dict_listes)
 
 
 
     def fit(self,X,Y):
         self.__data ,self.__target = X, Y
-<<<<<<< HEAD
         m1 , m2 = self.setMatricesImportanceRedondance(X,Y)
-
-=======
-        T = Tresholding()
-        T.fit(X,Y)
-        #self.__Threshold = T.getTreshold(X,Y)
-        self.__Threshold = 0.4
-        print(self.__Threshold)
->>>>>>> master
         for i in self.__mesures.keys():
             self.__mesures[i].fit (X , Y)
             print(i," fini")

@@ -8,7 +8,6 @@ import math
 from Destiny.DataSets.german_dataset import load_german_dataset
 from Destiny.DataSets.musk_dataset import load_musk_dataset
 from Destiny.Evaluateur_Precision import Evaluateur_Precision
-from Nature2 import Nature as nat
 
 
 class Tresholding:
@@ -306,6 +305,7 @@ class Tresholding:
                 #print("Amélioration de ",emin-e,"pour : Longueur = ",len(L))
                 emin = e
                 percentagemin = len(L) / self.__nb_features
+        return percentagemin
 
     def tresholder(self,t):
         self.nouvmesures=self.__mesures
@@ -313,7 +313,8 @@ class Tresholding:
             self.nouvmesures[i].setThresholdsAutomatiquement(self.__Threshold)
 
     def union_intersection(self):
-        for i in range(nat.Nature.maxH):
+        #TODO Trouver un moyen d'éviter d'importer Nature
+        for i in range(0,10):
             gj = self.getMegaHeuristique(["H" + str(i + 1)], 1)
             hierlist2 = gj[list(gj.keys())[0]]
             elus = set()
