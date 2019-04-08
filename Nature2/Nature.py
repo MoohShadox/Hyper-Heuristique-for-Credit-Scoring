@@ -3,6 +3,7 @@ import random
 import itertools
 
 from Destiny.Clustering_Incarnations import Clustering_Incarnations
+from Destiny import Destin as dest
 from Destiny.Evaluateur_Precision import Evaluateur_Precision
 from Nature2 import Genome
 from Nature2 import Fabriquant as fb
@@ -18,11 +19,11 @@ class Nature:
     Psupp=0.6
     Pstop=0.4
     maxA = 3
-    maxH = 13
+    maxH=0
     maxP = 1000
     maxS = 3
     nb_promo=4
-    alpha=0.1
+    alpha=0
     Tol = 4
     tol_evolutivite = 0.25
     strat = [[0.1, 0.7, 0.5, 0.8], [0.5, 0.3, 0.5, 0.7], [0.3, 0.6, 0.5, 0.7]]
@@ -163,7 +164,7 @@ class Nature:
         max=cls.qualite
         for i in Nature.alphas_locaux:
             precision=E.Evaluer(i)
-            c=cls.reguler_par_complexote(precision,len(i))
+            c=dest.Destiny.reguler_par_complexote(precision,len(i))
             if c > max:
                 max = c
                 cls.alpha_global = i
@@ -205,6 +206,8 @@ class Nature:
     @classmethod
     def init(cls,D):
         cls.DM=D
+        cls.maxH=D.maxH
+        cls.alpha=D.alpha
         cls.population=[]
         VNG=Genome.Genome()
         for i in range(cls.maxP):
@@ -237,9 +240,8 @@ class Nature:
 
         return -1
 
-    @classmethod
-    def reguler_par_complexote(cls,val,taille):
-        return (val *(1-cls.alpha)/(taille)*cls.alpha)
+
+
 
 
 def sigmoid(x):

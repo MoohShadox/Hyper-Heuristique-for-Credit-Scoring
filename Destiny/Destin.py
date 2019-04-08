@@ -1,13 +1,16 @@
 from Destiny.DataSets.german_dataset import load_german_dataset
 from Destiny.Embedded_Thresholding import Embedded_Thresholding
+from Destiny.Evaluateur_Precision import Evaluateur_Precision
 from Destiny.RankingFunctions.Final.Distances_Measures import Distances_Measures
 
 from Destiny.RankingFunctions.Final.Information_Measure import Information_Measure
 from Destiny.RankingFunctions.Final.MesureDeConsistance import MesureDeConsistance
 from Destiny.RankingFunctions.Final.MesureDeDependance import MesureDeDependance
 from Destiny.RankingFunctions.Final.PrecisionClassification import PrecisionClassification
+from sklearn.svm import SVC
 from Destiny.Tresholding import Tresholding
 import numpy as np
+
 
 
 class Destiny:
@@ -18,21 +21,25 @@ class Destiny:
     mesures_classification = ["RF",  "AdaBoost"]
     mesures_consistance = ['FCC']
     mesures_dependance = ["RST"]
+    maxH = 13
+    alpha=0.05
     #mesures_classification = ["BN","RF","LSVM","RBFSVM","GaussianProcess","AdaBoost","QDA","KNN","DTC","MLP"]
 
     def __init__(self):
         self.__data,self.__target = None,None
         self.__mesures = {}
+        self.__max_iterations=2
         self.__Threshold = 0
         self.__nom_mesures = {}
         self.subsetgenerated = None
-        self.__mesures_anterieure = {}
         self.__matrices_redondaces, self.__matrices_importances = {} , {}
         self.__mesures["D"],self.__nom_mesures["D"] = Distances_Measures(),Destiny.mesures_distance
         self.__mesures["I"],self.__nom_mesures["I"] = Information_Measure(),Destiny.mesures_information
         self.__mesures["C"],self.__nom_mesures["C"] = PrecisionClassification(),Destiny.mesures_classification
         self.__mesures["Co"],self.__nom_mesures["Co"] = MesureDeConsistance(),Destiny.mesures_consistance
         self.__mesures["De"],self.__nom_mesures["De"] = MesureDeDependance(),Destiny.mesures_dependance
+        self.inter=set()
+        self.union=set()
 
 
 
@@ -167,6 +174,7 @@ class Destiny:
 
     def fit(self,X,Y):
         self.__data ,self.__target = X, Y
+        print("ici", X.shape,Y.shape )
         m1 , m2 = self.setMatricesImportanceRedondance(X,Y)
         for i in self.__mesures.keys():
             self.__mesures[i].fit (X , Y)
@@ -176,9 +184,10 @@ class Destiny:
                 self.subsetgenerated = self.__mesures[i].CreateSubsets(borne = 1000)
             else:
                 self.__mesures[i].setSubsets(self.subsetgenerated)
-        T = Tresholding ()
-        T.fit (X , Y)
-        self.ThresholdMeasures(T.getTreshold(X,Y))
+        #T = Tresholding ()
+        #T.fit (X , Y)
+        #self.ThresholdMeasures(T.getTreshold(X,Y))
+        self.activer_treshold()
 
     def getMatriceImportanceRedondance(self):
         return self.__matrices_redondaces,self.__matrices_importances
@@ -191,12 +200,54 @@ class Destiny:
             self.__mesures[i].rank_with(n=2)
             print(self.__mesures[i].rank_with(n=3))
 
+    def tresholder(self,t):
+        self.nouvmesures=self.__mesures
+        for i in self.__mesures.keys():
+            self.nouvmesures[i].setThresholdsAutomatiquement(t)
+
+    def union_intersection(self):
+        for i in range(self.maxH):
+            gj = self.getMegaHeuristique(["H" + str(i + 1)], 1)
+            hierlist2 = gj[list(gj.keys())[0]]
+            elus = set()
+            #print('hierlist:',hierlist2)
+            #print("___")
+            for h in hierlist2:
+                if (h[1] >= 0):
+                    elus = elus.union(set(h[0]))
+           # print("les elus",elus)
+            if (len(self.inter) > 0):
+                self.inter = self.inter.intersection(elus)
+            else:
+                self.inter = elus
+            self.union = self.union.union(elus)
+
+    def evaluer(self):
+        E = Evaluateur_Precision(self.__data, self.__target)
+        #print("target et data shape",self.__data.shape,self.__target.shape)
+        E.train(SVC( ))
+        if(len(self.inter)>0):
+            return (self.reguler_par_complexote(E.Evaluer(list(self.inter)),len(self.inter))+self.reguler_par_complexote(E.Evaluer(list(self.union)),len(self.union)))/2
+        else:
+            return 0
+    def criteron(self,t):
+        self.tresholder(t)
+        self.union_intersection()
+        return self.evaluer()
+    def activer_treshold(self):
+        t=0.5
+        alpha=0.4
+        for i in range(self.__max_iterations):
+            p1=t+alpha
+            p2=t-alpha
+            if(self.criteron((t+p1)/2)>self.criteron((t+p1)/2)):
+                t=(p1+t)/2
+            else:t=(p2+t)/2
+            alpha=alpha/2
+            print("----le treshold est:",t)
+        self.tresholder(t)
 
 
 
-data,target = load_german_dataset()
-Dest = Destiny()
-Dest.fit(data,target)
-D = Embedded_Thresholding()
-D.fit(data,target)
-Dest.test()
+    def reguler_par_complexote(self,val,taille):
+        return (val *(1-self.alpha)/(taille)*self.alpha)

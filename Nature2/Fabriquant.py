@@ -30,7 +30,9 @@ class Fabriquant:
                 cpt1=0
                 while(cpt1<len(hierlist) and latol!=nat.Nature.Tol):
                     if(intersect(set(self.listbuffer),set(list(hierlist[cpt1][0])))==[]):
-                        condidats.add(hierlist[cpt1][0])
+
+                        a=set(hierlist[cpt1][0])
+                        condidats.union(a)
                         latol=latol+1
                     cpt1=cpt1+1
             tournoit=[]
