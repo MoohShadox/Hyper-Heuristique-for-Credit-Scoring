@@ -3,13 +3,13 @@ from sklearn.ensemble import AdaBoostClassifier
 
 from Destiny.DataSets import german_dataset
 from Destiny.DataSets.australian_dataset import load_australian_dataset
-from Destiny.DataSets.load_spambase_dataset import load_spambase_dataset
+from Destiny.DataSets.load_promoters_dataset import load_promoter_dataset
 from Destiny.Destin import Destiny
 from Destiny.Evaluateur_Precision import Evaluateur_Precision
 from Nature2.Nature import Nature
 
 #data,target = wine.data, wine.target
-data,target = load_spambase_dataset()
+data,target = load_promoter_dataset()
 DM= Destiny()
 DM.fit(data,target)
 Nature.init(DM)
