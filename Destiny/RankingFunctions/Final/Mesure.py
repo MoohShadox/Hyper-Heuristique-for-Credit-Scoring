@@ -71,8 +71,6 @@ class Mesure:
         if(self._subsets == None or not nb in self._subsets.keys()):
             C = combinations(L,nb)
         else:
-            print("nb = ",nb)
-            print(self._subsets)
             C = self._subsets[nb]
         for i in C:
             K = []

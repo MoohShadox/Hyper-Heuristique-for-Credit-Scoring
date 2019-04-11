@@ -14,6 +14,7 @@ class MesureDeConsistance(Mesure):
         self.__data = None
         self._liste_mesures = ['FCC']
         self.__target = None
+        self.ranks = {}
         self.feature_score= {}
 
     def getscore(self):
@@ -41,15 +42,20 @@ class MesureDeConsistance(Mesure):
     def rank(self,n):
         if (n > MesureDeConsistance.seuil_max):
             return None
-        if not (n in self.feature_score):
+        if not (n in self.ranks):
             L = list(range(0, len(self.__data[0]) - 1))
-            for i in combinations(L, n):
+            if(n in self._subsets):
+                C = self._subsets[n]
+            else:
+                C = combinations(L,n)
+            self.feature_score[n] = {}
+            for i in C:
                 KK = []
                 for j in i:
                     KK.append(j)
                 self.fcc(KK)
-            self.feature_score[n] = sorted(self.feature_score[n].items(), key=lambda x: x[1], reverse=True)
-        return self.feature_score[n]
+            self.ranks[n] = sorted(self.feature_score[n].items(), key=lambda x: x[1], reverse=True)
+        return self.ranks[n]
 
     def fcc(self,x):
         if not (len (x) in self.feature_score.keys()):

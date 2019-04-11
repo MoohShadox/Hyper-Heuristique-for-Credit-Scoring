@@ -56,5 +56,10 @@ class MesureDeDependance(Mesure):
         for l in liste:
             if(l<g1 or l<g2):
                 n=n+len(l)
-        return n/len(patterns)
+        try:
+            rez = n / len(patterns)
+        except(ZeroDivisionError):
+            print("pattern = ",patterns)
+            rez = 0
+        return rez
 

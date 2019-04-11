@@ -115,7 +115,7 @@ class Destiny:
         d = list (data)
         d.append (target)
         d = np.array (d)
-        #data = data.transpose ()
+        print("Taille de d : ", d.shape)
         c = np.corrcoef (d)
         c = c.transpose()
         self.__matrices_importances["Distance"] = c[-1]
@@ -148,7 +148,6 @@ class Destiny:
             for j in range(0,len(self.__nom_mesures[i])):
                 self.__mesures_anterieure.update(self.getMegaHeuristique(["H"+str(cpt)],1))
                 cpt = cpt + 1
-        self.attributs_qualitatifs(0.5)
         self.__Threshold = seuil
         for i in self.__mesures.keys():
             self.__mesures[i].setThresholdsAutomatiquement(self.__Threshold)
@@ -156,37 +155,28 @@ class Destiny:
 
     def attributs_qualitatifs(self,seuil):
         nb = int(seuil * len(self.__data[0]))
-        print("nb attributs = ",len(self.__data[0]))
         dict_listes = {}
         cpt = 0
         for i in self.__mesures_anterieure:
             L = []
-            print("Je positionne le curseur sur ",i)
             for j in range(0,nb):
                 L.append(self.__mesures_anterieure[i][j][0][0])
-                print(self.__mesures_anterieure[i][j])
-            print("L = ",L, " i= ",i)
             dict_listes[cpt] = L
             cpt = cpt + 1
-        print(dict_listes)
 
 
 
     def fit(self,X,Y):
         self.__data ,self.__target = X, Y
-        print("ici", X.shape,Y.shape )
         m1 , m2 = self.setMatricesImportanceRedondance(X,Y)
         for i in self.__mesures.keys():
             self.__mesures[i].fit (X , Y)
             print(i," fini")
             if(self.subsetgenerated == None):
                 self.__mesures[i].setMatrix(m1,m2)
-                self.subsetgenerated = self.__mesures[i].CreateSubsets(borne = 1000)
+                self.subsetgenerated = self.__mesures[i].CreateSubsets(borne = 30)
             else:
                 self.__mesures[i].setSubsets(self.subsetgenerated)
-        #T = Tresholding ()
-        #T.fit (X , Y)
-        #self.ThresholdMeasures(T.getTreshold(X,Y))
         self.activer_treshold()
 
     def getMatriceImportanceRedondance(self):
@@ -210,8 +200,6 @@ class Destiny:
             gj = self.getMegaHeuristique(["H" + str(i + 1)], 1)
             hierlist2 = gj[list(gj.keys())[0]]
             elus = set()
-            #print('hierlist:',hierlist2)
-            #print("___")
             for h in hierlist2:
                 if (h[1] >= 0):
                     elus = elus.union(set(h[0]))

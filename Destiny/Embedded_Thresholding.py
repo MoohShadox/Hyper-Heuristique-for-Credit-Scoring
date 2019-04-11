@@ -149,13 +149,11 @@ class Embedded_Thresholding:
                     NL = self.Alteration_Insensification(L,mc_courant)
                 else:
                     NL = self.GenererListeRandom(taille)
-            print("Le nouvel ensemble a estimer est ",NL)
             # Mise a jour de la température
             T = T * coef_decrementation_temperature
             if (cptcpt == 0):
                 cptcpt = nb_iterations_pas
                 T = T - pas
-            # print("La température est : ",T)
             # Mise a jour de l'energie
             ep = e
             enew = self.Energie(NL,mc_courant)
