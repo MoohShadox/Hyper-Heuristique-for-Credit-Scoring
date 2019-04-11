@@ -34,7 +34,8 @@ class Clustering_Incarnations:
         s = 0
         for i in projection:
             s = s + i*i
-        return nat.Nature.reguler_par_complexote(s,len(projection))
+        D=Destiny()
+        return D.reguler_par_complexote(s,len(projection))
 
 
     def maxCarreProjection(self,liste_projections):

@@ -307,33 +307,7 @@ class Tresholding:
                 percentagemin = len(L) / self.__nb_features
         return percentagemin
 
-    def tresholder(self,t):
-        self.nouvmesures=self.__mesures
-        for i in self.__mesures.keys():
-            self.nouvmesures[i].setThresholdsAutomatiquement(self.__Threshold)
 
-    def union_intersection(self):
-        #TODO Trouver un moyen d'éviter d'importer Nature
-        for i in range(0,10):
-            gj = self.getMegaHeuristique(["H" + str(i + 1)], 1)
-            hierlist2 = gj[list(gj.keys())[0]]
-            elus = set()
-            for h in hierlist2:
-                if (h[1] > 0):
-                    elus = elus.union(set(h[0]))
-            if (len(self.inter) > 0):
-                self.inter = self.inter.intersection(elus)
-            else:
-                self.inter = elus
-            self.union = self.union.union(elus)
-
-    def evaluer(self):
-        E = Evaluateur_Precision(self.__data, self.__target)
-        return (E.Evaluer(list(self.union))+E.Evaluer(list(self.intersection)))/2
-    def criteron(self,t):
-        self.tresholder(t)
-        self.union_intersection()
-        return self.evaluer()
 
 
 
@@ -349,4 +323,11 @@ class Tresholding:
 
 
 
+#data,target = load_musk_dataset()
+#print(data.shape)
+#T = Tresholding()
+#T.fit(data,target)
+#t = T.getTreshold(data,target)
+#print(t)
+#print("Le nombre d'attributs a garder est de : ", data.shape[1]*t, "parmi : ", data.shape[1])
 

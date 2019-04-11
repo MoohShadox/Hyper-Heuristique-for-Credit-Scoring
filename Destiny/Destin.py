@@ -21,14 +21,14 @@ class Destiny:
     mesures_classification = ["RF",  "AdaBoost"]
     mesures_consistance = ['FCC']
     mesures_dependance = ["RST"]
-    maxH = 13
-    alpha=0.05
+    maxH = 10
+    alpha=0.02
     #mesures_classification = ["BN","RF","LSVM","RBFSVM","GaussianProcess","AdaBoost","QDA","KNN","DTC","MLP"]
 
     def __init__(self):
         self.__data,self.__target = None,None
         self.__mesures = {}
-        self.__max_iterations=2
+        self.__max_iterations=5
         self.__Threshold = 0
         self.__nom_mesures = {}
         self.subsetgenerated = None
@@ -197,7 +197,7 @@ class Destiny:
 
     def union_intersection(self):
         for i in range(self.maxH):
-            gj = self.getMegaHeuristique(["H" + str(i + 1)], 1)
+            gj = self.getMegaHeuristique(["H" + str(i )], 1)
             hierlist2 = gj[list(gj.keys())[0]]
             elus = set()
             for h in hierlist2:
@@ -213,7 +213,7 @@ class Destiny:
     def evaluer(self):
         E = Evaluateur_Precision(self.__data, self.__target)
         #print("target et data shape",self.__data.shape,self.__target.shape)
-        E.train(SVC( ))
+        E.train(SVC())
         if(len(self.inter)>0):
             return (self.reguler_par_complexote(E.Evaluer(list(self.inter)),len(self.inter))+self.reguler_par_complexote(E.Evaluer(list(self.union)),len(self.union)))/2
         else:
@@ -228,7 +228,7 @@ class Destiny:
         for i in range(self.__max_iterations):
             p1=t+alpha
             p2=t-alpha
-            if(self.criteron((t+p1)/2)>self.criteron((t+p1)/2)):
+            if(self.criteron((t+p1)/2)>=self.criteron((t+p2)/2)):
                 t=(p1+t)/2
             else:t=(p2+t)/2
             alpha=alpha/2

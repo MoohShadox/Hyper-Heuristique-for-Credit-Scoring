@@ -58,6 +58,7 @@ class MesureDeConsistance(Mesure):
         return self.ranks[n]
 
     def fcc(self,x):
+        print("x = ",x," et le type : ",type(x))
         if not (len (x) in self.feature_score.keys()):
             self.feature_score[len(x)] = {}
         if not tuple(x) in self.feature_score[len(x)].keys():

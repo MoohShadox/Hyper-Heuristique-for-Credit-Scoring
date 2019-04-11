@@ -19,7 +19,7 @@ class Nature:
     Psupp=0.6
     Pstop=0.4
     maxA = 3
-    maxH=0
+    maxH=13
     maxP = 1000
     maxS = 3
     nb_promo=4
@@ -149,6 +149,15 @@ class Nature:
             P.append(i.resultat)
         CI = Clustering_Incarnations()
         CI.setDestiny(Nature.DM)
+        for i in cls.population:
+            if(i.resultat==[]):
+
+                k=Genome.Genome()
+                #fab=fb.Fabriquant(i,cls.DM)
+                #k=fab.getgenome()
+                #print("ici", i.identity, i.incarnation)
+               # print("nv genome",k.identity,k.incarnation)
+                exit()
         CI.ajouter_population(P)
         CI.projeter()
         CI.clusteriser()
@@ -164,7 +173,8 @@ class Nature:
         max=cls.qualite
         for i in Nature.alphas_locaux:
             precision=E.Evaluer(i)
-            c=dest.Destiny.reguler_par_complexote(precision,len(i))
+            DD=dest.Destiny()
+            c=DD.reguler_par_complexote(precision,len(i))
             if c > max:
                 max = c
                 cls.alpha_global = i

@@ -15,6 +15,7 @@ class Fabriquant:
         self.recette=re.findall(exp,GN.identity)
         self.genome=gn.Genome()
         self.incarnation=[]
+        self.listbuffer=[]
         exp2="H\d+"
         cpt=0
         for stg in self.recette:
@@ -29,10 +30,11 @@ class Fabriquant:
                 latol=0
                 cpt1=0
                 while(cpt1<len(hierlist) and latol!=nat.Nature.Tol):
-                    if(intersect(set(self.listbuffer),set(list(hierlist[cpt1][0])))==[]):
-
+                    trock=set(self.listbuffer)
+                    if(intersect(trock,set(list(hierlist[cpt1][0])))==[]):
                         a=set(hierlist[cpt1][0])
-                        condidats.union(a)
+                        for lop in a:
+                            condidats.add(lop)
                         latol=latol+1
                     cpt1=cpt1+1
             tournoit=[]
@@ -58,7 +60,7 @@ class Fabriquant:
             tournoit=sorted(tournoit,key=operator.itemgetter(1),reverse=True)
             if(tournoit!=[]):
                 self.incarnation.append((stg,tournoit[0][0],1))
-                self.listbuffer= self.listbuffer + list(list(tournoit[0][0]))
+                self.listbuffer.append(tournoit[0][0])
 
         self.bourrage2()
         ch=""
@@ -68,6 +70,7 @@ class Fabriquant:
         self.genome.incarnation=self.incarnation
         self.genome.isvalide=1
         self.genome.resultat=sorted(self.listbuffer)
+
 
 
     def getgenome(self):
@@ -81,7 +84,9 @@ class Fabriquant:
         k = 0
         while (k < len(self.incarnation)):
             if (int(self.incarnation[k][2]) > 0):
-                bourlist.extend(list(self.incarnation[k][1]))
+                lalist=[]
+                lalist.append(self.incarnation[k][1])
+                bourlist.extend(lalist)
                 Vincanration.append(self.incarnation[k])
             k = k + 1
         self.incarnation=Vincanration
