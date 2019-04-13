@@ -2,3 +2,5 @@
 Fichiers/
 
 *.csv
+
+*.pyc

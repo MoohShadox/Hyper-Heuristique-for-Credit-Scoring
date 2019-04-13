@@ -1,5 +1,6 @@
 from sklearn.datasets import make_classification
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.svm import SVC
 
 from Destiny.DataSets import german_dataset
 from Destiny.DataSets.australian_dataset import load_australian_dataset
@@ -23,3 +24,13 @@ for i in range(20):
     print("temps:",time.time()-a)
     print("Le génome alpha",Nature.actualalpha.incarnation)
     print("la precision",Nature.actual_precision)
+
+
+#DM= Destiny()
+#print("Data : ", data.shape,"Target : ", target.shape)
+#DM.fit(data,target)
+#Nature.init(DM)
+#for i in range(20):
+#    Nature.evolve()
+#    print("Le génome alpha",Nature.actualalpha.incarnation)
+#    print("la precision",Nature.actual_precision)

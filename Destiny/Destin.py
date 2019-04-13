@@ -116,7 +116,6 @@ class Destiny:
         d = list (data)
         d.append (target)
         d = np.array (d)
-        print("Taille de d : ", d.shape)
         c = np.corrcoef (d)
         c = c.transpose()
         self.__matrices_importances["Distance"] = c[-1]
@@ -244,7 +243,7 @@ class Destiny:
         else:
             return 0
 
-        
+
     def criteron(self,t):
         self.union_intersection2(t)
         return self.evaluer()
