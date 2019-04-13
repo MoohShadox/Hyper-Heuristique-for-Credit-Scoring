@@ -32,6 +32,7 @@ class Destiny:
         self.__Threshold = 0
         self.__nom_mesures = {}
         self.subsetgenerated = None
+        self.__mesures_anterieure = {}
         self.__matrices_redondaces, self.__matrices_importances = {} , {}
         self.__mesures["D"],self.__nom_mesures["D"] = Distances_Measures(),Destiny.mesures_distance
         self.__mesures["I"],self.__nom_mesures["I"] = Information_Measure(),Destiny.mesures_information
@@ -163,6 +164,7 @@ class Destiny:
                 L.append(self.__mesures_anterieure[i][j][0][0])
             dict_listes[cpt] = L
             cpt = cpt + 1
+        return dict_listes
 
 
 
@@ -177,7 +179,12 @@ class Destiny:
                 self.subsetgenerated = self.__mesures[i].CreateSubsets(borne = 30)
             else:
                 self.__mesures[i].setSubsets(self.subsetgenerated)
-        self.activer_treshold()
+        cpt = 0
+        for i in self.__mesures.keys ():
+            for j in range (0 , len (self.__nom_mesures[i])):
+                self.__mesures_anterieure.update (self.getMegaHeuristique (["H" + str (cpt)] , 1))
+                cpt = cpt + 1
+        #self.activer_treshold()
 
     def getMatriceImportanceRedondance(self):
         return self.__matrices_redondaces,self.__matrices_importances
@@ -191,7 +198,7 @@ class Destiny:
             print(self.__mesures[i].rank_with(n=3))
 
     def tresholder(self,t):
-        self.nouvmesures=self.__mesures
+        self.nouvmesures = self.__mesures
         for i in self.__mesures.keys():
             self.nouvmesures[i].setThresholdsAutomatiquement(t)
 
@@ -218,10 +225,13 @@ class Destiny:
             return (self.reguler_par_complexote(E.Evaluer(list(self.inter)),len(self.inter))+self.reguler_par_complexote(E.Evaluer(list(self.union)),len(self.union)))/2
         else:
             return 0
+
+        
     def criteron(self,t):
         self.tresholder(t)
         self.union_intersection()
         return self.evaluer()
+
     def activer_treshold(self):
         t=0.5
         alpha=0.4
