@@ -51,7 +51,7 @@ class Clustering_Incarnations:
 
 
     def clusteriser(self):
-        KM = k_means(self.__projections,n_clusters=10)
+        KM = k_means(self.__projections,n_clusters=5)
         cpt = 0
         Rez = {}
         for i in KM[1]:

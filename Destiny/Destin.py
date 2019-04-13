@@ -21,7 +21,7 @@ class Destiny:
     mesures_classification = ["RF",  "AdaBoost"]
     mesures_consistance = ['FCC']
     mesures_dependance = ["RST"]
-    maxH = 10
+    maxH = 9
     alpha=0.02
     #mesures_classification = ["BN","RF","LSVM","RBFSVM","GaussianProcess","AdaBoost","QDA","KNN","DTC","MLP"]
 
@@ -184,7 +184,7 @@ class Destiny:
             for j in range (0 , len (self.__nom_mesures[i])):
                 self.__mesures_anterieure.update (self.getMegaHeuristique (["H" + str (cpt)] , 1))
                 cpt = cpt + 1
-        #self.activer_treshold()
+        self.activer_treshold()
 
     def getMatriceImportanceRedondance(self):
         return self.__matrices_redondaces,self.__matrices_importances
@@ -200,9 +200,24 @@ class Destiny:
     def tresholder(self,t):
         self.nouvmesures = self.__mesures
         for i in self.__mesures.keys():
-            self.nouvmesures[i].setThresholdsAutomatiquement(t)
+            self.__mesures[i].setThresholdsAutomatiquement(t)
+
+    def union_intersection2(self,t):
+        self.inter = set()
+        self.union = set()
+        L=self.attributs_qualitatifs(t)
+        for i in L.values():
+            self.union=self.union.union(set(i))
+            if(len(self.inter)==0):
+                self.inter=set(i)
+            else:
+                self.inter.intersection(set(i))
+        print("union", self.union)
+        print("inter", self.inter)
 
     def union_intersection(self):
+        self.inter=set()
+        self.union=set()
         for i in range(self.maxH):
             gj = self.getMegaHeuristique(["H" + str(i )], 1)
             hierlist2 = gj[list(gj.keys())[0]]
@@ -216,20 +231,22 @@ class Destiny:
             else:
                 self.inter = elus
             self.union = self.union.union(elus)
+        print("union",self.union)
+        print("inter",self.inter)
 
     def evaluer(self):
         E = Evaluateur_Precision(self.__data, self.__target)
-        #print("target et data shape",self.__data.shape,self.__target.shape)
         E.train(SVC())
         if(len(self.inter)>0):
-            return (self.reguler_par_complexote(E.Evaluer(list(self.inter)),len(self.inter))+self.reguler_par_complexote(E.Evaluer(list(self.union)),len(self.union)))/2
+            a=(self.reguler_par_complexote(E.Evaluer(list(self.inter)),len(self.inter))+self.reguler_par_complexote(E.Evaluer(list(self.union)),len(self.union)))/2
+            print(a)
+            return a
         else:
             return 0
 
         
     def criteron(self,t):
-        self.tresholder(t)
-        self.union_intersection()
+        self.union_intersection2(t)
         return self.evaluer()
 
     def activer_treshold(self):
@@ -243,7 +260,7 @@ class Destiny:
             else:t=(p2+t)/2
             alpha=alpha/2
             print("----le treshold est:",t)
-        self.tresholder(t)
+        self.ThresholdMeasures(t)
 
 
 

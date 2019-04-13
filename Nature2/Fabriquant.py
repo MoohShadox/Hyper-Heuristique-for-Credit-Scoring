@@ -23,18 +23,15 @@ class Fabriquant:
             gene = re.findall(exp2, stg)
             condidats=set()
             for mesure in gene:
-                a = time.time()
                 dictt=DM.getMegaHeuristique([mesure],int(self.attlen))
-              #  print("le temps Fab1: "+mesure, time.time() - a)
                 hierlist = dictt[list(dictt.keys())[0]]
                 latol=0
                 cpt1=0
                 while(cpt1<len(hierlist) and latol!=nat.Nature.Tol):
                     trock=set(self.listbuffer)
                     if(intersect(trock,set(list(hierlist[cpt1][0])))==[]):
-                        a=set(hierlist[cpt1][0])
-                        for lop in a:
-                            condidats.add(lop)
+                        a=tuple(hierlist[cpt1][0])
+                        condidats.add(a)
                         latol=latol+1
                     cpt1=cpt1+1
             tournoit=[]
@@ -60,9 +57,12 @@ class Fabriquant:
             tournoit=sorted(tournoit,key=operator.itemgetter(1),reverse=True)
             if(tournoit!=[]):
                 self.incarnation.append((stg,tournoit[0][0],1))
-                self.listbuffer.append(tournoit[0][0])
+                for i in tournoit[0][0]:
+                    self.listbuffer.append(i)
+        #        print(self.listbuffer)
 
         self.bourrage2()
+       # print(self.listbuffer)
         ch=""
         for m in self.recette:
             ch=ch+m+"/"
@@ -85,27 +85,15 @@ class Fabriquant:
         while (k < len(self.incarnation)):
             if (int(self.incarnation[k][2]) > 0):
                 lalist=[]
-                lalist.append(self.incarnation[k][1])
+                for l in self.incarnation[k][1]:
+                    lalist.append(l)
                 bourlist.extend(lalist)
                 Vincanration.append(self.incarnation[k])
             k = k + 1
         self.incarnation=Vincanration
         self.listbuffer=bourlist
-        inter=set()
-        union=set()
-        for i in range(nat.Nature.maxH):
-            gj = self.dm.getMegaHeuristique(["H" + str(i+1)], 1)
-            hierlist2 = gj[list(gj.keys())[0]]
-            elus=set()
-            for h in hierlist2:
-                if (intersect (self.listbuffer , h[0]) == [] and h[1] > 0):
-                    elus= elus.union(set(h[0]))
-            if(len(inter)>0):
-                inter=inter.intersection(elus)
-            else:inter=elus
-            union=union.union(elus)
-        k = random.randint(len(inter),len(union))
-
+        #print("ici",self.listbuffer)
+        k = random.randint(len(self.dm.inter),len(self.dm.union))
         for j in range(k):
             fait=0
             while(fait==0):

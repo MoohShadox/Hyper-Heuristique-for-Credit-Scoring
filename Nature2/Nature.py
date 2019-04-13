@@ -18,7 +18,7 @@ class Nature:
     #Hyper parametres:
     Psupp=0.6
     Pstop=0.4
-    maxA = 3
+    maxA = 2
     maxH=13
     maxP = 1000
     maxS = 3
@@ -36,7 +36,7 @@ class Nature:
     population_clusterised = {}
     alphas_locaux = []
     alpha_global = []
-    modele = DecisionTreeClassifier()
+    modele = SVC()
     actual_precision=0
     qualite=0
     PM=1
@@ -144,23 +144,16 @@ class Nature:
 
     @classmethod
     def eludeAlpha(cls,evolve):
+        ko=time.time()
         P = []
         for i in cls.population:
             P.append(i.resultat)
         CI = Clustering_Incarnations()
         CI.setDestiny(Nature.DM)
-        for i in cls.population:
-            if(i.resultat==[]):
-
-                k=Genome.Genome()
-                #fab=fb.Fabriquant(i,cls.DM)
-                #k=fab.getgenome()
-                #print("ici", i.identity, i.incarnation)
-               # print("nv genome",k.identity,k.incarnation)
-                exit()
         CI.ajouter_population(P)
         CI.projeter()
         CI.clusteriser()
+        print("temps de clusturing",time.time()-ko)
         Nature.population_clusterised = CI.clusters
         Nature.alphas_locaux = CI.alphas_locaux
         if(len(cls.modjahidin)==cls.nb_promo):
@@ -168,11 +161,16 @@ class Nature:
             cls.modjahidin.append(cls.alphas_locaux)
         else: cls.modjahidin.append(cls.alphas_locaux)
         print("----Moudjahidin",len(cls.modjahidin))
+        ko = time.time()
         E = Evaluateur_Precision(Nature.DM.getDataset()[0],Nature.DM.getDataset()[1])
         E.train(Nature.modele)
+        print("temps du train",time.time()-ko)
         max=cls.qualite
         for i in Nature.alphas_locaux:
+            print("Evaluation de ",i)
+            ko = time.time()
             precision=E.Evaluer(i)
+            print("temps d'évaluation de ",i,": ",time.time()-ko)
             DD=dest.Destiny()
             c=DD.reguler_par_complexote(precision,len(i))
             if c > max:
@@ -229,7 +227,10 @@ class Nature:
         for i in range(cls.maxP):
             cls.population[i]=cls.monoevolv(cls.population[i],cls.alphas_locaux[cls.getcluster(cls.population[i])],cls.strat[random.randint(0, cls.maxS - 1)])
             cls.population[i] = cls.monoevolv(cls.population[i], cls.actualalpha, cls.strat[random.randint(0, cls.maxS - 1)])
+        print("Election de l'alpha")
+        po=time.time()
         cls.eludeAlpha(True)
+        print("temps de l'electiond 'un alpha :",time.time()-po)
 
     @classmethod
     def getcluster(cls,G):
