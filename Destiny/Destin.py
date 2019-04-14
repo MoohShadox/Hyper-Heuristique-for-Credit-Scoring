@@ -7,6 +7,8 @@ from Destiny.RankingFunctions.Final.Information_Measure import Information_Measu
 from Destiny.RankingFunctions.Final.MesureDeConsistance import MesureDeConsistance
 from Destiny.RankingFunctions.Final.MesureDeDependance import MesureDeDependance
 from Destiny.RankingFunctions.Final.PrecisionClassification import PrecisionClassification
+from sklearn.neural_network import MLPClassifier
+
 from sklearn.svm import SVC
 from Destiny.Tresholding import Tresholding
 import numpy as np
@@ -22,7 +24,7 @@ class Destiny:
     mesures_consistance = ['FCC']
     mesures_dependance = ["RST"]
     maxH = 9
-    alpha=0.02
+    alpha=0.05
     #mesures_classification = ["BN","RF","LSVM","RBFSVM","GaussianProcess","AdaBoost","QDA","KNN","DTC","MLP"]
 
     def __init__(self):
@@ -236,7 +238,7 @@ class Destiny:
 
     def evaluer(self):
         E = Evaluateur_Precision(self.__data, self.__target)
-        E.train(SVC())
+        E.train(MLPClassifier())
         if(len(self.inter)>0):
             a=(self.reguler_par_complexote(E.Evaluer(list(self.inter)),len(self.inter))+self.reguler_par_complexote(E.Evaluer(list(self.union)),len(self.union)))/2
             print(a)

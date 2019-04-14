@@ -60,7 +60,7 @@ class Fabriquant:
                 for i in tournoit[0][0]:
                     self.listbuffer.append(i)
         #        print(self.listbuffer)
-
+        hj = time.time()
         self.bourrage2()
        # print(self.listbuffer)
         ch=""
@@ -93,9 +93,17 @@ class Fabriquant:
         self.incarnation=Vincanration
         self.listbuffer=bourlist
         #print("ici",self.listbuffer)
+        ainter=list(self.dm.inter)
+        aunion=list(self.dm.union)
+        for i in self.listbuffer:
+            if(i in ainter):
+                ainter.remove(i)
+            if(i in aunion):
+                aunion.remove(i)
         k = random.randint(len(self.dm.inter),len(self.dm.union))
         for j in range(k):
             fait=0
+
             while(fait==0):
                 p=random.randint(1,nat.Nature.maxH)
                 gjj = self.dm.getMegaHeuristique(["H" + str(p)], 1)

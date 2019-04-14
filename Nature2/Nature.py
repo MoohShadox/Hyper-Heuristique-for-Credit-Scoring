@@ -9,6 +9,8 @@ from Nature2 import Genome
 from Nature2 import Fabriquant as fb
 import math
 import time
+from sklearn.neural_network import MLPClassifier
+
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -20,11 +22,11 @@ class Nature:
     Pstop=0.4
     maxA = 2
     maxH=13
-    maxP = 1000
+    maxP = 100
     maxS = 3
     nb_promo=4
     alpha=0
-    Tol = 4
+    Tol = 3
     tol_evolutivite = 0.25
     strat = [[0.1, 0.7, 0.5, 0.8], [0.5, 0.3, 0.5, 0.7], [0.3, 0.6, 0.5, 0.7]]
 
@@ -224,9 +226,20 @@ class Nature:
 
     @classmethod
     def evolve(cls):
+        print("evolution")
+        aa=0
+        bb=0
+        opo=time.time()
         for i in range(cls.maxP):
+            lp=time.time()
             cls.population[i]=cls.monoevolv(cls.population[i],cls.alphas_locaux[cls.getcluster(cls.population[i])],cls.strat[random.randint(0, cls.maxS - 1)])
+            aa=aa+(time.time()-lp)
+            lp=time.time()
             cls.population[i] = cls.monoevolv(cls.population[i], cls.actualalpha, cls.strat[random.randint(0, cls.maxS - 1)])
+            bb=bb+(time.time()-lp)
+        print("temps de premiere monoevolution :",aa)
+        print("temps de deuxieme monoevolution :",bb)
+        print("temps evolution: ",time.time()-opo)
         print("Election de l'alpha")
         po=time.time()
         cls.eludeAlpha(True)
