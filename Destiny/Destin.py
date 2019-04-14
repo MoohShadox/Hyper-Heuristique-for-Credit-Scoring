@@ -192,9 +192,13 @@ class Destiny:
         D = {}
         for i in self.__mesures.keys():
             print("Utilisation de ", i)
-            self.__mesures[i].rank_with(n=1)
-            self.__mesures[i].rank_with(n=2)
-            print(self.__mesures[i].rank_with(n=3))
+            D1 = self.__mesures[i].rank_with(n=1)
+            D2 = self.__mesures[i].rank_with(n=2)
+            D3 = self.__mesures[i].rank_with(n=3)
+            for i in D3:
+                print(" i = ",i)
+                for j in D3[i]:
+                    print(j , " len= ",len(D3[i][j])," : " , D3[i][j])
 
     def tresholder(self,t):
         self.nouvmesures = self.__mesures
@@ -235,7 +239,7 @@ class Destiny:
 
     def evaluer(self):
         E = Evaluateur_Precision(self.__data, self.__target)
-        E.train(SVC())
+        E.train(SVC(gamma="auto"))
         if(len(self.inter)>0):
             a=(self.reguler_par_complexote(E.Evaluer(list(self.inter)),len(self.inter))+self.reguler_par_complexote(E.Evaluer(list(self.union)),len(self.union)))/2
             print(a)
@@ -265,3 +269,39 @@ class Destiny:
 
     def reguler_par_complexote(self,val,taille):
         return (val *(1-self.alpha)/(taille)*self.alpha)
+
+
+    def criteron_heursitique_unique(self,h,t):
+        ep = Evaluateur_Precision(self.__data,self.__target)
+        ep.train(SVC(gamma="auto"))
+        D = self.attributs_qualitatifs(t)
+        D = D[h]
+        precision = ep.Evaluer(D)
+        print("Une précision de : ",precision, " pour une longueur " , len(D), " correpondant au subset : ",D,)
+        return ep.Evaluer(D)
+
+
+
+
+    def generer_un_seul_threshold(self,h):
+        print("Seul threshold")
+        t = 0.5
+        alpha = 0.4
+        mprecision = 0
+        for i in range (self.__max_iterations):
+            p1 = t + alpha
+            p2 = t - alpha
+            if (self.criteron_heursitique_unique (h,(t + p1) / 2) >= self.criteron_heursitique_unique (h,(t + p2) / 2)):
+                t = (p1 + t) / 2
+                mprecision = self.criteron_heursitique_unique (h , (t + p1) / 2)
+            else:
+                t = (p2 + t) / 2
+                mprecision = self.criteron_heursitique_unique (h,(t + p2) / 2)
+            alpha = alpha / 2
+            print ("----le treshold est:" , t)
+        return t,mprecision
+
+
+
+
+
