@@ -100,7 +100,7 @@ class Fabriquant:
                 ainter.remove(i)
             if(i in aunion):
                 aunion.remove(i)
-        k = random.randint(len(self.dm.inter),len(self.dm.union))
+        k = random.randint(len(ainter),len(aunion))
         for j in range(k):
             fait=0
 
