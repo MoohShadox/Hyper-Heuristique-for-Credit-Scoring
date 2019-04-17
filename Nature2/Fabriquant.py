@@ -6,7 +6,7 @@ import re
 import random
 from Destiny import Destin as dest
 class Fabriquant:
-    def __init__(self,GN,DM):
+    def __init__(self,GN,DM,bourrer):
 
         self.dm=DM
         self.listbuffer=[]
@@ -40,12 +40,15 @@ class Fabriquant:
                 adversaires=list(condidats)
                 adversaires.remove(joueur)
                 for adversaire in adversaires:
-                    for j in range(nat.Nature.maxH):
-                        dicttt = DM.getMegaHeuristique([mesure], int(self.attlen))
+                    valide=False
+                    for j in gene:
+                        dicttt = DM.getMegaHeuristique([j], int(self.attlen))
                         hierlistx = dicttt[list(dicttt.keys())[0]]
                         kk=0
                         while(kk<len(hierlistx)):
                             if(hierlistx[kk][0]==joueur):
+                                if(hierlist[kk][1]>0):
+                                    valide=True
                                 kk=len(hierlistx)+1
                                 score=score+1
                             else:
@@ -53,15 +56,18 @@ class Fabriquant:
                                     kk=len(hierlistx)+1
                                     score=score-1
                             kk=kk+1
-                tournoit.append((joueur,score))
+                tournoit.append((joueur,score,valide))
             tournoit=sorted(tournoit,key=operator.itemgetter(1),reverse=True)
             if(tournoit!=[]):
-                self.incarnation.append((stg,tournoit[0][0],1))
+                if(tournoit[0][2]==True):
+                    self.incarnation.append((stg,tournoit[0][0],1))
+                else:
+                    self.incarnation.append((stg,tournoit[0][0],-1))
                 for i in tournoit[0][0]:
                     self.listbuffer.append(i)
         #        print(self.listbuffer)
-        hj = time.time()
-        self.bourrage2()
+        if(bourrer):
+            self.bourrage2()
        # print(self.listbuffer)
         ch=""
         for m in self.recette:
@@ -82,6 +88,7 @@ class Fabriquant:
         Vincanration = []
         bourlist = []
         k = 0
+        #print("---selfincarnation",self.incarnation)
         while (k < len(self.incarnation)):
             if (int(self.incarnation[k][2]) > 0):
                 lalist=[]
@@ -100,7 +107,14 @@ class Fabriquant:
                 ainter.remove(i)
             if(i in aunion):
                 aunion.remove(i)
+       # print("megaheuristique",self.dm.getMegaHeuristique(["H1"], 1))
+        #print("identity",self.recette)
+        #print("---incarnation",Vincanration)
+       # print("listbuffer",self.listbuffer)
+       # print("inter",ainter)
+       # print("union",aunion)
         k = random.randint(len(ainter),len(aunion))
+       # print("ici",k)
         for j in range(k):
             fait=0
 
@@ -118,6 +132,8 @@ class Fabriquant:
                         hh = len(hierlist3) + 1
                         fait=1
                     else:hh=hh+1
+        #print("---selfincarnation-apres",self.incarnation)
+
 
 
 

@@ -23,7 +23,7 @@ class Destiny:
     mesures_classification = ["RF",  "AdaBoost"]
     mesures_consistance = ['FCC']
     mesures_dependance = ["RST"]
-    maxH = 9
+    maxH = 13
     alpha=0.05
     #mesures_classification = ["BN","RF","LSVM","RBFSVM","GaussianProcess","AdaBoost","QDA","KNN","DTC","MLP"]
 
@@ -216,7 +216,7 @@ class Destiny:
             if(len(self.inter)==0):
                 self.inter=set(i)
             else:
-                self.inter.intersection(set(i))
+                self.inter=self.inter.intersection(set(i))
         print("union", self.union)
         print("inter", self.inter)
 
@@ -265,7 +265,8 @@ class Destiny:
             else:t=(p2+t)/2
             alpha=alpha/2
             print("----le treshold est:",t)
-        self.ThresholdMeasures(t)
+        self.criteron(0.7)
+        self.ThresholdMeasures(0.7)
 
 
 
@@ -289,6 +290,7 @@ class Destiny:
         print("Seul threshold")
         t = 0.5
         alpha = 0.4
+        self.__Threshold=h
         mprecision = 0
         for i in range (self.__max_iterations):
             p1 = t + alpha

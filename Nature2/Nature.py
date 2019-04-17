@@ -125,23 +125,97 @@ class Nature:
         return st
 
     @classmethod
-    def validate(cls, G):
+    def validate(cls, G,bourrer):
         if (len(G.identity) == 0):
-            ppp = random.randint(0, 1)
+            ppp = random.randint(0,cls.maxH-5)
+            if (ppp == 0):
+                str="1H0/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H0/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
             if (ppp == 1):
-                G.identity = cls.PseudoTransoducteur("1H1/2H3/1H2/2H5/1H6/2H2", "", "MOMOMOMOMOMOMOMO")
-            else:
-                G.identity = cls.PseudoTransoducteur("1H2H3/2H3/1H4/2H1H4/2H1", "", "MOMOMOMOMOMOMO")
-        fab = fb.Fabriquant(G, cls.DM)
+                str="1H2/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H2/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 2):
+                str="1H3/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H3/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 3):
+                str="1H4/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H4/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 4):
+                str="1H5/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H5/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 5):
+                str="1H6/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H6/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 6):
+                str="1H7/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H7/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 7):
+                str="1H8/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H8/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 8):
+                str="1H9/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H9/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 9):
+                str="1H10/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H10/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 10):
+                str="1H11/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H11/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 11):
+                str="1H12/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H12/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if (ppp == 12):
+                str="1H13/"
+                for i in range(int(58*0.7)):
+                    str=str+"1H13/"
+                G.identity=str
+                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+        fab = fb.Fabriquant(G, cls.DM,bourrer)
         VG = fab.genome
         return VG
 
     @classmethod
-    def monoevolv(cls, VGOI, VGOA, strat):
+    def monoevolv(cls, VGOI, VGOA, strat,bourrer):
         st = cls.csm(VGOI.identity, VGOA.identity, strat)
         GN = Genome.Genome()
         GN.identity = cls.PseudoTransoducteur(VGOI.identity, VGOA.identity, st)
-        VGN = cls.validate(GN)
+        VGN = cls.validate(GN,bourrer)
         return VGN
 
     @classmethod
@@ -149,6 +223,7 @@ class Nature:
         ko=time.time()
         P = []
         for i in cls.population:
+            #print(i.identity)
             P.append(i.resultat)
         CI = Clustering_Incarnations()
         CI.setDestiny(Nature.DM)
@@ -176,6 +251,7 @@ class Nature:
             DD=dest.Destiny()
             c=DD.reguler_par_complexote(precision,len(i))
             if c > max:
+                print("_________________OKKKK__________",c,max)
                 max = c
                 cls.alpha_global = i
                 cls.actual_precision=precision
@@ -193,6 +269,7 @@ class Nature:
         print("----------ALPHA GLOBAL",cls.alpha_global)
         while(ll<len(cls.population)):
             if (cls.population[ll].resultat == list(cls.alpha_global)):
+                print("al'lpha",cls.population[ll].incarnation)
                 cls.actualalpha=cls.population[ll]
                 ll=len(cls.population)+1
             ll=ll+1
@@ -221,7 +298,7 @@ class Nature:
         cls.population=[]
         VNG=Genome.Genome()
         for i in range(cls.maxP):
-            cls.population.append(cls.monoevolv(VNG,VNG,cls.strat[random.randint(0,cls.maxS-1)]))
+            cls.population.append(cls.monoevolv(VNG,VNG,cls.strat[random.randint(0,cls.maxS-1)],False))
         cls.eludeAlpha(False)
 
     @classmethod
@@ -232,10 +309,10 @@ class Nature:
         opo=time.time()
         for i in range(cls.maxP):
             lp=time.time()
-            cls.population[i]=cls.monoevolv(cls.population[i],cls.alphas_locaux[cls.getcluster(cls.population[i])],cls.strat[random.randint(0, cls.maxS - 1)])
+            cls.population[i]=cls.monoevolv(cls.population[i],cls.alphas_locaux[cls.getcluster(cls.population[i])],cls.strat[random.randint(0, cls.maxS - 1)],True)
             aa=aa+(time.time()-lp)
             lp=time.time()
-            cls.population[i] = cls.monoevolv(cls.population[i], cls.actualalpha, cls.strat[random.randint(0, cls.maxS - 1)])
+            cls.population[i] = cls.monoevolv(cls.population[i], cls.actualalpha, cls.strat[random.randint(0, cls.maxS - 1)],True)
             bb=bb+(time.time()-lp)
         print("temps de premiere monoevolution :",aa)
         print("temps de deuxieme monoevolution :",bb)

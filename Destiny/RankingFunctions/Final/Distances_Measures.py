@@ -1,6 +1,5 @@
-from Destiny.DataSets import german_dataset
 from Destiny.RankingFunctions import ReliefF
-from Destiny.RankingFunctions.Final import ChiMesure , FScore
+from Destiny.RankingFunctions.Final import FScore
 
 from Destiny.RankingFunctions.Final.FCS import FCS
 from Destiny.RankingFunctions.Final.Mesure import Mesure
