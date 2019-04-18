@@ -22,7 +22,7 @@ class Nature:
     Pstop=0.4
     maxA = 2
     maxH=13
-    maxP = 100
+    maxP = 500
     maxS = 3
     nb_promo=4
     alpha=0
@@ -44,6 +44,7 @@ class Nature:
     PM=1
     evolutivite_inter=0
     actuel_score=0
+    taille=0
 
 
     @classmethod
@@ -127,7 +128,7 @@ class Nature:
     @classmethod
     def validate(cls, G,bourrer):
         if (len(G.identity) == 0):
-            ppp = random.randint(0,cls.maxH-5)
+            ppp = random.randint(0,cls.maxH-1)
             if (ppp == 0):
                 str="1H0/"
                 for i in range(int(58*0.7)):
@@ -254,7 +255,15 @@ class Nature:
                 print("_________________OKKKK__________",c,max)
                 max = c
                 cls.alpha_global = i
+                cls.taille=len(i)
                 cls.actual_precision=precision
+            else:
+                if(c==max):
+                    if(len(i)<cls.taille):
+                        cls.alpha_global=i
+                        cls.taille=len(i)
+                        cls.actual_precision=precision
+
         cls.qualite = max
         lesalpha=cls.alphas_locaux
         cls.alphas_locaux=[]

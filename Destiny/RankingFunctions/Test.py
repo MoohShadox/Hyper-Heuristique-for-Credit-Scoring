@@ -21,13 +21,14 @@ print("debut de l'évolution")
 print("Le génome alpha", Nature.actualalpha.identity)
 print("la precision", Nature.actual_precision)
 print("qualite", Nature.qualite)
-
+print("taille",Nature.taille)
 for i in range(20):
     a=time.time()
     Nature.evolve()
     print("temps:",time.time()-a)
     print("Le génome alpha",Nature.actualalpha.incarnation)
     print("la precision",Nature.actual_precision)
+    print("taille", Nature.taille)
     print("qualite",Nature.qualite)
 
 #DM= Destiny()

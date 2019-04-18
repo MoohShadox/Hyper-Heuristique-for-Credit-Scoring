@@ -271,8 +271,8 @@ class Destiny:
 
 
     def reguler_par_complexote(self,val,taille):
-        return (val *(1-self.alpha)/(taille)*self.alpha)
-
+        #return (val *(1-self.alpha)/(taille)*self.alpha)
+        return val
 
     def criteron_heursitique_unique(self,h,t):
         ep = Evaluateur_Precision(self.__data,self.__target)
