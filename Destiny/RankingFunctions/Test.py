@@ -1,3 +1,5 @@
+from itertools import combinations
+
 from sklearn.datasets import make_classification
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.svm import SVC
@@ -14,16 +16,26 @@ import time
 data,target = load_promoter_dataset()
 DM= Destiny()
 DM.fit(data,target)
-#for i in range(DM.maxH):
-   # print(DM.getMegaHeuristique(["H"+str(i)],1))
-Nature.init(DM)
-print("debut de l'évolution")
-for i in range(20):
-    a=time.time()
-    Nature.evolve()
-    print("temps:",time.time()-a)
-    print("Le génome alpha",Nature.actualalpha.incarnation)
-    print("la precision",Nature.actual_precision)
+print("fin du fit")
+#print("le seul threshold généré est : ",DM.generer_un_seul_threshold(0))
+#E.train(AdaBoostClassifier())
+print("rapport de classification : ")
+print(DM.rapport_heuristique(5,AdaBoostClassifier()))
+#for i in combinations(L,10):
+#
+#    t = time.time_ns()
+#    print(E.Evaluer(list(i)))
+#    if(time.time_ns() - t == 0):
+#        print("Combinaison donnant 0 : ",i)
+
+#Nature.init(DM)
+#print("debut de l'évolution")
+#for i in range(20):
+#    a=time.time()
+#    Nature.evolve()
+#    print("temps:",time.time()-a)
+#    print("Le génome alpha",Nature.actualalpha.incarnation)
+#    print("la precision",Nature.actual_precision)
 
 
 #DM= Destiny()

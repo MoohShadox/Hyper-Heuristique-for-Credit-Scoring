@@ -3,6 +3,7 @@ import timeit
 
 import numpy as np
 from sklearn import preprocessing
+from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_wine
 from sklearn import svm
@@ -56,3 +57,16 @@ class Evaluateur_Precision:
         self.train(self.__model)
 
 
+    def Evaluer_Metriques(self,numeros):
+        X , Y , Z , W = self.__data_train , self.__data_test , self.__target_train , self.__target_test
+        masque = np.array (len (self.__data_test[0]) * [False])
+        for i in numeros:
+            masque[i] = True
+        self.masquer (masque)
+        S = self.Rapport_Classification ()
+        self.__data_train , self.__data_test , self.__target_train , self.__target_test = X , Y , Z , W
+        return S
+
+    def Rapport_Classification(self):
+        c = classification_report(self.__model.predict(self.__data_test),self.__target_test,output_dict=True)
+        return c

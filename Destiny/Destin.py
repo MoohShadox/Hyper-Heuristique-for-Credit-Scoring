@@ -1,3 +1,5 @@
+from sklearn.ensemble import AdaBoostClassifier
+
 from Destiny.DataSets.german_dataset import load_german_dataset
 from Destiny.Embedded_Thresholding import Embedded_Thresholding
 from Destiny.Evaluateur_Precision import Evaluateur_Precision
@@ -21,6 +23,7 @@ class Destiny:
     mesures_classification = ["RF",  "AdaBoost"]
     mesures_consistance = ['FCC']
     mesures_dependance = ["RST"]
+    nb_heuristiques = 0
     maxH = 9
     alpha=0.02
     #mesures_classification = ["BN","RF","LSVM","RBFSVM","GaussianProcess","AdaBoost","QDA","KNN","DTC","MLP"]
@@ -41,6 +44,11 @@ class Destiny:
         self.__mesures["De"],self.__nom_mesures["De"] = MesureDeDependance(),Destiny.mesures_dependance
         self.inter=set()
         self.union=set()
+        Destiny.nb_heuristiques = len(Destiny.mesures_distance) + len(Destiny.mesures_dependance) + len(Destiny.mesures_consistance) + len(Destiny.mesures_information) + len(Destiny.mesures_classification)
+        self.liste_mesures = []
+        for i in self.__nom_mesures:
+            self.liste_mesures = self.liste_mesures + self.__nom_mesures[i]
+
 
 
 
@@ -273,7 +281,7 @@ class Destiny:
 
     def criteron_heursitique_unique(self,h,t):
         ep = Evaluateur_Precision(self.__data,self.__target)
-        ep.train(SVC(gamma="auto"))
+        ep.train(AdaBoostClassifier())
         D = self.attributs_qualitatifs(t)
         D = D[h]
         precision = ep.Evaluer(D)
@@ -284,7 +292,6 @@ class Destiny:
 
 
     def generer_un_seul_threshold(self,h):
-        print("Seul threshold")
         t = 0.5
         alpha = 0.4
         mprecision = 0
@@ -301,7 +308,12 @@ class Destiny:
             print ("----le treshold est:" , t)
         return t,mprecision
 
-
+    def rapport_heuristique(self,h,modele = SVC()):
+        t = self.generer_un_seul_threshold(h)[0]
+        att_qualitatifs = self.attributs_qualitatifs(t)[h]
+        EP = Evaluateur_Precision(self.__data,self.__target)
+        EP.train(modele)
+        return EP.Evaluer_Metriques(att_qualitatifs),att_qualitatifs,t
 
 
 
