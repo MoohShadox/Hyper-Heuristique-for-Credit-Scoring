@@ -16,27 +16,22 @@ import time
 data,target = load_promoter_dataset()
 DM= Destiny()
 DM.fit(data,target)
-print("fin du fit")
-#print("le seul threshold généré est : ",DM.generer_un_seul_threshold(0))
-#E.train(AdaBoostClassifier())
-print("rapport de classification : ")
-print(DM.rapport_heuristique(5,AdaBoostClassifier()))
-#for i in combinations(L,10):
-#
-#    t = time.time_ns()
-#    print(E.Evaluer(list(i)))
-#    if(time.time_ns() - t == 0):
-#        print("Combinaison donnant 0 : ",i)
-
-#Nature.init(DM)
-#print("debut de l'évolution")
-#for i in range(20):
-#    a=time.time()
-#    Nature.evolve()
-#    print("temps:",time.time()-a)
-#    print("Le génome alpha",Nature.actualalpha.incarnation)
-#    print("la precision",Nature.actual_precision)
-
+#for i in range(DM.maxH):
+   # print(DM.getMegaHeuristique(["H"+str(i)],1))
+Nature.init(DM)
+print("debut de l'évolution")
+print("Le génome alpha", Nature.actualalpha.identity)
+print("la precision", Nature.actual_precision)
+print("qualite", Nature.qualite)
+print("taille",Nature.taille)
+for i in range(20):
+    a=time.time()
+    Nature.evolve()
+    print("temps:",time.time()-a)
+    print("Le génome alpha",Nature.actualalpha.incarnation)
+    print("la precision",Nature.actual_precision)
+    print("taille", Nature.taille)
+    print("qualite",Nature.qualite)
 
 #DM= Destiny()
 #print("Data : ", data.shape,"Target : ", target.shape)
@@ -46,3 +41,6 @@ print(DM.rapport_heuristique(5,AdaBoostClassifier()))
 #    Nature.evolve()
 #    print("Le génome alpha",Nature.actualalpha.incarnation)
 #    print("la precision",Nature.actual_precision)
+#for i in range(DM.maxH):
+#    t=DM.generer_un_seul_threshold(i)
+#    DM.criteron_heursitique_unique(i,t#)

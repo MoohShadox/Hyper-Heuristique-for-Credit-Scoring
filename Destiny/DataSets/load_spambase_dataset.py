@@ -24,14 +24,13 @@ def load_spambase_dataset():
     D = D.transpose()
     Y = D[-1]
     X = np.array(X)[:-2]
-    Y = Y[:-1]
-
     return X,Y
 
-#train,target = load_spambase_dataset()
-#print(train.shape)
-#print(target.shape)
-#print(target)
-#E = Evaluateur_Precision(train,target)
-#E.train(SVC())
-#print(E.vecteur_precision())
+train,target = load_spambase_dataset()
+print(train.shape)
+print(target.shape)
+target = target[:-1]
+print(target)
+E = Evaluateur_Precision(train,target)
+E.train(SVC())
+print(E.vecteur_precision())

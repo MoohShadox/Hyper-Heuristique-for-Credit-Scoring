@@ -9,6 +9,8 @@ from Destiny.RankingFunctions.Final.Information_Measure import Information_Measu
 from Destiny.RankingFunctions.Final.MesureDeConsistance import MesureDeConsistance
 from Destiny.RankingFunctions.Final.MesureDeDependance import MesureDeDependance
 from Destiny.RankingFunctions.Final.PrecisionClassification import PrecisionClassification
+from sklearn.neural_network import MLPClassifier
+
 from sklearn.svm import SVC
 from Destiny.Tresholding import Tresholding
 import numpy as np
@@ -222,7 +224,7 @@ class Destiny:
             if(len(self.inter)==0):
                 self.inter=set(i)
             else:
-                self.inter.intersection(set(i))
+                self.inter=self.inter.intersection(set(i))
         print("union", self.union)
         print("inter", self.inter)
 
@@ -271,13 +273,14 @@ class Destiny:
             else:t=(p2+t)/2
             alpha=alpha/2
             print("----le treshold est:",t)
-        self.ThresholdMeasures(t)
+        self.criteron(0.7)
+        self.ThresholdMeasures(0.7)
 
 
 
     def reguler_par_complexote(self,val,taille):
-        return (val *(1-self.alpha)/(taille)*self.alpha)
-
+        #return (val *(1-self.alpha)/(taille)*self.alpha)
+        return val
 
     def criteron_heursitique_unique(self,h,t):
         ep = Evaluateur_Precision(self.__data,self.__target)
@@ -294,6 +297,7 @@ class Destiny:
     def generer_un_seul_threshold(self,h):
         t = 0.5
         alpha = 0.4
+        self.__Threshold=h
         mprecision = 0
         for i in range (self.__max_iterations):
             p1 = t + alpha

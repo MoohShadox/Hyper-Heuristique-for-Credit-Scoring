@@ -26,19 +26,18 @@ def load_promoter_dataset():
         gen = []
         for g in i:
             if(g == 'a'):
-                gen.append(np.array(1).astype("float64"))
+                gen.append(1)
             elif(g == 'c'):
-                gen.append(np.array(2).astype("float64"))
+                gen.append(2)
             elif(g == 't'):
-                gen.append(np.array(3).astype("float64"))
+                gen.append(3)
             elif(g=='g'):
-                gen.append(np.array(4).astype("float64"))
+                gen.append(4)
         R.append(gen)
     return np.array(R),np.array(Y)
 
 train,target = load_promoter_dataset()
-print(train.shape)
-print(target.shape)
-#E = Evaluateur_Precision(train,target.ravel())
-#E.train(KNeighborsClassifier())
-#print(E.vecteur_precision())
+print(target)
+E = Evaluateur_Precision(train,target.ravel())
+E.train(KNeighborsClassifier())
+print(E.vecteur_precision())
