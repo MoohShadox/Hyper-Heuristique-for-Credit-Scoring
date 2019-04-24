@@ -276,6 +276,10 @@ class Destiny:
         self.ThresholdMeasures(t)
 
 
+    def getTreshold(self):
+        return self.__Threshold
+    def getNbAttribute(self):
+        return self.__data.shape[1]
 
     def reguler_par_complexote(self,val,taille):
         #return (val *(1-self.alpha)/(taille)*self.alpha)

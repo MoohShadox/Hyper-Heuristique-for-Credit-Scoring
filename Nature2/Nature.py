@@ -28,6 +28,7 @@ class Nature:
     alpha=0
     Tol = 3
     tol_evolutivite = 0.25
+    modele = SVC(gamma='auto')
     strat = [[0.1, 0.7, 0.5, 0.8], [0.5, 0.3, 0.5, 0.7], [0.3, 0.6, 0.5, 0.7]]
 
     #Parametres de stockage
@@ -38,13 +39,13 @@ class Nature:
     population_clusterised = {}
     alphas_locaux = []
     alpha_global = []
-    modele = SVC(gamma='auto')
     actual_precision=0
     qualite=0
     PM=1
     evolutivite_inter=0
     actuel_score=0
     taille=0
+    iteratore=0
 
 
     @classmethod
@@ -128,85 +129,16 @@ class Nature:
     @classmethod
     def validate(cls, G,bourrer):
         if (len(G.identity) == 0):
-            ppp = random.randint(0,cls.maxH-1)
-            if (ppp == 0):
-                str="1H0/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H0/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 1):
-                str="1H2/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H2/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 2):
-                str="1H3/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H3/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 3):
-                str="1H4/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H4/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 4):
-                str="1H5/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H5/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 5):
-                str="1H6/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H6/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 6):
-                str="1H7/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H7/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 7):
-                str="1H8/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H8/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 8):
-                str="1H9/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H9/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 9):
-                str="1H10/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H10/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 10):
-                str="1H11/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H11/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 11):
-                str="1H12/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H12/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
-            if (ppp == 12):
-                str="1H13/"
-                for i in range(int(58*0.7)):
-                    str=str+"1H13/"
-                G.identity=str
-                #G.identity = cls.PseudoTransoducteur("1H1/1H1/1H1/1H1/1H1/1H1/", "", "MOMOMOMOMOMOMOMO")
+            if(cls.iteratore<cls.maxH+1):
+                ppp=cls.iteratore
+                cls.iteratore=cls.iteratore+1
+            else:
+                ppp = random.randint(0,cls.maxH-1)
+            ppp=0
+            stre="1H"+str(ppp)+"/"
+            for i in range(int(cls.DM.getNbAttribute()*cls.DM.getTreshold())):
+                stre=stre+"1H"+str(ppp)+"/"
+            G.identity=stre
         fab = fb.Fabriquant(G, cls.DM,bourrer)
         VG = fab.genome
         return VG
