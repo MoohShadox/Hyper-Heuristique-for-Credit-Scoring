@@ -33,7 +33,7 @@ class Destiny:
     def __init__(self):
         self.__data,self.__target = None,None
         self.__mesures = {}
-        self.__max_iterations=5
+        self.__max_iterations=20
         self.__Threshold = 0
         self.__nom_mesures = {}
         self.subsetgenerated = None
@@ -273,8 +273,7 @@ class Destiny:
             else:t=(p2+t)/2
             alpha=alpha/2
             print("----le treshold est:",t)
-        self.criteron(0.7)
-        self.ThresholdMeasures(0.7)
+        self.ThresholdMeasures(t)
 
 
 
@@ -312,12 +311,13 @@ class Destiny:
             print ("----le treshold est:" , t)
         return t,mprecision
 
-    def rapport_heuristique(self,h,modele = SVC()):
+    def rapport_heuristique(self,h,modele = SVC(gamma="auto")):
         t = self.generer_un_seul_threshold(h)[0]
         att_qualitatifs = self.attributs_qualitatifs(t)[h]
         EP = Evaluateur_Precision(self.__data,self.__target)
         EP.train(modele)
-        return EP.Evaluer_Metriques(att_qualitatifs),att_qualitatifs,t
+        v = EP.Evaluer(att_qualitatifs)
+        return EP.Evaluer_Metriques(att_qualitatifs),att_qualitatifs,t,v
 
 
 

@@ -22,7 +22,7 @@ class Nature:
     Pstop=0.4
     maxA = 2
     maxH=13
-    maxP = 500
+    maxP = 20
     maxS = 3
     nb_promo=4
     alpha=0
@@ -38,7 +38,7 @@ class Nature:
     population_clusterised = {}
     alphas_locaux = []
     alpha_global = []
-    modele = SVC()
+    modele = SVC(gamma='auto')
     actual_precision=0
     qualite=0
     PM=1

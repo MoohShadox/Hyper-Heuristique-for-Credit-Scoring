@@ -35,19 +35,26 @@ class Evaluateur_Precision:
         return cross_val_score(self.__model,self.__data,self.__target,cv = 10)
 
     def score(self):
-        return self.__model.score(self.__data_test,self.__target_test)
+        return np.array(cross_val_score(self.__model,self.__data,self.__target,cv = 10)).mean()
+        #return self.__model.score(self.__data_test,self.__target_test)
 
     def Evaluer(self,numeros):
         X,Y,Z,W = self.__data_train, self.__data_test, self.__target_train , self.__target_test
+        A , B = self.__data , self.__target
         masque = np.array(len(self.__data_test[0]) * [False])
         for i in numeros:
             masque[i] = True
         self.masquer(masque)
         S = self.score()
+        self.__data, self.__target = A,B
         self.__data_train , self.__data_test , self.__target_train , self.__target_test = X,Y,Z,W
         return S
 
     def masquer(self,masque):
+        self.__data = self.__data.transpose ()
+        self.__data = self.__data[masque]
+        self.__data = self.__data.transpose ()
+
         self.__data_test = self.__data_test.transpose ()
         self.__data_test = self.__data_test[masque]
         self.__data_test = self.__data_test.transpose ()
