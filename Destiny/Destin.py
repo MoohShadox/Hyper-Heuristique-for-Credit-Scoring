@@ -20,20 +20,31 @@ import numpy as np
 class Destiny:
     #C'est simple pour demander un ranking donné tu précise la lettre suivi de l'indice donc D0 pour Chi, I1 pour le gain d'information etc...
     #Sinon on peut indexer en utilisant H et un chiffre qui commence a 0
-    mesures_distance = ["FScore","ReliefF","FCS"]
-    mesures_information = [ 'GainInformation' , "GainRatio" , "SymetricalIncertitude" , "MutualInformation" , "UH" , "US" , "DML"]
-    mesures_classification = ["RF",  "AdaBoost"]
-    mesures_consistance = ['FCC']
+
+    #mesures_distance = ["FScore","ReliefF","FCS"]
+    #mesures_information = [ 'GainInformation' , "GainRatio" , "SymetricalIncertitude" , "MutualInformation" , "UH" , "US" , "DML"]
+    #mesures_classification = ["RF",  "AdaBoost"]
+    #mesures_consistance = ['FCC']
+    #mesures_dependance = ["RST"]
+
+    #Heuristiques considérés pour des raisons de test
+    mesures_distance = ["ReliefF","FCS"]
+    mesures_information = [  "GainRatio" , "SymetricalIncertitude" , "UH" , "US" , "DML"]
+    mesures_classification = ["AdaBoost"]
+    mesures_consistance = []
     mesures_dependance = ["RST"]
+
+
+
     nb_heuristiques = 0
-    maxH = 9
+    maxH = 0
     alpha=0.02
     #mesures_classification = ["BN","RF","LSVM","RBFSVM","GaussianProcess","AdaBoost","QDA","KNN","DTC","MLP"]
 
     def __init__(self):
         self.__data,self.__target = None,None
         self.__mesures = {}
-        self.__max_iterations=20
+        self.__max_iterations=5
         self.__Threshold = 0
         self.__nom_mesures = {}
         self.subsetgenerated = None
@@ -46,7 +57,8 @@ class Destiny:
         self.__mesures["De"],self.__nom_mesures["De"] = MesureDeDependance(),Destiny.mesures_dependance
         self.inter=set()
         self.union=set()
-        Destiny.nb_heuristiques = len(Destiny.mesures_distance) + len(Destiny.mesures_dependance) + len(Destiny.mesures_consistance) + len(Destiny.mesures_information) + len(Destiny.mesures_classification)
+        Destiny.nb_heuristiques = len(Destiny.mesures_distance) + len(Destiny.mesures_dependance) + len(Destiny.mesures_consistance) + len(Destiny.mesures_information) + len(Destiny.mesures_classification) -1
+        Destiny.maxH = Destiny.nb_heuristiques - 1
         self.liste_mesures = []
         for i in self.__nom_mesures:
             self.liste_mesures = self.liste_mesures + self.__nom_mesures[i]
@@ -104,7 +116,10 @@ class Destiny:
             L = []
             L.append(motclef)
             Lmotsclefs.append(motclef)
-            D.update(self.__mesures[tp].rank_with(L,n=nb))
+            try:
+                D.update(self.__mesures[tp].rank_with(L,n=nb))
+            except(KeyError):
+                print("Erreur pour l'heuristique  : ", id)
         DDD = {}
         for i in D[nb]:
             if i in Lmotsclefs:

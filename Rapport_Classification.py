@@ -10,8 +10,7 @@ from Destiny.DataSets.madelon_dataset import load__train_dataset
 
 from Destiny.DataSets.australian_dataset import load_australian_dataset
 from Destiny.DataSets.german_dataset import load_german_dataset
-from Destiny.DataSets.load_promoters_dataset import load_promoter_dataset
-from Destiny.DataSets.musk_dataset import load_musk_dataset
+
 from Destiny.Destin import Destiny
 from Nature2.Nature import Nature
 
@@ -78,17 +77,22 @@ def Ecrire_Init_Nature(DM,nd,nroot):
     premier_elem.setAttributeNode (att1)
     entete.appendChild(premier_elem)
     cpt = 1
-    for i in range (15):
+    for i in range (30):
         a = time.time ()
         Nature.evolve ()
         t =  time.time () - a
+
         att1 = nd.createAttribute ("Iteration")
         att1.nodeValue = str (cpt)
         premier_elem.setAttributeNode (att1)
         premier_elem = nd.createElement ("EtatPopulation")
+
         att1 = nd.createAttribute ("AlphaIdentite")
         att1.nodeValue = str(Nature.actualalpha.identity)
+        premier_elem.setAttributeNode (att1)
 
+        att1 = nd.createAttribute ("Subset")
+        att1.nodeValue = str (Nature.actualalpha.incarnation)
         premier_elem.setAttributeNode (att1)
         att1 = nd.createAttribute ("PrecisionMaximale")
         att1.nodeValue = str(Nature.actual_precision)
@@ -103,6 +107,7 @@ def Ecrire_Init_Nature(DM,nd,nroot):
         att1.nodeValue = str(t)
         premier_elem.setAttributeNode (att1)
         entete.appendChild (premier_elem)
+        cpt = cpt + 1
     nroot.appendChild(entete)
 
 
@@ -134,16 +139,16 @@ def Executer_Hyperheuristique(data,target,name):
     nd.writexml(f,"\n",'\t')
 
 data,target = load_australian_dataset()
-Generer_Tests_Heuristiques(data,target,"Australian")
+#Generer_Tests_Heuristiques(data,target,"Australian")
 Executer_Hyperheuristique(data,target,'Australian')
 
-data,target = load_promoter_dataset()
-Generer_Tests_Heuristiques(data,target,"Promoter")
-Executer_Hyperheuristique(data,target,'Promoter')
+#ata,target = load_promoter_dataset()
+#enerer_Tests_Heuristiques(data,target,"Promoter")
+#xecuter_Hyperheuristique(data,target,'Promoter')
 
-data,target = load_musk_dataset()
-Generer_Tests_Heuristiques(data,target,"Musk")
-Executer_Hyperheuristique(data,target,'Musk')
+#ata,target = load_musk_dataset()
+#enerer_Tests_Heuristiques(data,target,"Musk")
+#xecuter_Hyperheuristique(data,target,'Musk')
 
 
 

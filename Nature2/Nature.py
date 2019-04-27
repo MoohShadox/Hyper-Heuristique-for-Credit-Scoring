@@ -21,8 +21,8 @@ class Nature:
     Psupp=0.6
     Pstop=0.4
     maxA = 2
-    maxH=13
-    maxP = 20
+    maxH= 6
+    maxP = 50
     maxS = 3
     nb_promo=4
     alpha=0

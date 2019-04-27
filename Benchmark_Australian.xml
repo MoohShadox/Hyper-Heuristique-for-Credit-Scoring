@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<Benchmarking DatasetName="Australian">
+	<DictionnaireHeuristiques>
+		<Heuristique Index="0">FScore</Heuristique>
+		<Heuristique Index="1">ReliefF</Heuristique>
+		<Heuristique Index="2">FCS</Heuristique>
+		<Heuristique Index="3">GainInformation</Heuristique>
+		<Heuristique Index="4">GainRatio</Heuristique>
+		<Heuristique Index="5">SymetricalIncertitude</Heuristique>
+		<Heuristique Index="6">MutualInformation</Heuristique>
+		<Heuristique Index="7">UH</Heuristique>
+		<Heuristique Index="8">US</Heuristique>
+		<Heuristique Index="9">DML</Heuristique>
+		<Heuristique Index="10">RF</Heuristique>
+		<Heuristique Index="11">AdaBoost</Heuristique>
+		<Heuristique Index="12">FCC</Heuristique>
+		<Heuristique Index="13">RST</Heuristique>
+	</DictionnaireHeuristiques>
+	<FeatureSelection Heuristique="FScore" NeatPrecision="0.5610680794056753" Seuil="0.8875" Subset="[7, 8, 9, 4, 6, 5, 2, 3, 13, 1, 11, 12, 10]">
+		<precision>0.9372631066498208</precision>
+		<recall>0.5579710144927537</recall>
+		<f1-score>0.6897256257033716</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="ReliefF" NeatPrecision="0.851791499208379" Seuil="0.2375" Subset="[7, 8, 11]">
+		<precision>0.861536054153675</precision>
+		<recall>0.8586956521739131</recall>
+		<f1-score>0.8581862960379584</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="FCS" NeatPrecision="0.7413122640360492" Seuil="0.6375" Subset="[0, 1, 2, 3, 4, 5, 6, 7, 8]">
+		<precision>0.7324767501613096</precision>
+		<recall>0.7318840579710145</recall>
+		<f1-score>0.7321418617614271</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="GainInformation" NeatPrecision="0.5566989404457435" Seuil="0.7124999999999999" Subset="[1, 13, 7, 2, 12, 6, 9, 8, 4, 5]">
+		<precision>0.9631792874557122</precision>
+		<recall>0.5579710144927537</recall>
+		<f1-score>0.7012623243486684</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="GainRatio" NeatPrecision="0.8561399342345635" Seuil="0.18749999999999994" Subset="[7, 8]">
+		<precision>0.8724765183390708</precision>
+		<recall>0.8623188405797102</recall>
+		<f1-score>0.8618407809983897</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="SymetricalIncertitude" NeatPrecision="0.8561399342345635" Seuil="0.18749999999999994" Subset="[7, 8]">
+		<precision>0.8724765183390708</precision>
+		<recall>0.8623188405797102</recall>
+		<f1-score>0.8618407809983897</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="MutualInformation" NeatPrecision="0.5566989404457435" Seuil="0.7124999999999999" Subset="[1, 13, 7, 2, 12, 6, 9, 8, 4, 5]">
+		<precision>0.9631792874557122</precision>
+		<recall>0.5579710144927537</recall>
+		<f1-score>0.7012623243486684</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="UH" NeatPrecision="0.851791499208379" Seuil="0.2375" Subset="[7, 11, 8]">
+		<precision>0.861536054153675</precision>
+		<recall>0.8586956521739131</recall>
+		<f1-score>0.8581862960379584</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="US" NeatPrecision="0.8546906588722447" Seuil="0.18749999999999994" Subset="[11, 7]">
+		<precision>0.8642228739002932</precision>
+		<recall>0.8586956521739131</recall>
+		<f1-score>0.8581575236865339</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="DML" NeatPrecision="0.5741761052246985" Seuil="0.8374999999999999" Subset="[11, 3, 0, 8, 10, 7, 5, 9, 4, 12, 6, 13]">
+		<precision>0.7679227568300626</precision>
+		<recall>0.5398550724637681</recall>
+		<f1-score>0.614907333078603</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="RF" NeatPrecision="0.572748142735355" Seuil="0.6875" Subset="[7, 9, 8, 4, 6, 13, 5, 12, 11, 0]">
+		<precision>0.7881461561940971</precision>
+		<recall>0.5398550724637681</recall>
+		<f1-score>0.6223686525207591</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="AdaBoost" NeatPrecision="0.8518122031421266" Seuil="0.2375" Subset="[7, 9, 8]">
+		<precision>0.8698526769673016</precision>
+		<recall>0.8586956521739131</recall>
+		<f1-score>0.8582255976081384</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="FCC" NeatPrecision="0.5566989404457435" Seuil="0.7124999999999999" Subset="[7, 1, 13, 9, 6, 8, 12, 2, 4, 5]">
+		<precision>0.9631792874557122</precision>
+		<recall>0.5579710144927537</recall>
+		<f1-score>0.7012623243486684</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+	<FeatureSelection Heuristique="RST" NeatPrecision="0.5610680794056753" Seuil="0.8875" Subset="[1, 13, 2, 12, 6, 9, 3, 0, 4, 5, 7, 8, 10]">
+		<precision>0.9372631066498208</precision>
+		<recall>0.5579710144927537</recall>
+		<f1-score>0.6897256257033716</f1-score>
+		<support>276</support>
+	</FeatureSelection>
+</Benchmarking>
