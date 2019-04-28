@@ -21,11 +21,11 @@ class Destiny:
     #C'est simple pour demander un ranking donné tu précise la lettre suivi de l'indice donc D0 pour Chi, I1 pour le gain d'information etc...
     #Sinon on peut indexer en utilisant H et un chiffre qui commence a 0
 
-    #mesures_distance = ["FScore","ReliefF","FCS"]
-    #mesures_information = [ 'GainInformation' , "GainRatio" , "SymetricalIncertitude" , "MutualInformation" , "UH" , "US" , "DML"]
-    #mesures_classification = ["RF",  "AdaBoost"]
-    #mesures_consistance = ['FCC']
-    #mesures_dependance = ["RST"]
+    Mmesures_distance = ["FScore","ReliefF","FCS"]
+    Mmesures_information = [ 'GainInformation' , "GainRatio" , "SymetricalIncertitude" , "MutualInformation" , "UH" , "US" , "DML"]
+    Mmesures_classification = ["RF",  "AdaBoost"]
+    Mmesures_consistance = ['FCC']
+    Mmesures_dependance = ["RST"]
 
     #Heuristiques considérés pour des raisons de test
     mesures_distance = ["ReliefF","FCS"]
@@ -33,6 +33,7 @@ class Destiny:
     mesures_classification = ["AdaBoost"]
     mesures_consistance = []
     mesures_dependance = ["RST"]
+    allMesures=["FScore","RST","ReliefF","FCS",'GainInformation' ,"GainRatio" , "SymetricalIncertitude" ,"MutualInformation" , "UH" , "US" , "DML","AdaBoost","RST"]
 
 
 
@@ -41,7 +42,7 @@ class Destiny:
     alpha=0.02
     #mesures_classification = ["BN","RF","LSVM","RBFSVM","GaussianProcess","AdaBoost","QDA","KNN","DTC","MLP"]
 
-    def __init__(self):
+    def __init__(self,seuilllage):
         self.__data,self.__target = None,None
         self.__mesures = {}
         self.__max_iterations=5
@@ -60,6 +61,7 @@ class Destiny:
         Destiny.nb_heuristiques = len(Destiny.mesures_distance) + len(Destiny.mesures_dependance) + len(Destiny.mesures_consistance) + len(Destiny.mesures_information) + len(Destiny.mesures_classification) -1
         Destiny.maxH = Destiny.nb_heuristiques - 1
         self.liste_mesures = []
+        self.seuillage=seuilllage
         for i in self.__nom_mesures:
             self.liste_mesures = self.liste_mesures + self.__nom_mesures[i]
 
@@ -190,6 +192,8 @@ class Destiny:
             cpt = cpt + 1
         return dict_listes
 
+    def setTreshold(self,t):
+        self.__Threshold=t
 
 
     def fit(self,X,Y):
@@ -208,7 +212,8 @@ class Destiny:
             for j in range (0 , len (self.__nom_mesures[i])):
                 self.__mesures_anterieure.update (self.getMegaHeuristique (["H" + str (cpt)] , 1))
                 cpt = cpt + 1
-        self.activer_treshold()
+        if(self.seuillage=="union_intersection"):
+            self.activer_treshold()
 
     def getMatriceImportanceRedondance(self):
         return self.__matrices_redondaces,self.__matrices_importances
