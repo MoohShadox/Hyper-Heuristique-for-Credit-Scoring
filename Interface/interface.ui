@@ -96,7 +96,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QTableWidget" name="strategies"/>
+      <widget class="QTableWidget" name="strategies">
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>59</number>
+       </attribute>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_15">
@@ -126,9 +130,9 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>990</x>
+      <x>970</x>
       <y>450</y>
-      <width>191</width>
+      <width>211</width>
       <height>101</height>
      </rect>
     </property>
@@ -137,20 +141,54 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>191</width>
+       <width>204</width>
        <height>101</height>
       </rect>
      </property>
      <layout class="QFormLayout" name="panel">
       <item row="0" column="0">
-       <widget class="QLabel" name="label_16">
+       <widget class="QLabel" name="union_treshold_label">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
-         <string>Nb.Iteration.treshold           </string>
+         <string>Nb.Iteration.treshold(union) </string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="nb_iteration_tresholding"/>
+       <widget class="QLineEdit" name="nb_tresholding_union">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="unique_treshold_label">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Nb.Iteration.treshold(unique)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="nb_tresholding_unique">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="manual_treshold_label">
+        <property name="text">
+         <string>Manual treshold</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="manual_treshold"/>
       </item>
      </layout>
     </widget>
@@ -252,7 +290,7 @@
          <item row="7" column="0">
           <widget class="QLabel" name="label_24">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Tol</string>
@@ -272,17 +310,34 @@
         <widget class="QListWidget" name="heuristics"/>
        </item>
        <item>
-        <widget class="QPushButton" name="clear">
-         <property name="baseSize">
-          <size>
-           <width>0</width>
-           <height>10</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Clear</string>
-         </property>
-        </widget>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="clear">
+           <property name="baseSize">
+            <size>
+             <width>0</width>
+             <height>10</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Clear</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="delete_h">
+           <property name="baseSize">
+            <size>
+             <width>0</width>
+             <height>10</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Delete</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QComboBox" name="add_heuristics"/>
@@ -500,6 +555,9 @@
      </property>
     </widget>
     <widget class="QComboBox" name="metrics">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>240</x>
@@ -606,16 +664,6 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QWidget" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>180</y>
-      <width>191</width>
-      <height>51</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="bake">
     <property name="geometry">
      <rect>
@@ -628,6 +676,49 @@
     <property name="text">
      <string>Bake</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="formLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>140</y>
+      <width>160</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_2">
+     <property name="verticalSpacing">
+      <number>10</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>IIteration</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="iteration">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_18">
+       <property name="text">
+        <string>quality</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="quality">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

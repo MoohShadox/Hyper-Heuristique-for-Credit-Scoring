@@ -10,7 +10,6 @@ from Nature2 import Fabriquant as fb
 import math
 import time
 from sklearn.neural_network import MLPClassifier
-
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -26,8 +25,11 @@ class Nature:
     maxS = 3
     nb_promo=4
     alpha=0
+    nb_cluster=10
     Tol = 3
     tol_evolutivite = 0.25
+    scrutin="Condorcet"
+    metric="accuracy"
     modele = SVC(gamma='auto')
     strat = [[0.1, 0.7, 0.5, 0.8], [0.5, 0.3, 0.5, 0.7], [0.3, 0.6, 0.5, 0.7]]
 

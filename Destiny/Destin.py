@@ -65,8 +65,11 @@ class Destiny:
         for i in self.__nom_mesures:
             self.liste_mesures = self.liste_mesures + self.__nom_mesures[i]
 
+    def setMax_iterations(self,n):
+        self.__max_iterations=n
 
-
+    def setSeuillage(self,s):
+        self.seuillage=s
 
     def __copy__(self):
         D = Destiny()
