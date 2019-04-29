@@ -31,6 +31,10 @@ class Nature:
     scrutin="Condorcet"
     metric="accuracy"
     modele = SVC(gamma='auto')
+    evolve_strategies=True
+    only_global_crossing=False
+    random_initialisation=False
+    train_all=False
     strat = [[0.1, 0.7, 0.5, 0.8], [0.5, 0.3, 0.5, 0.7], [0.3, 0.6, 0.5, 0.7]]
 
     #Parametres de stockage
@@ -131,16 +135,23 @@ class Nature:
     @classmethod
     def validate(cls, G,bourrer):
         if (len(G.identity) == 0):
-            if(cls.iteratore<cls.maxH+1):
-                ppp=cls.iteratore
-                cls.iteratore=cls.iteratore+1
+            if(not cls.random_initialisation):
+                if(cls.iteratore<cls.maxH+1):
+                    pp=cls.iteratore
+                    cls.iteratore=cls.iteratore+1
+                else:
+                    pp = random.randint(0,cls.maxH-1)
+                stre="1H"+str(pp)+"/"
+                for i in range(int(cls.DM.getNbAttribute()*cls.DM.getTreshold())):
+                    stre=stre+"1H"+str(pp)+"/"
+                G.identity=stre
             else:
-                ppp = random.randint(0,cls.maxH-1)
-            ppp=0
-            stre="1H"+str(ppp)+"/"
-            for i in range(int(cls.DM.getNbAttribute()*cls.DM.getTreshold())):
-                stre=stre+"1H"+str(ppp)+"/"
-            G.identity=stre
+                setr="1H1/"
+                mute="MO"
+                for i in range(int(cls.DM.getNbAttribute() * cls.DM.getTreshold())):
+                    setr = setr + "1H1/"
+                    mute=mute+"MO"
+                G.identity = cls.PseudoTransoducteur(setr, "", mute)
         fab = fb.Fabriquant(G, cls.DM,bourrer)
         VG = fab.genome
         return VG
@@ -164,7 +175,7 @@ class Nature:
         CI.setDestiny(Nature.DM)
         CI.ajouter_population(P)
         CI.projeter()
-        CI.clusteriser()
+        CI.clusteriser(cls.train_all)
         print("temps de clusturing",time.time()-ko)
         Nature.population_clusterised = CI.clusters
         Nature.alphas_locaux = CI.alphas_locaux
@@ -236,7 +247,7 @@ class Nature:
     @classmethod
     def init(cls,D):
         cls.DM=D
-        cls.maxH=D.maxH
+        cls.maxH=len(cls.DM.mesures_distance)+len(cls.DM.mesures_information)+len(cls.DM.mesures_consistance)+len(cls.DM.mesures_classification)+len(cls.DM.mesures_dependance)
         cls.alpha=D.alpha
         cls.population=[]
         VNG=Genome.Genome()
@@ -252,7 +263,8 @@ class Nature:
         opo=time.time()
         for i in range(cls.maxP):
             lp=time.time()
-            cls.population[i]=cls.monoevolv(cls.population[i],cls.alphas_locaux[cls.getcluster(cls.population[i])],cls.strat[random.randint(0, cls.maxS - 1)],True)
+            if(not cls.only_global_crossing):
+                cls.population[i]=cls.monoevolv(cls.population[i],cls.alphas_locaux[cls.getcluster(cls.population[i])],cls.strat[random.randint(0, cls.maxS - 1)],True)
             aa=aa+(time.time()-lp)
             lp=time.time()
             cls.population[i] = cls.monoevolv(cls.population[i], cls.actualalpha, cls.strat[random.randint(0, cls.maxS - 1)],True)
@@ -262,7 +274,7 @@ class Nature:
         print("temps evolution: ",time.time()-opo)
         print("Election de l'alpha")
         po=time.time()
-        cls.eludeAlpha(True)
+        cls.eludeAlpha(cls.evolve_strategies)
         print("temps de l'electiond 'un alpha :",time.time()-po)
 
     @classmethod

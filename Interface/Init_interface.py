@@ -66,6 +66,10 @@ class interface:
             nat.Nature.modele=KNeighborsClassifier()
         if model == "RF":
             nat.Nature.modele=RandomForestClassifier()
+        nat.Nature.evolve_strategies=self.interfac.evolve_strategies.isChecked()
+        nat.Nature.only_global_crossing=self.interfac.only_global_crossing.isChecked()
+        nat.Nature.random_initialisation=self.interfac.random_initalisation.isChecked()
+        nat.Nature.train_all=self.interfac.train_all.isChecked()
 
     def changer_scrutin(self):
         if self.interfac.ballot.currentText()=="Condorecet":
@@ -121,17 +125,32 @@ class interface:
             self.interfac.manual_treshold.setEnabled(False)
 
     def run(self):
-        self.refresh()
-        data, target = load_promoter_dataset()
-        self.DM.fit(data,target)
-        nat.Nature.init(self.DM)
-        print("gege")
-        self.interfac.iteration.setText("0")
-        self.interfac.quality.setText(str(nat.Nature.actual_precision))
-        for i in range(int(self.interfac.max_iteration.text())):
-            nat.Nature.evolve()
-            self.interfac.iteration.setText(str(i))
+        if(not self.interfac.sequential_run.isChecked()):
+            self.refresh()
+            data, target = load_promoter_dataset()
+            self.DM.fit(data,target)
+            nat.Nature.init(self.DM)
+            print("gege")
+            self.interfac.iteration.setText("0")
             self.interfac.quality.setText(str(nat.Nature.actual_precision))
+            for i in range(int(self.interfac.max_iteration.text())):
+                nat.Nature.evolve()
+                self.interfac.iteration.setText(str(i))
+                self.interfac.quality.setText(str(nat.Nature.actual_precision))
+        else:
+            if(not self.intialised):
+                self.refresh()
+                self.interfac.iteration.setText("0")
+                data, target = load_promoter_dataset()
+                self.DM.fit(data, target)
+                nat.Nature.init(self.DM)
+                print("gege")
+                self.interfac.quality.setText(str(nat.Nature.actual_precision))
+            else:
+                self.iteration=self.iteration+1
+                nat.Nature.evolve()
+                self.interfac.iteration.setText(str(self.iteration))
+                self.interfac.quality.setText(str(nat.Nature.actual_precision))
 
 
 
@@ -180,6 +199,8 @@ class interface:
         self.init_interface1()
         self.DM = dest.Destiny("manual")
         self.init_interface2()
+        self.intialised=False
+        self.iteration=0
         self.interfac.show()
         app.exec_()
 

@@ -1,5 +1,6 @@
 from itertools import combinations
 
+from Destiny.Evaluateur_Precision import Evaluateur_Precision
 from Nature2 import Nature as nat
 from Destiny.Destin import Destiny
 from sklearn.cluster import k_means
@@ -49,9 +50,22 @@ class Clustering_Incarnations:
                     im = i
         return im
 
+    def maxprecision(self,liste_projection):
+        max=0
+        im=None
+        E = Evaluateur_Precision(nat.Nature.DM.getDataset()[0], nat.Nature.DM.getDataset()[1])
+        E.train(nat.Nature.modele)
+        for i in liste_projection:
+            self.actul_score=self.actul_score+E.Evaluer(i)
+            if (i not in nat.Nature.alphas_locaux):
+                if (E.Evaluer(i) >= max):
+                    max = Clustering_Incarnations.carreProjection(i)
+                    im = i
+        return im
 
-    def clusteriser(self):
-        KM = k_means(self.__projections,n_clusters=5)
+
+    def clusteriser(self,train):
+        KM = k_means(self.__projections,n_clusters=nat.Nature.nb_cluster)
         cpt = 0
         Rez = {}
         for i in KM[1]:
@@ -66,7 +80,10 @@ class Clustering_Incarnations:
         self.alphas_locaux = (len(self.clusters.keys()))*[0]
         self.actul_score=0
         for i in self.clusters:
-            C = self.maxCarreProjection(self.clusters[i])
+            if not train:
+                C = self.maxCarreProjection(self.clusters[i])
+            else:
+                C=self.maxprecision(self.clusters[i])
             self.alphas_locaux[i] = C
 
 
